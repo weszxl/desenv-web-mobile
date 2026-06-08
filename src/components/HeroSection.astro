@@ -1,0 +1,259 @@
+---
+// src/components/HeroSection.astro
+---
+
+<section id="inicio" class="hero-section noise-overlay">
+  <!-- Background Elements (Herda do global.css) -->
+  <div class="bg-gradient-overlay"></div>
+  <div class="bg-blob blob-green hero-blob-1"></div>
+  <div class="bg-blob blob-yellow hero-blob-2"></div>
+
+  <div class="hero-container">
+    
+    <!-- CONTEÚDO PRINCIPAL (Texto + Imagem) -->
+    <div class="hero-main-content">
+      
+      <!-- 1. Título e Subtítulo -->
+      <div class="hero-text">
+        <h1 class="hero-title">
+          <span class="block text-brand-green">NÓS COLETAMOS</span>
+          <span class="block text-brand-gray">SEU <span class="text-brand-yellow">ÓLEO</span> DE COZINHA</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+          Facilite a sua rotina. Agende a retirada para o seu restaurante, condomínio ou casa. Ajude o meio ambiente.
+        </p>
+      </div>
+
+      <!-- 2. Imagem 3D (Centralizada) -->
+      <div class="hero-image-wrapper">
+        <div class="image-glow"></div>
+        <img 
+          src="/images/2_hero.svg" 
+          alt="Coleta de óleo de cozinha" 
+          width="1536" 
+          height="1024" 
+          class="hero-image" 
+        />
+      </div>
+
+    </div>
+
+    <!-- 3. RODAPÉ DA SEÇÃO (Botão + Link) -->
+    <div class="hero-footer">
+      <a href="https://wa.me/SEUNUMEROAQUI" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        Agendar Coleta
+      </a>
+      
+      <p class="contact-info">
+        Precisa de mais informações? <a href="/contato">Fale conosco</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--bg-white);
+  }
+
+  /* Posicionamento dos Blobs locais */
+  .hero-blob-1 {
+    top: 5rem;
+    left: 2.5rem;
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .hero-blob-2 {
+    bottom: 10rem;
+    right: 5rem;
+    width: 8rem;
+    height: 8rem;
+  }
+
+  /* 
+    CONTAINER PRINCIPAL
+    Usando flex-direction: column para empilhar o conteúdo e o rodapé.
+  */
+  .hero-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    min-height: 100vh;
+    /* Adicionado padding-bottom para criar o respiro final da tela */
+    padding: 7rem 1.5rem 2.5rem 1.5rem; 
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 
+    CONTEÚDO PRINCIPAL (Faz a mágica do espaçamento)
+    O flex-grow: 1 ocupa todo o espaço livre, empurrando o footer para baixo.
+  */
+  .hero-main-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    flex-grow: 1; 
+    align-items: center;
+  }
+
+  /* No desktop, volta a ser 2 colunas */
+  @media (min-width: 1024px) {
+    .hero-main-content {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+  }
+
+  /* Bloco de Texto (Alinhamento rigoroso à esquerda) */
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: left;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .hero-title { font-size: 4.5rem; }
+  }
+
+  .block { display: block; }
+  
+  .hero-subtitle {
+    font-size: 1.125rem;
+    font-family: var(--font-sans);
+    color: rgba(18, 18, 18, 0.8);
+    letter-spacing: -0.025em;
+    max-width: 28rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .hero-subtitle { font-size: 1.25rem; }
+  }
+
+  /* Bloco de Imagem (Padronizada ao centro) */
+  .hero-image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.75);
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(100, 180, 69, 0.2);
+    filter: blur(80px);
+    border-radius: 50%;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(100, 180, 69, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(100, 180, 69, 0.6); }
+  }
+
+  .hero-image {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* 
+    RODAPÉ DA HERO (Botão e Contato)
+    Empurrado automaticamente para o limite do monitor
+  */
+  .hero-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinhamento esquerdo no mobile */
+    gap: 1.25rem;
+    margin-top: 3rem; /* Espaçamento caso o celular seja muito pequeno e encoste na imagem */
+    width: 100%;
+  }
+
+  /* No desktop, o botão e o texto ficam lado a lado */
+  @media (min-width: 768px) {
+    .hero-footer {
+      flex-direction: row;
+      align-items: center;
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+  }
+
+  /* Estilos do Botão Principal */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: 0.025em;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: none;
+  }
+
+  .btn-primary {
+    background-color: var(--brand-green);
+    color: var(--bg-white);
+  }
+
+  .btn-primary:hover {
+    transform: scale(1.05);
+  }
+
+  /* Estilos do Link de Informação */
+  .contact-info {
+    font-size: 1.125rem;
+    color: rgba(18, 18, 18, 0.7);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .contact-info a {
+    color: var(--charcoal);
+    text-decoration: underline;
+    text-decoration-color: var(--brand-green);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    transition: color 0.2s;
+  }
+
+  .contact-info a:hover {
+    color: var(--brand-green);
+  }
+</style>

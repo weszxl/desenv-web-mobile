@@ -1,0 +1,315 @@
+---
+// Captura a URL atual para destacar o link ativo
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => currentPath === href || currentPath === href + '/';
+
+const navLinks = [
+  { label: "Início", href: "/" },
+  { label: "Como funciona", href: "/como-funciona" },
+  { label: "Quem atendemos", href: "/quem-atendemos" },
+];
+---
+
+<nav id="main-nav" class="navbar">
+  <div class="nav-container">
+    <a href="/" class="nav-logo">
+      <img src="/images/logo_v1.svg" alt="GiGi Energy" class="logo-default" />
+      <img src="/images/logo_v2.svg" alt="GiGi Energy" class="logo-scrolled" />
+    </a>
+
+    <div class="nav-links-desktop">
+      {navLinks.map((item) => (
+        <a 
+          href={item.href} 
+          class={`nav-link ${isActive(item.href) ? 'active' : ''}`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <a href="/contato" class="btn-cta-desktop">
+      Entrar em Contato
+    </a>
+
+    <button id="mobile-menu-btn" class="mobile-toggle" aria-label="Menu">
+      <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+      <svg class="close-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu-content">
+      {navLinks.map((item) => (
+        <a 
+          href={item.href} 
+          class={`mobile-nav-link ${isActive(item.href) ? 'active' : ''}`}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a href="/contato" class="btn-cta-mobile">
+        Entrar em Contato
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('main-nav');
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.querySelector('.menu-icon');
+  const closeIcon = document.querySelector('.close-icon');
+
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    // Evita que o menu suma se o usuário rolar a tela com o menu mobile aberto
+    const isMenuOpen = mobileMenu?.classList.contains('open');
+
+    // 1. Controle visual da cor de fundo
+    if (currentScrollY > 50) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+
+    // 2. Controle de visibilidade (Rolagem para baixo vs cima)
+    if (currentScrollY > lastScrollY && currentScrollY > 100 && !isMenuOpen) {
+      navbar?.classList.add('hidden-nav');
+    } else {
+      navbar?.classList.remove('hidden-nav');
+    }
+
+    lastScrollY = currentScrollY;
+  });
+
+  function toggleMenu() {
+    mobileMenu?.classList.toggle('open');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  }
+
+  mobileBtn?.addEventListener('click', toggleMenu);
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    /* A transição aqui só afeta cor de fundo e sombra. O transform fica de fora para gerar o corte seco */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    background-color: transparent;
+    font-family: var(--font-sans);
+  }
+
+  /* Classe que remove a navbar da tela com corte seco */
+  .navbar.hidden-nav {
+    transform: translateY(-100%);
+  }
+
+  .navbar.scrolled {
+    background-color: var(--brand-green);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Controle das Logos */
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .logo-default, .logo-scrolled {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .logo-scrolled {
+    display: none;
+  }
+
+  .navbar.scrolled .logo-default {
+    display: none;
+  }
+
+  .navbar.scrolled .logo-scrolled {
+    display: block;
+  }
+
+  /* Links Desktop */
+  .nav-links-desktop {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links-desktop { display: flex; }
+  }
+
+  .nav-link {
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    transition: color 0.3s;
+  }
+
+  .nav-link:hover {
+    color: var(--brand-green);
+  }
+
+  .nav-link.active {
+    color: var(--brand-green);
+    font-weight: 700;
+  }
+
+  /* Comportamento dos links com scroll ativo */
+  .navbar.scrolled .nav-link {
+    color: var(--bg-white);
+  }
+
+  .navbar.scrolled .nav-link:hover,
+  .navbar.scrolled .nav-link.active {
+    color: var(--brand-yellow);
+  }
+
+  /* Botão CTA Desktop */
+  .btn-cta-desktop {
+    display: none;
+    background-color: var(--brand-green);
+    color: var(--bg-white);
+    height: 48px; 
+    padding: 0 1.5rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+  }
+
+  @media (min-width: 768px) {
+    .btn-cta-desktop {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .btn-cta-desktop:hover {
+    transform: scale(1.02);
+  }
+
+  /* Inversão do botão com scroll ativo */
+  .navbar.scrolled .btn-cta-desktop {
+    background-color: var(--brand-yellow);
+    color: var(--bg-white); 
+  }
+
+  /* Mobile Toggle */
+  .mobile-toggle {
+    display: block;
+    background: transparent;
+    border: none;
+    color: var(--charcoal);
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .navbar.scrolled .mobile-toggle {
+    color: var(--bg-white);
+  }
+
+  @media (min-width: 768px) {
+    .mobile-toggle { display: none; }
+  }
+
+  .mobile-toggle svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .hidden { display: none; }
+
+  /* Menu Mobile Dropdown */
+  .mobile-menu {
+    display: none;
+    background-color: var(--bg-white);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .navbar.scrolled .mobile-menu {
+    background-color: var(--brand-green);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .mobile-menu-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .mobile-nav-link {
+    text-decoration: none;
+    color: var(--charcoal);
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .mobile-nav-link.active {
+    color: var(--brand-green);
+    font-weight: 700;
+  }
+
+  /* Links Mobile com scroll ativo */
+  .navbar.scrolled .mobile-nav-link {
+    color: var(--bg-white);
+  }
+
+  .navbar.scrolled .mobile-nav-link.active {
+    color: var(--brand-yellow);
+  }
+
+  .btn-cta-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    background-color: var(--brand-green);
+    color: var(--bg-white);
+    border-radius: 9999px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 0.5rem;
+  }
+
+  .navbar.scrolled .btn-cta-mobile {
+    background-color: var(--brand-yellow);
+    color: var(--bg-white);
+  }
+</style>

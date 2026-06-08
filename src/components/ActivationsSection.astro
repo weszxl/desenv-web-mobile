@@ -1,0 +1,234 @@
+---
+const steps = [
+  {
+    number: "1º",
+    title: "Espere o óleo esfriar",
+    description: "Após a fritura, deixe o líquido esfriar completamente antes do descarte para evitar acidentes ou o derretimento do recipiente.",
+    icon: "/images/5_how-recycle_step1.svg"
+  },
+  {
+    number: "2º",
+    title: "Armazene em um recipiente",
+    description: "Utilize as nossas bombonas ou garrafas PET bem fechadas. Não é necessário coar.",
+    icon: "/images/5_how-recycle_step2.svg"
+  },
+  {
+    number: "3º",
+    title: "Coloque em um lugar adequado",
+    description: "Mantenha o material armazenado em um local seguro, arejado e protegido do sol ou fontes de calor até o dia da retirada.",
+    icon: "/images/5_how-recycle_step3.svg"
+  },
+  {
+    number: "4º",
+    title: "Nos chame",
+    description: "Recipiente cheio? Envie uma mensagem com a quantidade e o bairro. Seu endereço entra na nossa próxima rota programada.",
+    icon: "/images/5_how-recycle_step4.svg"
+  }
+];
+---
+
+<section id="preparacao" class="prep-section noise-overlay">
+  <div class="bg-gradient-overlay"></div>
+  <div class="bg-blob blob-green prep-blob-1"></div>
+  <div class="bg-blob blob-yellow prep-blob-2"></div>
+
+  <div class="container">
+    
+    <div class="section-header">
+      <h2 class="section-title">Como preparar o seu óleo?</h2>
+      <p class="section-subtitle">Siga este passo a passo simples para garantir que a coleta seja feita de forma segura e eficiente.</p>
+    </div>
+
+    <div class="zigzag-wrapper">
+      {steps.map((step, index) => {
+        // Define a intercalação: par na esquerda, ímpar na direita
+        const isCardLeft = index % 2 === 0;
+        
+        return (
+          <div class={`step-row ${isCardLeft ? 'layout-card-left' : 'layout-card-right'}`}>
+            
+            <div class="step-card">
+              <h3 class="step-title">
+                <span class="step-number">{step.number}</span> {step.title}
+              </h3>
+              <p class="step-desc">{step.description}</p>
+            </div>
+
+            <div class="step-icon">
+              <img src={step.icon} alt={step.title} />
+            </div>
+
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .prep-section {
+    position: relative;
+    padding: 4rem 0; /* Padding lateral removido do pai para maximizar espaço no mobile */
+    background-color: var(--bg-white);
+    color: var(--charcoal);
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .prep-section { padding: 6rem 0; }
+  }
+
+  /* Posicionamento exclusivo dos blobs nesta seção */
+  .prep-blob-1 {
+    top: 10%;
+    left: 5%;
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .prep-blob-2 {
+    bottom: 10%;
+    right: 5%;
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .container {
+    position: relative;
+    z-index: 10;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 1.5rem; /* Padding lateral trazido para o container */
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  /* Estrutura Zigue-Zague */
+  .zigzag-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Espaço vertical menor no mobile */
+  }
+
+  @media (min-width: 768px) {
+    .zigzag-wrapper {
+      gap: 3rem; /* Espaço vertical padrão no desktop */
+    }
+  }
+
+  .step-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; /* Espaço estreito entre card e ícone no mobile */
+  }
+
+  @media (min-width: 768px) {
+    .step-row {
+      gap: 2.5rem; /* Espaço largo no desktop */
+    }
+  }
+
+  /* Lógica de intercalação (Agora funciona desde o Mobile) */
+  .layout-card-left {
+    flex-direction: row; 
+  }
+  
+  .layout-card-right {
+    flex-direction: row-reverse; 
+  }
+
+  /* Cartões */
+  .step-card {
+    background-color: var(--bg-white);
+    padding: 1.25rem; /* Padding reduzido no mobile para poupar espaço */
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    width: 75%; /* Garante que o card deixe espaço para o ícone no mobile */
+    max-width: 450px; 
+    transition: transform 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .step-card {
+      padding: 2rem; /* Padding generoso no desktop */
+      width: 100%;
+    }
+  }
+
+  .step-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .step-title {
+    font-size: 1.125rem; /* Fonte menor no mobile */
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--brand-gray);
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .step-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  .step-number {
+    color: var(--brand-green);
+    font-weight: 900;
+  }
+
+  .step-desc {
+    font-size: 0.875rem; /* 14px no mobile */
+    font-family: var(--font-sans);
+    color: rgba(18, 18, 18, 0.7);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .step-desc {
+      font-size: 1rem; /* 16px no desktop */
+      line-height: 1.6;
+    }
+  }
+
+  /* Ícone */
+  .step-icon {
+    width: 50px; /* Ícone menor no mobile */
+    height: 50px;
+    background-color: var(--bg-white);
+    border: 3px solid var(--brand-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; 
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  @media (min-width: 768px) {
+    .step-icon {
+      width: 80px; /* Ícone grande no desktop */
+      height: 80px;
+      border-width: 4px;
+    }
+  }
+
+  .step-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+  }
+</style>

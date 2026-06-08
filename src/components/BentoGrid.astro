@@ -1,0 +1,363 @@
+---
+const features = [
+  {
+    id: "coleta",
+    title: "Retirada no Local",
+    description: "Coletamos o seu óleo de cozinha usado. O processo é agendado para que você não tenha nenhum trabalho com o transporte ou descarte do material.",
+    bullets: [
+      "Fornecimento de bombonas adequadas.",
+      "Rotas programadas para a sua região.",
+      "Coleta rápida sem interromper sua rotina."
+    ],
+    image: "/images/3_how-work_01.svg"
+  },
+  {
+    id: "preparacao",
+    title: "Preparação do Material",
+    description: "Todo o óleo recolhido passa por etapas de limpeza nas nossas instalações para a remoção completa de água e partículas sólidas da fritura.",
+    bullets: [
+      "Separação total de resíduos de alimentos.",
+      "Extração da umidade do óleo.",
+      "Armazenamento em tanques próprios."
+    ],
+    image: "/images/3_how-work_02.svg"
+  },
+  {
+    id: "reciclagem",
+    title: "Processo de Reciclagem",
+    description: "O resíduo é reinserido na indústria e ganha vida nova, servindo como matéria-prima principal para diversos setores.",
+    bullets: [
+      "Base para produção de biodiesel.",
+      "Insumo para produtos de limpeza.",
+      "Prevenção de contaminação da rede de esgoto."
+    ],
+    image: "/images/3_how-work_03.svg"
+  }
+];
+---
+
+<section id="o-que-fazemos" class="process-section">
+  <div class="container">
+    
+    <!-- Cabeçalho (Herda estilos do global.css) -->
+    <div class="section-header">
+      <h2 class="section-title">O que fazemos?</h2>
+      <p class="section-subtitle">O ciclo completo do material: da retirada no seu endereço até o reaproveitamento.</p>
+    </div>
+
+    <div class="layout-grid">
+      
+      <!-- Coluna do Accordion -->
+      <div class="accordion-column">
+        {features.map((feature, index) => (
+          <div class={`feature-card ${index === 0 ? 'active' : ''}`} data-image={feature.image}>
+            
+            <button class="card-header" aria-expanded={index === 0 ? 'true' : 'false'}>
+              
+              <!-- IMAGEM MOBILE (Aparece apenas em telas menores) -->
+              <div class="mobile-image-wrapper">
+                <img src={feature.image} alt={`Ilustração: ${feature.title}`} />
+              </div>
+
+              <!-- TÍTULO E ÍCONE DE ABRIR/FECHAR -->
+              <div class="header-row">
+                <h3 class="feature-title">{feature.title}</h3>
+                <div class="toggle-icon">
+                  <svg class="icon-plus" width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+
+            </button>
+            
+            <!-- CONTEÚDO EXPANSÍVEL (Apenas o texto) -->
+            <div class="card-body">
+              <div class="card-content">
+                <p class="feature-desc">{feature.description}</p>
+                
+                <ul class="feature-bullets">
+                  {feature.bullets.map(bullet => (
+                    <li>
+                      <div class="bullet-icon">
+                        <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M10 3L4.5 8.5L2 6" stroke="var(--bg-white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+                
+                <div class="accent-line"></div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- IMAGEM DINÂMICA DESKTOP (Fica oculta no Mobile) -->
+      <div class="visual-column">
+        <div class="image-wrapper">
+          <img id="dynamic-feature-image" src={features[0].image} alt="Ilustração do processo" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-section {
+    padding: 4rem 1.5rem; 
+    background-color: var(--bg-light); 
+    color: var(--charcoal);
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem; 
+  }
+
+  /* Layout Base (CSS Grid) */
+  .layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 992px) {
+    .layout-grid {
+      grid-template-columns: 4.5fr 5.5fr;
+      gap: 3rem;
+      align-items: stretch;
+    }
+  }
+
+  .accordion-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; 
+  }
+
+  /* Estilos do Card */
+  .feature-card {
+    background-color: var(--bg-white);
+    border-radius: 1.25rem;
+    padding: 1.25rem 1.25rem 0 1.25rem; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .card-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 0 1rem 0; 
+    text-align: left;
+  }
+
+  /* --- NOVA LÓGICA DE IMAGENS --- */
+  .mobile-image-wrapper {
+    display: block; /* Visível no mobile */
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: var(--bg-light);
+    border-radius: 0.75rem;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+
+  .mobile-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .visual-column {
+    display: none; /* Oculta a imagem global lateral no mobile */
+  }
+
+  /* Reverte no Desktop: Mostra a Imagem Lateral e Oculta as Imagens dos Cards */
+  @media (min-width: 992px) {
+    .mobile-image-wrapper {
+      display: none; 
+    }
+    .visual-column {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 0;
+    }
+  }
+  /* ------------------------------ */
+
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .feature-title {
+    font-size: 1.125rem; 
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--brand-gray); 
+    margin: 0;
+    transition: font-weight 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .feature-title { font-size: 1.25rem; }
+  }
+
+  .feature-card.active .feature-title {
+    font-weight: 900;
+  }
+
+  /* Ícone de + */
+  .toggle-icon {
+    width: 28px; 
+    height: 28px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.05); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--charcoal);
+    transition: all 0.3s ease;
+  }
+
+  .feature-card.active .toggle-icon {
+    background-color: var(--brand-yellow); 
+    color: var(--bg-white); 
+  }
+
+  /* Corpo do Acordeão */
+  .card-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+  }
+
+  .feature-card.active .card-body {
+    grid-template-rows: 1fr;
+  }
+
+  .card-content {
+    overflow: hidden;
+  }
+
+  .feature-desc {
+    font-size: 0.875rem; 
+    font-family: var(--font-sans);
+    color: rgba(18, 18, 18, 0.7);
+    line-height: 1.5;
+    margin: 0 0 1rem 0; 
+  }
+
+  .feature-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0; 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+  }
+
+  .feature-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.875rem; 
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--charcoal);
+    line-height: 1.4;
+  }
+
+  .bullet-icon {
+    width: 18px; 
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--brand-yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  .accent-line {
+    height: 3px;
+    width: 100%;
+    background-color: var(--brand-yellow);
+    border-radius: 9999px;
+    margin-bottom: 1.25rem; 
+  }
+
+  /* Imagem Global (Desktop) */
+  .image-wrapper {
+    position: relative; 
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-light); 
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+
+  .image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.feature-card');
+    const dynamicImage = document.getElementById('dynamic-feature-image') as HTMLImageElement;
+
+    if (!cards.length || !dynamicImage) return;
+
+    cards.forEach(card => {
+      const header = card.querySelector('.card-header');
+      
+      header?.addEventListener('click', () => {
+        if (card.classList.contains('active')) return;
+
+        cards.forEach(el => {
+          el.classList.remove('active');
+          el.querySelector('.card-header')?.setAttribute('aria-expanded', 'false');
+        });
+
+        card.classList.add('active');
+        header.setAttribute('aria-expanded', 'true');
+
+        const newImageSrc = card.getAttribute('data-image');
+        if (newImageSrc) {
+          dynamicImage.style.opacity = '0.3';
+          setTimeout(() => {
+            dynamicImage.src = newImageSrc;
+            dynamicImage.style.opacity = '1';
+          }, 200);
+        }
+      });
+    });
+  });
+</script>

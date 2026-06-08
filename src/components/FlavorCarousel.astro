@@ -1,0 +1,311 @@
+---
+const services = [
+  {
+    id: 1,
+    title: "Coleta Comercial",
+    description: "Retirada programada de resíduos gordurosos para restaurantes, bares e comércios de alimentação.",
+    image: "/images/4_services_01.png",
+    icon: "/images/4_services-icon_01.svg"
+  },
+  {
+    id: 2,
+    title: "Coleta em Condomínio",
+    description: "Sistemas de descarte ecológico e bombonas sob medida para edifícios residenciais.",
+    image: "/images/4_services_02.png",
+    icon: "/images/4_services-icon_02.svg"
+  },
+  {
+    id: 3,
+    title: "Coleta Residencial",
+    description: "Atendimento agendado para descarte correto diretamente na sua casa.",
+    image: "/images/4_services_03.png",
+    icon: "/images/4_services-icon_03.svg"
+  },
+  {
+    id: 4,
+    title: "Coleta Industrial",
+    description: "Logística e destinação correta de grandes volumes de óleo para indústrias e fábricas.",
+    image: "/images/4_services_04.png",
+    icon: "/images/4_services-icon_04.svg"
+  }
+];
+---
+
+<section id="quem-atendemos" class="services-section">
+  <div class="services-container">
+    
+    <!-- Cabeçalho -->
+    <div class="services-header">
+      <h2 class="section-title">Tipos de coleta</h2>
+      <p class="section-subtitle">Encontre a solução ideal para a sua necessidade e agende a retirada de forma rápida e prática.</p>
+    </div>
+
+    <!-- Wrapper do Carrossel/Accordion -->
+    <div class="accordion-wrapper" id="coleta-accordion">
+      {services.map((service, index) => (
+        <div class={`accordion-card ${index === 0 ? 'active' : ''}`} style={`background-image: url('${service.image}');`}>
+          <div class="card-overlay"></div>
+          
+          <div class="card-content">
+            <div class="card-top">
+              <div class="card-icon">
+                <img src={service.icon} alt={`Ícone ${service.title}`} />
+              </div>
+              <h3 class="card-title">{service.title}</h3>
+            </div>
+
+            <div class="card-bottom-reveal">
+              <p class="card-description">{service.description}</p>
+              <a href="https://wa.me/SEUNUMEROAQUI" target="_blank" rel="noopener noreferrer" class="btn-schedule">
+                Agendar Coleta
+              </a>
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .services-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 4rem 0; 
+    background: var(--bg-light);
+    overflow: hidden;
+  }
+
+  .services-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    /* Mantém o limite lateral para o cabeçalho e demais elementos */
+    padding: 0 1.5rem;
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 3rem; 
+  }
+
+  /* COMPORTAMENTO MOBILE (SLIDER NATIVO FULL BLEED)
+  */
+  .accordion-wrapper {
+    display: flex;
+    gap: 1rem;
+    
+    /* Força o container a ocupar a tela inteira ignorando o padding do pai */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    
+    /* O padding aqui devolve o alinhamento para que o 1º card inicie junto com o título */
+    padding: 0 1.5rem;
+    padding-bottom: 1.5rem; /* Espaço inferior para evitar corte de sombras */
+    
+    /* Configuração de Scroll */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 1.5rem; /* CRÍTICO: Avisa o CSS que o "início" da tela tem um recuo */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; 
+  }
+
+  .accordion-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .accordion-card {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+    
+    /* Configurações do Mobile */
+    flex: 0 0 92%; /* 92% garante que o segundo card apareça cortado na direita */
+    max-width: 420px; /* Trava de segurança para tablets pequenos */
+    min-height: 460px; 
+    height: 65vh;
+    max-height: 550px;
+    
+    /* Mudança aqui: 'start' encosta o card perfeitamente no padding, 'center' deixaria um buraco visual */
+    scroll-snap-align: start; 
+  }
+
+  /* COMPORTAMENTO DESKTOP (ACCORDION HOVER)
+  */
+  @media (min-width: 1024px) {
+    .accordion-wrapper {
+      /* Remove o comportamento Full Bleed do mobile */
+      width: 100%; 
+      margin-left: 0;
+      padding: 0;
+      
+      flex-direction: row;
+      overflow-x: visible; 
+      scroll-snap-type: none;
+      
+      min-height: 380px; 
+      height: 50vh; 
+      max-height: 500px;
+    }
+
+    .accordion-card {
+      flex: 1; 
+      max-width: none;
+      height: 100%;
+      scroll-snap-align: none;
+    }
+
+    .accordion-card.active {
+      flex: 2.2;
+    }
+  }
+
+  /* Controle do fundo escurecido */
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(18, 18, 18, 0.75);
+    transition: background-color 0.4s ease;
+    z-index: 1;
+  }
+
+  @media (min-width: 1024px) {
+    .card-overlay {
+      background-color: rgba(18, 18, 18, 0.8);
+    }
+    .accordion-card.active .card-overlay {
+      background-color: rgba(18, 18, 18, 0.4); 
+    }
+  }
+
+  /* Conteúdo Interno */
+  .card-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    padding: 1.5rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .card-title {
+    font-size: 1.25rem; 
+    font-family: var(--font-sans);
+    font-weight: 900;
+    color: var(--bg-white);
+    letter-spacing: -0.025em;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .services-section { padding: 6rem 0; }
+    .card-title { font-size: 1.375rem; }
+  }
+
+  /* Bloco de Descrição e Botão */
+  .card-bottom-reveal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, margin 0.4s ease;
+    
+    opacity: 1;
+    max-height: 250px; 
+    transform: translateY(0);
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .card-bottom-reveal {
+      opacity: 0;
+      max-height: 0;
+      transform: translateY(10px);
+      margin-top: 0;
+    }
+    .accordion-card.active .card-bottom-reveal {
+      opacity: 1;
+      max-height: 250px; 
+      transform: translateY(0);
+      margin-top: 1rem;
+    }
+  }
+
+  .card-description {
+    font-size: 0.9375rem; 
+    color: #f3f4f6; 
+    line-height: 1.5;
+    font-family: var(--font-sans);
+    margin: 0 0 1.25rem 0; 
+  }
+
+  .btn-schedule {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0.875rem 2rem; 
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1rem; 
+    letter-spacing: 0.025em;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: none;
+    background-color: var(--brand-green);
+    color: var(--bg-white);
+  }
+
+  .btn-schedule:hover {
+    transform: scale(1.05);
+  }
+</style>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // JavaScript é mantido APENAS para gerenciar a interação de "accordion" no desktop
+    // No mobile, a experiência é comandada inteiramente pelo CSS (scroll e swipe)
+    const cards = document.querySelectorAll('#coleta-accordion .accordion-card');
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        // Verifica se a tela é desktop antes de alterar classes
+        if (window.innerWidth >= 1024) {
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,124 @@
+:root {
+  /* Paleta de cores padronizada */
+  --brand-green: #64b445;
+  --brand-yellow: #FBB342;
+  --brand-gray: #555555;
+  --charcoal: #121212;
+  --bg-white: #ffffff;
+  --bg-light: #f0ece0; 
+
+  /* Fontes */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-white);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* =========================================
+   Tipografia e Classes Utilitárias globais
+   ========================================= */
+.text-brand-green { color: var(--brand-green); }
+.text-brand-yellow { color: var(--brand-yellow); }
+.text-brand-gray { color: var(--brand-gray); }
+.text-charcoal { color: var(--charcoal); }
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  font-family: var(--font-sans);
+  color: var(--brand-gray);
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .section-title { font-size: 3rem; }
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  font-family: var(--font-sans);
+  color: rgba(18, 18, 18, 0.8);
+  letter-spacing: -0.025em;
+  padding-top: 0.5rem;
+  line-height: 1.5;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .section-subtitle { font-size: 1.25rem; }
+}
+
+/* =========================================
+   Elementos de Background (Blobs e Gradientes)
+   ========================================= */
+.bg-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, var(--bg-white), rgba(100, 180, 69, 0.05), var(--bg-white));
+  z-index: 1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+}
+
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: 1;
+}
+
+.bg-blob.blob-green {
+  background-color: rgba(100, 180, 69, 0.15);
+  animation: float 6s ease-in-out infinite;
+}
+
+.bg-blob.blob-yellow {
+  background-color: rgba(255, 190, 0, 0.1);
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+/* =========================================
+   Efeito de Ruído (Noise)
+   ========================================= */
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  30% { transform: translate(3%, -15%); }
+  50% { transform: translate(12%, 9%); }
+  70% { transform: translate(9%, 4%); }
+  90% { transform: translate(-1%, 7%); }
+}
+
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+  z-index: 50;
+}

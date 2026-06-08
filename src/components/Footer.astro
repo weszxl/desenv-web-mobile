@@ -1,0 +1,363 @@
+---
+---
+
+<footer id="contato" class="footer-section">
+  <div class="footer-container">
+    
+    <div class="footer-cta-header">
+      <h2 class="section-title">
+        <span class="block text-brand-gray">PRONTO PARA</span>
+        <span class="block text-brand-green">RECICLAR?</span>
+      </h2>
+    </div>
+
+    <div class="contact-wrapper">
+      <form id="contact-form" class="contact-form">
+        <div class="inputs-grid">
+          <div class="input-group">
+            <input type="text" placeholder="Seu Nome" required class="contact-input" />
+          </div>
+          <div class="input-group">
+            <input type="email" placeholder="seu@email.com" required class="contact-input" />
+          </div>
+          <div class="input-group">
+            <input type="tel" placeholder="Seu Contato (WhatsApp)" required class="contact-input" />
+          </div>
+        </div>
+        
+        <button type="submit" id="submit-btn" class="btn-submit">
+          <span class="btn-text">Enviar dados</span>
+        </button>
+      </form>
+      <p class="contact-note">Insira suas informações para que possamos entrar em contato com você.</p>
+    </div>
+
+    <div class="footer-links-grid">
+      
+      <div class="footer-link-col">
+        <h4 class="link-title">Contatos</h4>
+        <ul class="link-list">
+          <li>
+            <a href="tel:+5551999999999" class="link-item">Telefone: 51 9 9999-9999</a>
+          </li>
+          <li>
+            <a href="mailto:papaoleoColeta@gmail.com" class="link-item">E-mail: papaoleoColeta@gmail.com</a>
+          </li>
+        </ul>
+        
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram" class="social-icon">
+            <img src="/images/instagram_icon.svg" alt="Instagram" />
+          </a>
+          <a href="#" aria-label="Facebook" class="social-icon">
+            <img src="/images/facebook_icon.svg" alt="Facebook" />
+          </a>
+          <a href="https://wa.me/SEUNUMEROAQUI" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon">
+            <img src="/images/whatsapp_icon.svg" alt="WhatsApp" />
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-link-col">
+        <h4 class="link-title">Links Rápidos</h4>
+        <ul class="link-list">
+          <li><a href="/" class="link-item">Início</a></li>
+          <li><a href="/como-funciona" class="link-item">Como Funciona</a></li>
+          <li><a href="/quem-atendemos" class="link-item">Quem atendemos</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-link-col">
+        <h4 class="link-title">Informações gerais</h4>
+        <ul class="link-list">
+          <li><a href="/faq" class="link-item">FAQ</a></li>
+          <li><a href="/politica-de-privacidade" class="link-item">Política de Privacidade</a></li>
+          <li><a href="/termos-de-servico" class="link-item">Termos de Serviço</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-logo">
+        <img src="/images/logo_v3.svg" alt="Logo" />
+      </div>
+      <p class="copyright">© 2026</p>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnText = submitBtn?.querySelector('.btn-text');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (submitBtn && btnText) {
+      const originalText = btnText.textContent;
+      submitBtn.classList.add('submitting');
+      btnText.textContent = 'Enviando...';
+      
+      setTimeout(() => {
+        submitBtn.classList.remove('submitting');
+        btnText.textContent = originalText;
+        (form as HTMLFormElement).reset();
+        alert('Dados enviados com sucesso! Em breve entraremos em contato.');
+      }, 2000);
+    }
+  });
+</script>
+
+<style>
+  .footer-section {
+    position: relative;
+    background-color: var(--bg-light); 
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .footer-section { padding-top: 6rem; }
+  }
+
+  .footer-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .footer-cta-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .block { display: block; }
+
+  /* Formulário */
+  .contact-wrapper {
+    max-width: 56rem; 
+    margin: 0 auto 4rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .inputs-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .input-group {
+    width: 100%;
+    position: relative;
+  }
+
+  .contact-input {
+    width: 100%;
+    background-color: var(--bg-white);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    color: var(--charcoal);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+
+  .contact-input::placeholder {
+    color: rgba(18, 18, 18, 0.4);
+  }
+
+  .contact-input:focus {
+    border-color: var(--brand-green);
+    box-shadow: 0 0 0 3px rgba(100, 180, 69, 0.2);
+  }
+
+  /* Botão Padronizado */
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 1rem 2.5rem; 
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1.125rem; 
+    letter-spacing: 0.025em;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: none;
+    background-color: var(--brand-green); 
+    color: var(--bg-white);
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .btn-submit {
+      width: fit-content;
+      align-self: center;
+    }
+  }
+
+  .btn-submit:hover {
+    transform: scale(1.05);
+  }
+
+  .btn-submit.submitting {
+    opacity: 0.7;
+    pointer-events: none;
+    animation: pulse 1s infinite alternate;
+  }
+
+  @keyframes pulse {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+  }
+
+  .contact-note {
+    color: rgba(18, 18, 18, 0.6);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  /* Seção de Links */
+  .footer-links-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1); 
+  }
+
+  @media (min-width: 768px) {
+    .footer-links-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .link-title {
+    font-weight: 900;
+    font-family: var(--font-sans);
+    color: var(--brand-gray);
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .link-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .link-item {
+    color: rgba(18, 18, 18, 0.6);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .link-item:hover {
+    color: var(--brand-green);
+    transform: translateX(4px);
+  }
+
+  /* Ícones Sociais (Atualizado para Imagens) */
+  .social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  .social-icon img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .social-icon:hover {
+    transform: translateY(-3px) scale(1.05);
+  }
+
+  /* Barra Inferior */
+  .footer-bottom {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between; 
+    }
+
+    .copyright {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%); 
+    }
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-logo img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .footer-logo img:hover {
+    transform: scale(1.05);
+  }
+
+  .copyright {
+    color: rgba(18, 18, 18, 0.5);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    margin: 0;
+    text-align: center;
+  }
+</style>
