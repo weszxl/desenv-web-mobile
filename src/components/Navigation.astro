@@ -68,9 +68,19 @@ const navLinks = [
 
   let lastScrollY = window.scrollY;
 
+  // Função centralizada para fechar o menu e destravar o scroll
+  function closeMobileMenu() {
+    if (mobileMenu?.classList.contains('open')) {
+      mobileMenu.classList.remove('open');
+      navbar?.classList.remove('menu-open'); // Remove as pontas redondas da navbar
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      document.body.style.overflow = ''; // Restaura o scroll
+    }
+  }
+
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
-    // Evita que o menu suma se o usuário rolar a tela com o menu mobile aberto
     const isMenuOpen = mobileMenu?.classList.contains('open');
 
     // 1. Controle visual da cor de fundo
@@ -90,13 +100,42 @@ const navLinks = [
     lastScrollY = currentScrollY;
   });
 
-  function toggleMenu() {
-    mobileMenu?.classList.toggle('open');
-    menuIcon?.classList.toggle('hidden');
-    closeIcon?.classList.toggle('hidden');
+  function toggleMenu(e: Event) {
+    e.stopPropagation(); // Evita que o click ative os fechamentos externos imediatamente
+    const isOpening = !mobileMenu?.classList.contains('open');
+    
+    if (isOpening) {
+      mobileMenu?.classList.add('open');
+      navbar?.classList.add('menu-open'); // Adiciona as pontas redondas na navbar pai
+      menuIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Trava o scroll da página
+    } else {
+      closeMobileMenu();
+    }
   }
 
   mobileBtn?.addEventListener('click', toggleMenu);
+
+  // 3. Fechar menu se o usuário clicar fora da Navbar
+  document.addEventListener('click', (e) => {
+    if (mobileMenu?.classList.contains('open') && !navbar?.contains(e.target as Node)) {
+      closeMobileMenu();
+    }
+  });
+
+  // 4. Fechar menu se o usuário tentar dar scroll/arrastar o dedo
+  document.addEventListener('wheel', () => {
+    if (mobileMenu?.classList.contains('open')) {
+      closeMobileMenu();
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (mobileMenu?.classList.contains('open') && !navbar?.contains(e.target as Node)) {
+      closeMobileMenu();
+    }
+  }, { passive: true });
 </script>
 
 <style>
@@ -106,13 +145,26 @@ const navLinks = [
     left: 0;
     right: 0;
     z-index: 50;
-    /* A transição aqui só afeta cor de fundo e sombra. O transform fica de fora para gerar o corte seco */
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    /* Adicionada a transição para o border-radius também ficar suave */
+    
     background-color: transparent;
     font-family: var(--font-sans);
   }
 
-  /* Classe que remove a navbar da tela com corte seco */
+  /* O pulo do gato: quando o menu abre, o retângulo pai também ganha as bordas arredondadas */
+  .navbar.menu-open {
+    border-bottom-left-radius: 2.25rem;
+    border-bottom-right-radius: 2.25rem;
+  }
+
+  /* Impede que esse arredondamento ocorra por acidente no Desktop */
+  @media (min-width: 768px) {
+    .navbar.menu-open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
   .navbar.hidden-nav {
     transform: translateY(-100%);
   }
@@ -131,7 +183,6 @@ const navLinks = [
     justify-content: space-between;
   }
 
-  /* Controle das Logos */
   .nav-logo {
     display: flex;
     align-items: center;
@@ -156,7 +207,6 @@ const navLinks = [
     display: block;
   }
 
-  /* Links Desktop */
   .nav-links-desktop {
     display: none;
     align-items: center;
@@ -184,7 +234,6 @@ const navLinks = [
     font-weight: 700;
   }
 
-  /* Comportamento dos links com scroll ativo */
   .navbar.scrolled .nav-link {
     color: var(--bg-white);
   }
@@ -194,7 +243,6 @@ const navLinks = [
     color: var(--brand-yellow);
   }
 
-  /* Botão CTA Desktop */
   .btn-cta-desktop {
     display: none;
     background-color: var(--brand-green);
@@ -220,13 +268,11 @@ const navLinks = [
     transform: scale(1.02);
   }
 
-  /* Inversão do botão com scroll ativo */
   .navbar.scrolled .btn-cta-desktop {
     background-color: var(--brand-yellow);
     color: var(--bg-white); 
   }
 
-  /* Mobile Toggle */
   .mobile-toggle {
     display: block;
     background: transparent;
@@ -251,16 +297,21 @@ const navLinks = [
 
   .hidden { display: none; }
 
-  /* Menu Mobile Dropdown */
+  /* =========================================================
+     MENU MOBILE DROPDOWN
+     ========================================================= */
   .mobile-menu {
     display: none;
-    background-color: var(--bg-white);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: #F7FBF6;
+    border-bottom-left-radius: 2.25rem;
+    border-bottom-right-radius: 2.25rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   .navbar.scrolled .mobile-menu {
     background-color: var(--brand-green);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    /* Removemos a sombra interna do submenu para evitar dupla sombra com a navbar pai */
+    box-shadow: none; 
   }
 
   .mobile-menu.open {
@@ -286,7 +337,6 @@ const navLinks = [
     font-weight: 700;
   }
 
-  /* Links Mobile com scroll ativo */
   .navbar.scrolled .mobile-nav-link {
     color: var(--bg-white);
   }
