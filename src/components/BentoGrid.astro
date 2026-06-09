@@ -9,7 +9,7 @@ const features = [
       "Rotas programadas para a sua região.",
       "Coleta rápida sem interromper sua rotina."
     ],
-    image: "/images/3_how-work_01.svg"
+    image: "/images/3_how-work_01_v2.svg"
   },
   {
     id: "preparacao",
@@ -39,7 +39,6 @@ const features = [
 <section id="o-que-fazemos" class="process-section">
   <div class="container">
     
-    <!-- Cabeçalho (Herda estilos do global.css) -->
     <div class="section-header">
       <h2 class="section-title">O que fazemos?</h2>
       <p class="section-subtitle">O ciclo completo do material: da retirada no seu endereço até o reaproveitamento.</p>
@@ -47,19 +46,16 @@ const features = [
 
     <div class="layout-grid">
       
-      <!-- Coluna do Accordion -->
       <div class="accordion-column">
         {features.map((feature, index) => (
           <div class={`feature-card ${index === 0 ? 'active' : ''}`} data-image={feature.image}>
             
             <button class="card-header" aria-expanded={index === 0 ? 'true' : 'false'}>
               
-              <!-- IMAGEM MOBILE (Aparece apenas em telas menores) -->
               <div class="mobile-image-wrapper">
                 <img src={feature.image} alt={`Ilustração: ${feature.title}`} />
               </div>
 
-              <!-- TÍTULO E ÍCONE DE ABRIR/FECHAR -->
               <div class="header-row">
                 <h3 class="feature-title">{feature.title}</h3>
                 <div class="toggle-icon">
@@ -71,7 +67,6 @@ const features = [
 
             </button>
             
-            <!-- CONTEÚDO EXPANSÍVEL (Apenas o texto) -->
             <div class="card-body">
               <div class="card-content">
                 <p class="feature-desc">{feature.description}</p>
@@ -96,7 +91,6 @@ const features = [
         ))}
       </div>
 
-      <!-- IMAGEM DINÂMICA DESKTOP (Fica oculta no Mobile) -->
       <div class="visual-column">
         <div class="image-wrapper">
           <img id="dynamic-feature-image" src={features[0].image} alt="Ilustração do processo" />
@@ -114,6 +108,10 @@ const features = [
     color: var(--charcoal);
   }
 
+  @media (min-width: 768px) {
+    .process-section { padding: 6rem 1.5rem; }
+  }
+
   .container {
     max-width: 1280px;
     margin: 0 auto;
@@ -124,7 +122,7 @@ const features = [
     margin-bottom: 3rem; 
   }
 
-  /* Layout Base (CSS Grid) */
+  /* Layout Base */
   .layout-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -142,17 +140,23 @@ const features = [
   .accordion-column {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem; 
+    gap: 1rem; 
   }
 
   /* Estilos do Card */
   .feature-card {
     background-color: var(--bg-white);
     border-radius: 1.25rem;
-    padding: 1.25rem 1.25rem 0 1.25rem; 
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    padding: 0.625rem 0.625rem 0 0.625rem; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
+  }
+
+  @media (min-width: 992px) {
+    .feature-card {
+      padding: 1.25rem 1.25rem 0 1.25rem; 
+    }
   }
 
   .card-header {
@@ -166,9 +170,9 @@ const features = [
     text-align: left;
   }
 
-  /* --- NOVA LÓGICA DE IMAGENS --- */
+  /* Imagens Mobile */
   .mobile-image-wrapper {
-    display: block; /* Visível no mobile */
+    display: block; 
     width: 100%;
     aspect-ratio: 16 / 9;
     background-color: var(--bg-light);
@@ -184,10 +188,9 @@ const features = [
   }
 
   .visual-column {
-    display: none; /* Oculta a imagem global lateral no mobile */
+    display: none; 
   }
 
-  /* Reverte no Desktop: Mostra a Imagem Lateral e Oculta as Imagens dos Cards */
   @media (min-width: 992px) {
     .mobile-image-wrapper {
       display: none; 
@@ -199,7 +202,6 @@ const features = [
       min-height: 0;
     }
   }
-  /* ------------------------------ */
 
   .header-row {
     display: flex;
@@ -221,11 +223,6 @@ const features = [
     .feature-title { font-size: 1.25rem; }
   }
 
-  .feature-card.active .feature-title {
-    font-weight: 900;
-  }
-
-  /* Ícone de + */
   .toggle-icon {
     width: 28px; 
     height: 28px;
@@ -239,12 +236,19 @@ const features = [
     transition: all 0.3s ease;
   }
 
+  .icon-plus {
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card.active .icon-plus {
+    transform: rotate(45deg);
+  }
+
   .feature-card.active .toggle-icon {
     background-color: var(--brand-yellow); 
     color: var(--bg-white); 
   }
 
-  /* Corpo do Acordeão */
   .card-body {
     display: grid;
     grid-template-rows: 0fr;
@@ -307,14 +311,13 @@ const features = [
     margin-bottom: 1.25rem; 
   }
 
-  /* Imagem Global (Desktop) */
+  /* IMAGEM DESKTOP COM EFEITO POP-OUT */
   .image-wrapper {
     position: relative; 
     width: 100%;
     height: 100%;
     background-color: var(--bg-light); 
     border-radius: 1.5rem;
-    overflow: hidden;
   }
 
   .image-wrapper img {
@@ -323,8 +326,10 @@ const features = [
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 1rem;
     object-fit: contain; 
+    z-index: 10;
+    
+    transform: scale(1.15);
     transition: opacity 0.3s ease-in-out;
   }
 </style>
@@ -334,22 +339,19 @@ const features = [
     const cards = document.querySelectorAll('.feature-card');
     const dynamicImage = document.getElementById('dynamic-feature-image') as HTMLImageElement;
 
-    if (!cards.length || !dynamicImage) return;
+    if (!cards.length) return;
 
-    cards.forEach(card => {
-      const header = card.querySelector('.card-header');
-      
-      header?.addEventListener('click', () => {
-        if (card.classList.contains('active')) return;
+    // Função centralizada para abrir o card e trocar a imagem
+    function activateCard(card: Element) {
+      cards.forEach(el => {
+        el.classList.remove('active');
+        el.querySelector('.card-header')?.setAttribute('aria-expanded', 'false');
+      });
 
-        cards.forEach(el => {
-          el.classList.remove('active');
-          el.querySelector('.card-header')?.setAttribute('aria-expanded', 'false');
-        });
+      card.classList.add('active');
+      card.querySelector('.card-header')?.setAttribute('aria-expanded', 'true');
 
-        card.classList.add('active');
-        header.setAttribute('aria-expanded', 'true');
-
+      if (dynamicImage) {
         const newImageSrc = card.getAttribute('data-image');
         if (newImageSrc) {
           dynamicImage.style.opacity = '0.3';
@@ -358,7 +360,45 @@ const features = [
             dynamicImage.style.opacity = '1';
           }, 200);
         }
+      }
+    }
+
+    // Lógica de Cliques
+    cards.forEach(card => {
+      const header = card.querySelector('.card-header');
+      
+      header?.addEventListener('click', () => {
+        const isActive = card.classList.contains('active');
+
+        // Regra Desktop: Um sempre aberto
+        if (isActive && window.innerWidth >= 992) {
+          return;
+        }
+
+        // Regra Mobile: Permite fechar no X
+        if (isActive && window.innerWidth < 992) {
+          card.classList.remove('active');
+          header.setAttribute('aria-expanded', 'false');
+          return;
+        }
+
+        activateCard(card);
       });
     });
+
+    // CORREÇÃO DO BUG DE RESIZE: Obriga o desktop a ter pelo menos 1 card aberto
+    const mediaQuery = window.matchMedia('(min-width: 992px)');
+    
+    mediaQuery.addEventListener('change', (e) => {
+      if (e.matches) { // Entrou na visualização Desktop
+        const hasActive = Array.from(cards).some(card => card.classList.contains('active'));
+        
+        if (!hasActive) {
+          // Se todos os cards estiverem fechados, abre o primeiro automaticamente
+          activateCard(cards[0]);
+        }
+      }
+    });
+
   });
 </script>
