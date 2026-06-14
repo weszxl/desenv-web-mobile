@@ -1,12 +1,8 @@
 ---
-// Captura a URL atual para destacar o link ativo
-const currentPath = Astro.url.pathname;
-const isActive = (href: string) => currentPath === href || currentPath === href + '/';
-
 const navLinks = [
   { label: "Início", href: "/" },
-  { label: "Como funciona", href: "/como-funciona" },
-  { label: "Quem atendemos", href: "/quem-atendemos" },
+  { label: "Como funciona", href: "/#o-que-fazemos" },
+  { label: "Quem atendemos", href: "/#quem-atendemos" },
 ];
 ---
 
@@ -19,16 +15,13 @@ const navLinks = [
 
     <div class="nav-links-desktop">
       {navLinks.map((item) => (
-        <a 
-          href={item.href} 
-          class={`nav-link ${isActive(item.href) ? 'active' : ''}`}
-        >
+        <a href={item.href} class="nav-link">
           {item.label}
         </a>
       ))}
     </div>
 
-    <a href="/contato" class="btn-cta-desktop">
+    <a href="/#contato" class="btn-cta-desktop">
       Entrar em Contato
     </a>
 
@@ -45,14 +38,11 @@ const navLinks = [
   <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-content">
       {navLinks.map((item) => (
-        <a 
-          href={item.href} 
-          class={`mobile-nav-link ${isActive(item.href) ? 'active' : ''}`}
-        >
+        <a href={item.href} class="mobile-nav-link">
           {item.label}
         </a>
       ))}
-      <a href="/contato" class="btn-cta-mobile">
+      <a href="/#contato" class="btn-cta-mobile">
         Entrar em Contato
       </a>
     </div>
@@ -72,12 +62,20 @@ const navLinks = [
   function closeMobileMenu() {
     if (mobileMenu?.classList.contains('open')) {
       mobileMenu.classList.remove('open');
-      navbar?.classList.remove('menu-open'); // Remove as pontas redondas da navbar
+      navbar?.classList.remove('menu-open');
       menuIcon?.classList.remove('hidden');
       closeIcon?.classList.add('hidden');
-      document.body.style.overflow = ''; // Restaura o scroll
+      document.body.style.overflow = ''; 
     }
   }
+
+  // Fechar o menu automaticamente ao clicar num link âncora no mobile
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .btn-cta-mobile');
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+    });
+  });
 
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
@@ -101,15 +99,15 @@ const navLinks = [
   });
 
   function toggleMenu(e: Event) {
-    e.stopPropagation(); // Evita que o click ative os fechamentos externos imediatamente
+    e.stopPropagation(); 
     const isOpening = !mobileMenu?.classList.contains('open');
     
     if (isOpening) {
       mobileMenu?.classList.add('open');
-      navbar?.classList.add('menu-open'); // Adiciona as pontas redondas na navbar pai
+      navbar?.classList.add('menu-open'); 
       menuIcon?.classList.add('hidden');
       closeIcon?.classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; // Trava o scroll da página
+      document.body.style.overflow = 'hidden'; 
     } else {
       closeMobileMenu();
     }
@@ -117,14 +115,12 @@ const navLinks = [
 
   mobileBtn?.addEventListener('click', toggleMenu);
 
-  // 3. Fechar menu se o usuário clicar fora da Navbar
   document.addEventListener('click', (e) => {
     if (mobileMenu?.classList.contains('open') && !navbar?.contains(e.target as Node)) {
       closeMobileMenu();
     }
   });
 
-  // 4. Fechar menu se o usuário tentar dar scroll/arrastar o dedo
   document.addEventListener('wheel', () => {
     if (mobileMenu?.classList.contains('open')) {
       closeMobileMenu();
@@ -138,6 +134,14 @@ const navLinks = [
   }, { passive: true });
 </script>
 
+<!-- REGRAS GLOBAIS DE SCROLL -->
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+    /* Margem de segurança de 80px removida conforme solicitado */
+  }
+</style>
+
 <style>
   .navbar {
     position: fixed;
@@ -145,19 +149,16 @@ const navLinks = [
     left: 0;
     right: 0;
     z-index: 50;
-    /* Adicionada a transição para o border-radius também ficar suave */
-    
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
     background-color: transparent;
     font-family: var(--font-sans);
   }
 
-  /* O pulo do gato: quando o menu abre, o retângulo pai também ganha as bordas arredondadas */
   .navbar.menu-open {
-    border-bottom-left-radius: 2.25rem;
-    border-bottom-right-radius: 2.25rem;
+    border-bottom-left-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
   }
 
-  /* Impede que esse arredondamento ocorra por acidente no Desktop */
   @media (min-width: 768px) {
     .navbar.menu-open {
       border-bottom-left-radius: 0;
@@ -225,21 +226,16 @@ const navLinks = [
     transition: color 0.3s;
   }
 
-  .nav-link:hover {
+  /* Efeito de destaque apenas no hover ou no clique (:active) */
+  .nav-link:hover, .nav-link:active {
     color: var(--brand-green);
-  }
-
-  .nav-link.active {
-    color: var(--brand-green);
-    font-weight: 700;
   }
 
   .navbar.scrolled .nav-link {
     color: var(--bg-white);
   }
 
-  .navbar.scrolled .nav-link:hover,
-  .navbar.scrolled .nav-link.active {
+  .navbar.scrolled .nav-link:hover, .navbar.scrolled .nav-link:active {
     color: var(--brand-yellow);
   }
 
@@ -297,20 +293,16 @@ const navLinks = [
 
   .hidden { display: none; }
 
-  /* =========================================================
-     MENU MOBILE DROPDOWN
-     ========================================================= */
   .mobile-menu {
     display: none;
-    background-color: #F7FBF6;
-    border-bottom-left-radius: 2.25rem;
-    border-bottom-right-radius: 2.25rem;
+    background-color: var(--bg-white);
+    border-bottom-left-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   .navbar.scrolled .mobile-menu {
     background-color: var(--brand-green);
-    /* Removemos a sombra interna do submenu para evitar dupla sombra com a navbar pai */
     box-shadow: none; 
   }
 
@@ -330,18 +322,18 @@ const navLinks = [
     color: var(--charcoal);
     font-size: 1.125rem;
     font-weight: 500;
+    transition: color 0.2s;
   }
 
-  .mobile-nav-link.active {
+  .mobile-nav-link:hover, .mobile-nav-link:active {
     color: var(--brand-green);
-    font-weight: 700;
   }
 
   .navbar.scrolled .mobile-nav-link {
     color: var(--bg-white);
   }
 
-  .navbar.scrolled .mobile-nav-link.active {
+  .navbar.scrolled .mobile-nav-link:hover, .navbar.scrolled .mobile-nav-link:active {
     color: var(--brand-yellow);
   }
 
