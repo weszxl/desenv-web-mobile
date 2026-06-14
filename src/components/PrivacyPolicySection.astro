@@ -1,44 +1,65 @@
 ---
 // src/components/PrivacyPolicySection.astro
+
+const policies = [
+  {
+    title: "1. Quais dados coletamos",
+    text: "Coletamos apenas os dados que você insere voluntariamente em nosso formulário de contato: nome e número de telefone/WhatsApp. Caso nosso site utilize ferramentas de medição de acessos, dados básicos de navegação (como modelo do dispositivo e cidade de acesso) podem ser registrados de forma anônima."
+  },
+  {
+    title: "2. Para que usamos os seus dados",
+    text: "As informações captadas são utilizadas exclusivamente para o andamento da nossa operação de coleta. Usamos seu WhatsApp para estabelecer contato comercial, agendar as rotas de retirada, alinhar a logística no seu endereço e enviar informações pertinentes ao serviço."
+  },
+  {
+    title: "3. Compartilhamento de dados",
+    text: "Os seus dados são para uso estrito da nossa equipe logística e de atendimento. Nós não vendemos, alugamos ou repassamos as suas informações de contato para terceiros em nenhuma hipótese, salvo por obrigação legal ou ordem judicial."
+  },
+  {
+    title: "4. Seus direitos",
+    text: "Você possui controle sobre as suas informações. A qualquer momento, você pode nos enviar uma mensagem no WhatsApp ou e-mail solicitando a exclusão do seu número da nossa base de contatos operacionais e o seu registro será apagado."
+  }
+];
 ---
 
-<section class="privacy-section noise-overlay">
-  <div class="bg-gradient-overlay"></div>
-  <div class="bg-blob blob-green policy-blob-1"></div>
-  <div class="bg-blob blob-yellow policy-blob-2"></div>
+<section class="privacy-section">
+  
+  <div class="privacy-background">
+    <div class="bg-gradient-overlay"></div>
+    <div class="bg-blob blob-green privacy-blob-1"></div>
+    <div class="bg-blob blob-yellow privacy-blob-2"></div>
+  </div>
 
-  <div class="policy-container">
+  <div class="privacy-noise-wrapper noise-overlay"></div>
+
+  <div class="privacy-container">
     
-    <div class="policy-header">
-      <h1 class="section-title">Política de Privacidade</h1>
-      <p class="section-subtitle">Transparência e segurança sobre como tratamos as suas informações.</p>
-    </div>
-
-    <div class="policy-content">
+    <div class="privacy-grid">
       
-      <div class="policy-block">
-        <h2>1. Quais dados coletamos</h2>
-        <p>Coletamos apenas os dados que você insere voluntariamente em nosso formulário de contato: nome e número de telefone/WhatsApp. Caso nosso site utilize ferramentas de medição de acessos, dados básicos de navegação (como modelo do dispositivo e cidade de acesso) podem ser registrados de forma anônima.</p>
-      </div>
-      
-      <div class="policy-block">
-        <h2>2. Para que usamos os seus dados</h2>
-        <p>As informações captadas são utilizadas exclusivamente para o andamento da nossa operação de coleta. Usamos seu WhatsApp para estabelecer contato comercial, agendar as rotas de retirada, alinhar a logística no seu endereço e enviar informações pertinentes ao serviço.</p>
+      <div class="privacy-sidebar">
+        <div class="sidebar-header">
+          <span class="subtitle">TRANSPARÊNCIA E SEGURANÇA</span>
+          <h2 class="title">Política de Privacidade</h2>
+        </div>
+
+        <div class="support-card">
+          <h3 class="support-title">Ficou com alguma dúvida?</h3>
+          <p class="support-text">Caso tenha qualquer dúvida sobre como tratamos os seus dados, entre em contato conosco.</p>
+          
+          <a href="mailto:papaoleoColeta@gmail.com" class="btn-support">
+            Enviar E-mail
+          </a>
+        </div>
       </div>
 
-      <div class="policy-block">
-        <h2>3. Compartilhamento de dados</h2>
-        <p>Os seus dados são para uso estrito da nossa equipe logística e de atendimento. Nós não vendemos, alugamos ou repassamos as suas informações de contato para terceiros em nenhuma hipótese, salvo por obrigação legal ou ordem judicial.</p>
-      </div>
-
-      <div class="policy-block">
-        <h2>4. Seus direitos</h2>
-        <p>Você possui controle sobre as suas informações. A qualquer momento, você pode nos enviar uma mensagem no WhatsApp ou e-mail solicitando a exclusão do seu número da nossa base de contatos operacionais e o seu registro será apagado.</p>
-      </div>
-
-      <div class="policy-block">
-        <h2>5. Contato</h2>
-        <p>Caso tenha qualquer dúvida sobre como tratamos os seus dados no processo de coleta, entre em contato diretamente pelo e-mail: <a href="mailto:papaoleoColeta@gmail.com">papaoleoColeta@gmail.com</a>.</p>
+      <div class="privacy-content">
+        <div class="policy-group">
+          {policies.map((policy) => (
+            <div class="policy-card">
+              <h3 class="policy-title">{policy.title}</h3>
+              <p class="policy-text">{policy.text}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
     </div>
@@ -53,7 +74,6 @@
     background-color: var(--bg-white);
     color: var(--charcoal);
     min-height: 100vh;
-    overflow: hidden; /* Mantém os blobs contidos */
   }
 
   @media (min-width: 768px) {
@@ -62,93 +82,186 @@
     }
   }
 
-  /* Posicionamento dos Blobs locais */
-  .policy-blob-1 {
+  /* --- TRANCANDO O RUÍDO DE FORMA SEGURA --- */
+  .privacy-noise-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  /* --- TRANCANDO OS BLOBS DE FORMA SEGURA --- */
+  .privacy-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden; 
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .privacy-blob-1 {
     top: 5%;
     left: -5%;
     width: 15rem;
     height: 15rem;
   }
 
-  .policy-blob-2 {
+  .privacy-blob-2 {
     bottom: 10%;
     right: -5%;
     width: 20rem;
     height: 20rem;
   }
 
-  .policy-container {
+  .privacy-container {
     position: relative;
     z-index: 10;
-    /* Limitamos a largura a 800px para garantir a legibilidade ideal dos parágrafos */
-    max-width: 800px; 
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
 
-  .policy-header {
-    text-align: center;
-    margin-bottom: 4rem;
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
-  /* Caixa onde fica o texto da política */
-  .policy-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    background-color: var(--bg-white);
-    padding: 2rem;
-    border-radius: 1.25rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-  }
-
-  @media (min-width: 768px) {
-    .policy-content {
-      padding: 3.5rem;
+  @media (min-width: 992px) {
+    .privacy-grid {
+      grid-template-columns: 3.5fr 8.5fr;
+      gap: 5rem;
+      align-items: start;
     }
   }
 
-  /* Blocos individuais de texto */
-  .policy-block {
+  /* --- SIDEBAR INDEPENDENTE E FIXA --- */
+  .privacy-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-self: start; 
+    height: max-content;
+  }
+
+  @media (min-width: 992px) {
+    .privacy-sidebar {
+      position: sticky;
+      top: 8rem; 
+    }
+  }
+
+  .sidebar-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--charcoal);
+    opacity: 0.6;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: var(--font-sans);
+    color: var(--brand-gray); 
+    letter-spacing: -0.025em;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  @media (min-width: 768px) {
+    .title { font-size: 3rem; }
+  }
+
+  /* Card de Suporte */
+  .support-card {
+    background-color: transparent;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .support-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin: 0 0 0.25rem 0;
+  }
+
+  .support-text {
+    font-size: 0.875rem;
+    color: var(--charcoal);
+    opacity: 0.8;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .btn-support {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--brand-green);
+    color: var(--bg-white);
+    padding: 0.875rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: transform 0.2s, background-color 0.2s;
+    width: 100%;
+  }
+
+  .btn-support:hover {
+    transform: scale(1.02);
+  }
+
+  /* --- POLICY CARDS --- */
+  .policy-group {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
 
-  .policy-block h2 {
-    font-size: 1.25rem;
-    font-family: var(--font-sans);
-    font-weight: 900;
-    color: var(--brand-gray);
-    margin: 0;
-    letter-spacing: -0.025em;
+  .policy-card {
+    background-color: transparent; 
+    border-radius: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+    padding: 1.25rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .policy-card:hover {
+    border-color: rgba(100, 180, 69, 0.3);
   }
 
   @media (min-width: 768px) {
-    .policy-block h2 { font-size: 1.5rem; }
+    .policy-card { padding: 1.5rem; }
   }
 
-  .policy-block p {
+  .policy-title {
     font-size: 1rem;
-    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.4;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .policy-text {
+    margin: 0;
+    font-size: 0.9375rem;
     color: var(--charcoal);
     opacity: 0.8;
-    line-height: 1.7; /* Linha mais alta melhora a leitura de textos longos */
-    margin: 0;
-  }
-
-  /* Links no meio do texto */
-  .policy-block a {
-    color: var(--brand-green);
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    transition: color 0.2s;
-  }
-
-  .policy-block a:hover {
-    color: var(--brand-yellow);
+    line-height: 1.6;
   }
 </style>
