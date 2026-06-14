@@ -1,393 +1,427 @@
 ---
 const faqs = [
-  {
-    question: "Como sei que o óleo está pronto para recolha?",
-    answer: "O óleo deve estar completamente frio e armazenado em garrafas PET ou bombonas bem fechadas. Não é necessário coar os resíduos de alimentos antes de nos entregar."
-  },
-  {
-    question: "Qual a quantidade mínima para solicitar a retirada?",
-    answer: "Para a recolha residencial, pedimos um mínimo de 5 litros. Para estabelecimentos comerciais, podemos agendar recolhas a partir de 20 litros ou de acordo com a rota programada."
-  },
-  {
-    question: "Vocês cobram alguma taxa pela recolha?",
-    answer: "Não. A recolha do óleo de cozinha usado é 100% gratuita para si ou para a sua empresa."
-  },
-  {
-    question: "O que vocês fazem com o óleo recolhido?",
-    answer: "Todo o óleo passa por um processo de filtragem e decantação nas nossas instalações e é reencaminhado para a indústria, servindo como matéria-prima para a produção de biodiesel e produtos de limpeza."
-  },
-  {
-    question: "Vocês fornecem recipientes para armazenamento?",
-    answer: "Sim. Para condomínios, restaurantes e indústrias parceiras, fornecemos bombonas adequadas e seguras para o armazenamento contínuo do material."
-  },
-  {
-    question: "Fornecem algum certificado de descarte ecológico?",
-    answer: "Sim. Para parceiros comerciais e industriais, emitimos certificados de destinação final que comprovam o descarte ecologicamente correto dos resíduos."
-  }
+    {
+        question: "Como sei que o óleo está pronto para recolha?",
+        answer: "O óleo deve estar completamente frio e armazenado em garrafas PET ou bombonas bem fechadas. Não é necessário coar os resíduos de alimentos antes de nos entregar.",
+    },
+    {
+        question: "Qual a quantidade mínima para solicitar a retirada?",
+        answer: "Para a recolha residencial, pedimos um mínimo de 5 litros. Para estabelecimentos comerciais, podemos agendar recolhas a partir de 20 litros ou de acordo com a rota programada.",
+    },
+    {
+        question: "Vocês cobram alguma taxa pela recolha?",
+        answer: "Não. A recolha do óleo de cozinha usado é 100% gratuita para si ou para a sua empresa.",
+    },
+    {
+        question: "O que vocês fazem com o óleo recolhido?",
+        answer: "Todo o óleo passa por um processo de filtragem e decantação nas nossas instalações e é reencaminhado para a indústria, servindo como matéria-prima para a produção de biodiesel e produtos de limpeza.",
+    },
+    {
+        question: "Vocês fornecem recipientes para armazenamento?",
+        answer: "Sim. Para condomínios, restaurantes e indústrias parceiras, fornecemos bombonas adequadas e seguras para o armazenamento contínuo do material.",
+    },
+    {
+        question: "Fornecem algum certificado de descarte ecológico?",
+        answer: "Sim. Para parceiros comerciais e industriais, emitimos certificados de destinação final que comprovam o descarte ecologicamente correto dos resíduos.",
+    },
 ];
 ---
 
 <section class="faq-section">
-  
-  <div class="faq-background">
-    <div class="bg-gradient-overlay"></div>
-    <div class="bg-blob blob-green faq-blob-1"></div>
-    <div class="bg-blob blob-yellow faq-blob-2"></div>
-  </div>
-
-  <div class="faq-noise-wrapper noise-overlay"></div>
-
-  <div class="faq-container">
-    
-    <div class="faq-grid">
-      
-      <div class="faq-sidebar">
-        <div class="sidebar-header">
-          <span class="subtitle">AINDA COM DÚVIDAS?</span>
-          <h2 class="title">Leia o nosso FAQ</h2>
-        </div>
-
-        <div class="support-card">
-          <h3 class="support-title">Não encontrou a sua resposta?</h3>
-          <p class="support-text">Envie-nos uma mensagem e vamos conversar.</p>
-          
-          <a href="https://wa.me/SEUNUMEROAQUI" target="_blank" rel="noopener noreferrer" class="btn-support">
-            Falar no WhatsApp
-          </a>
-          
-          <p class="support-email">
-            Ou envie um e-mail: <a href="mailto:papaoleoColeta@gmail.com">papaoleoColeta@gmail.com</a>
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-content">
-        <div class="accordion-group">
-          {faqs.map((faq, index) => (
-            <div class="faq-item">
-              <button class="faq-button" aria-expanded="false">
-                
-                <div class="toggle-icon">
-                  <svg class="icon-plus" width="12" height="12" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 1V13M1 7H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                
-                <span class="faq-question">{faq.question}</span>
-              </button>
-              
-              <div class="faq-collapse">
-                <div class="faq-answer">
-                  <p>{faq.answer}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
+    <div class="faq-background">
+        <div class="bg-gradient-overlay"></div>
+        <div class="bg-blob blob-green faq-blob-1"></div>
+        <div class="bg-blob blob-yellow faq-blob-2"></div>
     </div>
 
-  </div>
+    <div class="faq-noise-wrapper noise-overlay"></div>
+
+    <div class="faq-container">
+        <div class="faq-grid">
+            <div class="faq-sidebar">
+                <div class="sidebar-header">
+                    <span class="subtitle">AINDA COM DÚVIDAS?</span>
+                    <h2 class="title">Leia o nosso FAQ</h2>
+                </div>
+
+                <div class="support-card">
+                    <h3 class="support-title">Não encontrou a sua resposta?</h3>
+                    <p class="support-text">
+                        Envie-nos uma mensagem e vamos conversar.
+                    </p>
+
+                    <a
+                        href="https://wa.me/SEUNUMEROAQUI"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-support"
+                    >
+                        Falar no WhatsApp
+                    </a>
+
+                    <p class="support-email">
+                        Ou envie um e-mail: <a
+                            href="mailto:papaoleocoleta@gmail.com"
+                            >papaoleocoleta@gmail.com</a
+                        >
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-content">
+                <div class="accordion-group">
+                    {
+                        faqs.map((faq, index) => (
+                            <div class="faq-item">
+                                <button
+                                    class="faq-button"
+                                    aria-expanded="false"
+                                >
+                                    <div class="toggle-icon">
+                                        <svg
+                                            class="icon-plus"
+                                            width="12"
+                                            height="12"
+                                            viewBox="0 0 14 14"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M7 1V13M1 7H13"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                            />
+                                        </svg>
+                                    </div>
+
+                                    <span class="faq-question">
+                                        {faq.question}
+                                    </span>
+                                </button>
+
+                                <div class="faq-collapse">
+                                    <div class="faq-answer">
+                                        <p>{faq.answer}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <style>
-  .faq-section {
-    position: relative;
-    padding: 8rem 0 6rem 0;
-    background-color: var(--bg-white);
-    color: var(--charcoal);
-    min-height: 100vh;
-  }
-
-  @media (min-width: 768px) {
     .faq-section {
-      padding: 10rem 0 8rem 0;
+        position: relative;
+        padding: 8rem 0 6rem 0;
+        background-color: var(--bg-white);
+        color: var(--charcoal);
+        min-height: 100vh;
     }
-  }
 
-  /* --- TRANCANDO O RUÍDO DE FORMA SEGURA --- */
-  .faq-noise-wrapper {
-    position: absolute;
-    inset: 0;
-    overflow: hidden; /* Corta a animação que vazava para as laterais */
-    pointer-events: none;
-    z-index: 50; /* Garante que o ruído fica por cima do fundo e dos elementos */
-  }
+    @media (min-width: 768px) {
+        .faq-section {
+            padding: 10rem 0 8rem 0;
+        }
+    }
 
-  /* --- TRANCANDO OS BLOBS DE FORMA SEGURA --- */
-  .faq-background {
-    position: absolute;
-    inset: 0;
-    overflow: hidden; 
-    pointer-events: none;
-    z-index: 1;
-  }
+    /* --- TRANCANDO O RUÍDO DE FORMA SEGURA --- */
+    .faq-noise-wrapper {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 50;
+    }
 
-  .faq-blob-1 {
-    top: 5%;
-    left: -5%;
-    width: 15rem;
-    height: 15rem;
-  }
+    /* --- TRANCANDO OS BLOBS DE FORMA SEGURA --- */
+    .faq-background {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
 
-  .faq-blob-2 {
-    bottom: 10%;
-    right: -5%;
-    width: 20rem;
-    height: 20rem;
-  }
+    .faq-blob-1 {
+        top: 5%;
+        left: -5%;
+        width: 15rem;
+        height: 15rem;
+    }
 
-  .faq-container {
-    position: relative;
-    z-index: 10;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
+    .faq-blob-2 {
+        bottom: 10%;
+        right: -5%;
+        width: 20rem;
+        height: 20rem;
+    }
 
-  .faq-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
+    .faq-container {
+        position: relative;
+        z-index: 10;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
 
-  @media (min-width: 992px) {
+    /* --- GRID --- */
     .faq-grid {
-      grid-template-columns: 3.5fr 8.5fr;
-      gap: 5rem;
-      align-items: start;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
-  }
 
-  /* --- SIDEBAR INDEPENDENTE E FIXA --- */
-  .faq-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-self: start; 
-    height: max-content;
-  }
+    @media (min-width: 992px) {
+        .faq-grid {
+            grid-template-columns: 3.5fr 8.5fr;
+            gap: 5rem;
+            align-items: start; /* Devolve o alinhamento exclusivo ao desktop */
+        }
+    }
 
-  @media (min-width: 992px) {
+    /* --- SIDEBAR INDEPENDENTE E FIXA --- */
     .faq-sidebar {
-      position: sticky;
-      top: 8rem; 
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-self: start;
+        height: max-content;
     }
-  }
 
-  .sidebar-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+    @media (min-width: 992px) {
+        .faq-sidebar {
+            top: 10rem;
+        }
+    }
 
-  .subtitle {
-    font-size: 0.75rem;
-    font-weight: 700;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--charcoal);
-    opacity: 0.6;
-  }
+    .sidebar-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 
-  .title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    font-family: var(--font-sans);
-    color: var(--brand-gray); 
-    letter-spacing: -0.025em;
-    margin: 0;
-    line-height: 1.1;
-  }
+    .subtitle {
+        font-size: 0.75rem;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--charcoal);
+        opacity: 0.6;
+    }
 
-  @media (min-width: 768px) {
-    .title { font-size: 3rem; }
-  }
+    .title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        font-family: var(--font-sans);
+        color: var(--brand-gray);
+        letter-spacing: -0.025em;
+        margin: 0;
+        line-height: 1.1;
+    }
 
-  /* Card de Suporte */
-  .support-card {
-    background-color: transparent;
-    border-radius: 1.25rem;
-    padding: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    @media (min-width: 768px) {
+        .title {
+            font-size: 3rem;
+        }
+    }
 
-  .support-title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: var(--charcoal);
-    margin: 0 0 0.25rem 0;
-  }
+    /* Card de Suporte */
+    .support-card {
+        background-color: transparent;
+        border-radius: 1.25rem;
+        padding: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-  .support-text {
-    font-size: 0.875rem;
-    color: var(--charcoal);
-    opacity: 0.8;
-    margin: 0 0 1.5rem 0;
-  }
+    .support-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--charcoal);
+        margin: 0 0 0.25rem 0;
+    }
 
-  .btn-support {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--brand-green);
-    color: var(--bg-white);
-    padding: 0.875rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 700;
-    font-size: 0.9375rem;
-    text-decoration: none;
-    transition: transform 0.2s, background-color 0.2s;
-    width: 100%;
-    margin-bottom: 1.5rem;
-  }
+    .support-text {
+        font-size: 0.875rem;
+        color: var(--charcoal);
+        opacity: 0.8;
+        margin: 0 0 1.5rem 0;
+    }
 
-  .btn-support:hover {
-    transform: scale(1.02);
-  }
+    .btn-support {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--brand-green);
+        color: var(--bg-white);
+        padding: 0.875rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 0.9375rem;
+        text-decoration: none;
+        transition:
+            transform 0.2s,
+            background-color 0.2s;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
 
-  .support-email {
-    font-size: 0.8125rem;
-    color: var(--charcoal);
-    opacity: 0.8;
-    margin: 0;
-  }
+    .btn-support:hover {
+        transform: scale(1.02);
+    }
 
-  .support-email a {
-    color: var(--charcoal);
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    transition: color 0.2s;
-    opacity: 1;
-  }
+    .support-email {
+        font-size: 0.8125rem;
+        color: var(--charcoal);
+        opacity: 0.8;
+        margin: 0;
+    }
 
-  .support-email a:hover {
-    color: var(--brand-green);
-  }
+    .support-email a {
+        color: var(--charcoal);
+        font-weight: 700;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+        transition: color 0.2s;
+        opacity: 1;
+    }
 
-  /* --- ACCORDION --- */
-  .accordion-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
+    .support-email a:hover {
+        color: var(--brand-green);
+    }
 
-  .faq-item {
-    background-color: transparent; 
-    border-radius: 0.75rem;
-    border: 1px solid rgba(0, 0, 0, 0.1); 
-    overflow: hidden;
-    transition: border-color 0.3s ease;
-  }
+    /* --- ACCORDION --- */
+    .accordion-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
 
-  .faq-item.open {
-    border-color: rgba(100, 180, 69, 0.3);
-  }
+    .faq-item {
+        background-color: transparent;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: border-color 0.3s ease;
+    }
 
-  .faq-button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: none;
-    border: none;
-    padding: 1.25rem;
-    cursor: pointer;
-    text-align: left;
-  }
+    .faq-item.open {
+        border-color: rgba(100, 180, 69, 0.3);
+    }
 
-  @media (min-width: 768px) {
-    .faq-button { padding: 1.5rem; }
-  }
+    .faq-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: none;
+        border: none;
+        padding: 1.25rem;
+        cursor: pointer;
+        text-align: left;
+    }
 
-  .toggle-icon {
-    width: 28px; 
-    height: 28px;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,0.05); 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    color: var(--charcoal);
-    transition: all 0.3s ease;
-  }
+    @media (min-width: 768px) {
+        .faq-button {
+            padding: 1.5rem;
+        }
+    }
 
-  .icon-plus {
-    transition: transform 0.3s ease;
-  }
+    .toggle-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--charcoal);
+        transition: all 0.3s ease;
+    }
 
-  .faq-item.open .icon-plus {
-    transform: rotate(45deg);
-  }
+    .icon-plus {
+        transition: transform 0.3s ease;
+    }
 
-  .faq-item.open .toggle-icon {
-    background-color: var(--brand-yellow); 
-    color: var(--bg-white); 
-  }
+    .faq-item.open .icon-plus {
+        transform: rotate(45deg);
+    }
 
-  .faq-question {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--charcoal);
-    line-height: 1.4;
-  }
+    .faq-item.open .toggle-icon {
+        background-color: var(--brand-yellow);
+        color: var(--bg-white);
+    }
 
-  .faq-collapse {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
-  }
+    .faq-question {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--charcoal);
+        line-height: 1.4;
+    }
 
-  .faq-item.open .faq-collapse {
-    grid-template-rows: 1fr;
-  }
+    .faq-collapse {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+    }
 
-  .faq-answer {
-    overflow: hidden;
-  }
+    .faq-item.open .faq-collapse {
+        grid-template-rows: 1fr;
+    }
 
-  .faq-answer p {
-    padding: 0 1.25rem 1.25rem 3.5rem; 
-    margin: 0;
-    font-size: 0.9375rem;
-    color: var(--charcoal);
-    opacity: 0.8;
-    line-height: 1.6;
-  }
+    .faq-answer {
+        overflow: hidden;
+    }
 
-  @media (min-width: 768px) {
-    .faq-answer p { padding: 0 1.5rem 1.5rem 4.25rem; }
-  }
+    .faq-answer p {
+        padding: 0 1.25rem 1.25rem 3.5rem;
+        margin: 0;
+        font-size: 0.9375rem;
+        color: var(--charcoal);
+        opacity: 0.8;
+        line-height: 1.6;
+    }
+
+    @media (min-width: 768px) {
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem 4.25rem;
+        }
+    }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const faqItems = document.querySelectorAll('.faq-item');
+    document.addEventListener("DOMContentLoaded", () => {
+        const faqItems = document.querySelectorAll(".faq-item");
 
-    faqItems.forEach(item => {
-      const button = item.querySelector('.faq-button');
-      
-      button?.addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
+        faqItems.forEach((item) => {
+            const button = item.querySelector(".faq-button");
 
-        faqItems.forEach(el => {
-          el.classList.remove('open');
-          el.querySelector('.faq-button')?.setAttribute('aria-expanded', 'false');
+            button?.addEventListener("click", () => {
+                const isOpen = item.classList.contains("open");
+
+                faqItems.forEach((el) => {
+                    el.classList.remove("open");
+                    el.querySelector(".faq-button")?.setAttribute(
+                        "aria-expanded",
+                        "false",
+                    );
+                });
+
+                if (!isOpen) {
+                    item.classList.add("open");
+                    button.setAttribute("aria-expanded", "true");
+                }
+            });
         });
-
-        if (!isOpen) {
-          item.classList.add('open');
-          button.setAttribute('aria-expanded', 'true');
-        }
-      });
     });
-  });
 </script>

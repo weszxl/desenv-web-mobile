@@ -1,9 +1,9 @@
 ---
+
 ---
 
 <footer id="contato" class="footer-section">
   <div class="footer-container">
-    
     <div class="footer-cta-header">
       <h2 class="section-title">
         <span class="block text-brand-gray">PRONTO PARA</span>
@@ -15,36 +15,56 @@
       <form id="contact-form" class="contact-form">
         <div class="inputs-grid">
           <div class="input-group">
-            <input type="text" placeholder="Seu Nome" required class="contact-input" />
+            <input
+              type="text"
+              placeholder="Seu Nome"
+              required
+              class="contact-input"
+            />
           </div>
           <div class="input-group">
-            <input type="email" placeholder="seu@email.com" required class="contact-input" />
+            <input
+              type="email"
+              placeholder="seu@email.com"
+              required
+              class="contact-input"
+            />
           </div>
           <div class="input-group">
-            <input type="tel" placeholder="Seu Contato (WhatsApp)" required class="contact-input" />
+            <input
+              type="tel"
+              placeholder="Seu Contato (WhatsApp)"
+              required
+              class="contact-input"
+            />
           </div>
         </div>
-        
+
         <button type="submit" id="submit-btn" class="btn-submit">
           <span class="btn-text">Enviar dados</span>
         </button>
       </form>
-      <p class="contact-note">Insira suas informações para que possamos entrar em contato com você.</p>
+      <p class="contact-note">
+        Insira suas informações para que possamos entrar em contato com você.
+      </p>
     </div>
 
     <div class="footer-links-grid">
-      
       <div class="footer-link-col">
         <h4 class="link-title">Contatos</h4>
         <ul class="link-list">
           <li>
-            <a href="tel:+5551999999999" class="link-item">Telefone: 51 9 9999-9999</a>
+            <a href="tel:+5551999999999" class="link-item"
+              >Telefone: 51 9 9999-9999</a
+            >
           </li>
           <li>
-            <a href="mailto:papaoleocoleta@gmail.com" class="link-item">E-mail: papaoleoColeta@gmail.com</a>
+            <a href="mailto:papaoleocoleta@gmail.com" class="link-item"
+              >E-mail: papaoleocoleta@gmail.com</a
+            >
           </li>
         </ul>
-        
+
         <div class="social-icons">
           <a href="#" aria-label="Instagram" class="social-icon">
             <img src="/images/instagram_icon.svg" alt="Instagram" />
@@ -52,18 +72,26 @@
           <a href="#" aria-label="Facebook" class="social-icon">
             <img src="/images/facebook_icon.svg" alt="Facebook" />
           </a>
-          <a href="https://wa.me/SEUNUMEROAQUI" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon">
+          <a
+            href="https://wa.me/SEUNUMEROAQUI"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            class="social-icon"
+          >
             <img src="/images/whatsapp_icon.svg" alt="WhatsApp" />
           </a>
         </div>
       </div>
 
       <div class="footer-link-col">
-        <h4 class="link-title">Links Rápidos</h4>
+        <h4 class="link-title">Navegação</h4>
         <ul class="link-list">
           <li><a href="/" class="link-item">Início</a></li>
-          <li><a href="/como-funciona" class="link-item">Como Funciona</a></li>
-          <li><a href="/quem-atendemos" class="link-item">Quem atendemos</a></li>
+          <li><a href="/#o-que-fazemos" class="link-item">Como Funciona</a></li>
+          <li>
+            <a href="/#quem-atendemos" class="link-item">Quem atendemos</a>
+          </li>
         </ul>
       </div>
 
@@ -71,10 +99,13 @@
         <h4 class="link-title">Informações gerais</h4>
         <ul class="link-list">
           <li><a href="/faq" class="link-item">FAQ</a></li>
-          <li><a href="/politica-de-privacidade" class="link-item">Política de Privacidade</a></li>
+          <li>
+            <a href="/politica-de-privacidade" class="link-item"
+              >Política de Privacidade</a
+            >
+          </li>
         </ul>
       </div>
-
     </div>
 
     <div class="footer-bottom">
@@ -83,27 +114,26 @@
       </div>
       <p class="copyright">© 2026</p>
     </div>
-
   </div>
 </footer>
 
 <script>
-  const form = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('submit-btn');
-  const btnText = submitBtn?.querySelector('.btn-text');
+  const form = document.getElementById("contact-form");
+  const submitBtn = document.getElementById("submit-btn");
+  const btnText = submitBtn?.querySelector(".btn-text");
 
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener("submit", (e) => {
     e.preventDefault();
     if (submitBtn && btnText) {
       const originalText = btnText.textContent;
-      submitBtn.classList.add('submitting');
-      btnText.textContent = 'Enviando...';
-      
+      submitBtn.classList.add("submitting");
+      btnText.textContent = "Enviando...";
+
       setTimeout(() => {
-        submitBtn.classList.remove('submitting');
+        submitBtn.classList.remove("submitting");
         btnText.textContent = originalText;
         (form as HTMLFormElement).reset();
-        alert('Dados enviados com sucesso! Em breve entraremos em contato.');
+        alert("Dados enviados com sucesso! Em breve entraremos em contato.");
       }, 2000);
     }
   });
@@ -112,14 +142,16 @@
 <style>
   .footer-section {
     position: relative;
-    background-color: var(--bg-light); 
+    background-color: var(--bg-light);
     padding-top: 4rem;
     padding-bottom: 2rem;
     overflow: hidden;
   }
 
   @media (min-width: 768px) {
-    .footer-section { padding-top: 6rem; }
+    .footer-section {
+      padding-top: 6rem;
+    }
   }
 
   .footer-container {
@@ -135,11 +167,13 @@
     margin-bottom: 3rem;
   }
 
-  .block { display: block; }
+  .block {
+    display: block;
+  }
 
   /* Formulário */
   .contact-wrapper {
-    max-width: 56rem; 
+    max-width: 56rem;
     margin: 0 auto 4rem;
   }
 
@@ -196,15 +230,15 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    padding: 1rem 2.5rem; 
+    padding: 1rem 2.5rem;
     border-radius: 9999px;
     font-weight: 700;
-    font-size: 1.125rem; 
+    font-size: 1.125rem;
     letter-spacing: 0.025em;
     cursor: pointer;
     transition: transform 0.2s;
     border: none;
-    background-color: var(--brand-green); 
+    background-color: var(--brand-green);
     color: var(--bg-white);
     width: 100%;
   }
@@ -227,8 +261,12 @@
   }
 
   @keyframes pulse {
-    from { opacity: 0.5; }
-    to { opacity: 1; }
+    from {
+      opacity: 0.5;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .contact-note {
@@ -245,7 +283,7 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 2.5rem;
     padding: 2.5rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1); 
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   @media (min-width: 768px) {
@@ -278,7 +316,9 @@
     font-family: var(--font-sans);
     font-size: 0.9375rem;
     text-decoration: none;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
     display: inline-block;
   }
 
@@ -326,13 +366,13 @@
   @media (min-width: 768px) {
     .footer-bottom {
       flex-direction: row;
-      justify-content: space-between; 
+      justify-content: space-between;
     }
 
     .copyright {
       position: absolute;
       left: 50%;
-      transform: translateX(-50%); 
+      transform: translateX(-50%);
     }
   }
 
