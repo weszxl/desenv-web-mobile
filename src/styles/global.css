@@ -12,6 +12,10 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Reset básico */
 * {
   box-sizing: border-box;

@@ -1,31 +1,71 @@
 ---
-const faqs = [
-    {
-        question: "Como sei que o óleo está pronto para recolha?",
-        answer: "O óleo deve estar completamente frio e armazenado em garrafas PET ou bombonas bem fechadas. Não é necessário coar os resíduos de alimentos antes de nos entregar.",
-    },
-    {
-        question: "Qual a quantidade mínima para solicitar a retirada?",
-        answer: "Para a recolha residencial, pedimos um mínimo de 5 litros. Para estabelecimentos comerciais, podemos agendar recolhas a partir de 20 litros ou de acordo com a rota programada.",
-    },
-    {
-        question: "Vocês cobram alguma taxa pela recolha?",
-        answer: "Não. A recolha do óleo de cozinha usado é 100% gratuita para si ou para a sua empresa.",
-    },
-    {
-        question: "O que vocês fazem com o óleo recolhido?",
-        answer: "Todo o óleo passa por um processo de filtragem e decantação nas nossas instalações e é reencaminhado para a indústria, servindo como matéria-prima para a produção de biodiesel e produtos de limpeza.",
-    },
-    {
-        question: "Vocês fornecem recipientes para armazenamento?",
-        answer: "Sim. Para condomínios, restaurantes e indústrias parceiras, fornecemos bombonas adequadas e seguras para o armazenamento contínuo do material.",
-    },
-    {
-        question: "Fornecem algum certificado de descarte ecológico?",
-        answer: "Sim. Para parceiros comerciais e industriais, emitimos certificados de destinação final que comprovam o descarte ecologicamente correto dos resíduos.",
-    },
-];
+const SHEET_URL =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRNcFpkLvsjvJDI_u-trmMPFKZJnJOSHjiG8r_wiNTgvbxm7CrEIaeviOmmwTAi71XXRvjJW66QvGa0/pub?gid=0&single=true&output=csv";
+let faqs = [];
+
+try {
+    const response = await fetch(SHEET_URL);
+    const csvText = await response.text();
+
+    const lines = csvText
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean);
+    const dataLines = lines.slice(1);
+
+    faqs = dataLines.map((line) => {
+        const [pergunta, ...restoResposta] = line.split(",");
+        return {
+            question: pergunta?.replace(/^"|"$/g, ""),
+            answer: restoResposta.join(",").replace(/^"|"$/g, ""),
+        };
+    });
+} catch (error) {
+    console.error("Erro ao buscar dados do FAQ no Google Sheets:", error);
+    faqs = [
+        {
+            question: "Como sei que o óleo está pronto para recolha?",
+            answer: "O óleo deve estar completamente frio e armazenado em garrafas PET ou bombonas bem fechadas. Não é necessário coar os resíduos de alimentos antes de nos entregar.",
+        },
+        {
+            question: "Qual a quantidade mínima para solicitar a retirada?",
+            answer: "Para a recolha residencial, pedimos um mínimo de 5 litros. Para estabelecimentos comerciais, podemos agendar recolhas a partir de 20 litros ou de acordo com a rota programada.",
+        },
+        {
+            question: "Vocês cobram alguma taxa pela recolha?",
+            answer: "Não. A recolha do óleo de cozinha usado é 100% gratuita para si ou para a sua empresa.",
+        },
+        {
+            question: "O que vocês fazem com o óleo recolhido?",
+            answer: "Todo o óleo passa por um processo de filtragem e decantação nas nossas instalações e é reencaminhado para a indústria, servindo como matéria-prima para a produção de biodiesel e produtos de limpeza.",
+        },
+        {
+            question: "Vocês fornecem recipientes para armazenamento?",
+            answer: "Sim. Para condomínios, restaurantes e indústrias parceiras, fornecemos bombonas adequadas e seguras para o armazenamento contínuo do material.",
+        },
+        {
+            question: "Fornecem algum certificado de descarte ecológico?",
+            answer: "Sim. Para parceiros comerciais e industriais, emitimos certificados de destinação final que comprovam o descarte ecologicamente correto dos resíduos.",
+        },
+    ];
+}
 ---
+
+<script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+            },
+        })),
+    })}
+/>
 
 <section class="faq-section">
     <div class="faq-background">
@@ -95,9 +135,7 @@ const faqs = [
                                         </svg>
                                     </div>
 
-                                    <span class="faq-question">
-                                        {faq.question}
-                                    </span>
+                                    <h3 class="faq-question">{faq.question}</h3>
                                 </button>
 
                                 <div class="faq-collapse">

@@ -3,27 +3,31 @@ const steps = [
   {
     number: "1º",
     title: "Espere o óleo esfriar",
-    description: "Após a fritura, deixe o líquido esfriar completamente antes do descarte para evitar acidentes ou o derretimento do recipiente.",
-    icon: "/images/5_how-recycle_step1.svg"
+    description:
+      "Após a fritura, deixe o líquido esfriar completamente antes do descarte para evitar acidentes ou o derretimento do recipiente.",
+    icon: "/images/5_how-recycle_step1.svg",
   },
   {
     number: "2º",
     title: "Armazene em um recipiente",
-    description: "Utilize as nossas bombonas ou garrafas PET bem fechadas. Não é necessário coar.",
-    icon: "/images/5_how-recycle_step2.svg"
+    description:
+      "Utilize as nossas bombonas ou garrafas PET bem fechadas. Não é necessário coar.",
+    icon: "/images/5_how-recycle_step2.svg",
   },
   {
     number: "3º",
     title: "Coloque em um lugar adequado",
-    description: "Mantenha o material armazenado em um local seguro, arejado e protegido do sol ou fontes de calor até o dia da retirada.",
-    icon: "/images/5_how-recycle_step3.svg"
+    description:
+      "Mantenha o material armazenado em um local seguro, arejado e protegido do sol ou fontes de calor até o dia da retirada.",
+    icon: "/images/5_how-recycle_step3.svg",
   },
   {
     number: "4º",
     title: "Nos chame",
-    description: "Recipiente cheio? Envie uma mensagem com a quantidade e o bairro. Seu endereço entra na nossa próxima rota programada.",
-    icon: "/images/5_how-recycle_step4.svg"
-  }
+    description:
+      "Recipiente cheio? Envie uma mensagem com a quantidade e o bairro. Seu endereço entra na nossa próxima rota programada.",
+    icon: "/images/5_how-recycle_step4.svg",
+  },
 ];
 ---
 
@@ -33,36 +37,39 @@ const steps = [
   <div class="bg-blob blob-yellow prep-blob-2"></div>
 
   <div class="container">
-    
     <div class="section-header">
-      <h2 class="section-title">Gostaria de nos ajudar?</h2>
-      <p class="section-subtitle">Siga este passo a passo simples para garantir que a coleta seja feita de forma segura e eficiente.</p>
+      <h2 class="section-title">Como descartar o seu óleo de cozinha</h2>
+      <p class="section-subtitle">
+        Siga este passo a passo simples para garantir que a coleta seja feita de
+        forma segura e eficiente.
+      </p>
     </div>
 
     <div class="zigzag-wrapper">
-      {steps.map((step, index) => {
-        // Defines interleaving: even on the left, odd on the right
-        const isCardLeft = index % 2 === 0;
-        
-        return (
-          <div class={`step-row ${isCardLeft ? 'layout-card-left' : 'layout-card-right'}`}>
-            
-            <div class="step-card">
-              <h3 class="step-title">
-                <span class="step-number">{step.number}</span> {step.title}
-              </h3>
-              <p class="step-desc">{step.description}</p>
-            </div>
+      {
+        steps.map((step, index) => {
+          // Defines interleaving: even on the left, odd on the right
+          const isCardLeft = index % 2 === 0;
 
-            <div class="step-icon">
-              <img src={step.icon} alt={step.title} />
-            </div>
+          return (
+            <div
+              class={`step-row ${isCardLeft ? "layout-card-left" : "layout-card-right"}`}
+            >
+              <div class="step-card">
+                <h3 class="step-title">
+                  <span class="step-number">{step.number}</span> {step.title}
+                </h3>
+                <p class="step-desc">{step.description}</p>
+              </div>
 
-          </div>
-        );
-      })}
+              <div class="step-icon">
+                <img src={step.icon} alt={step.title} loading="lazy" />
+              </div>
+            </div>
+          );
+        })
+      }
     </div>
-
   </div>
 </section>
 
@@ -76,7 +83,9 @@ const steps = [
   }
 
   @media (min-width: 768px) {
-    .prep-section { padding: 6rem 0; }
+    .prep-section {
+      padding: 6rem 0;
+    }
   }
 
   /* Exclusive blob positioning in this section */
@@ -135,11 +144,11 @@ const steps = [
 
   /* Interleaving logic (Now works from Mobile) */
   .layout-card-left {
-    flex-direction: row; 
+    flex-direction: row;
   }
-  
+
   .layout-card-right {
-    flex-direction: row-reverse; 
+    flex-direction: row-reverse;
   }
 
   /* Cards */
@@ -150,7 +159,7 @@ const steps = [
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.05);
     width: 75%; /* Ensures card leaves space for icon on mobile */
-    max-width: 450px; 
+    max-width: 450px;
     transition: transform 0.3s ease;
   }
 
@@ -213,7 +222,7 @@ const steps = [
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0; 
+    flex-shrink: 0;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   }
@@ -229,6 +238,6 @@ const steps = [
   .step-icon img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
   }
 </style>
