@@ -41,7 +41,7 @@ const steps = [
 
     <div class="zigzag-wrapper">
       {steps.map((step, index) => {
-        // Define a intercalação: par na esquerda, ímpar na direita
+        // Defines interleaving: even on the left, odd on the right
         const isCardLeft = index % 2 === 0;
         
         return (
@@ -69,7 +69,7 @@ const steps = [
 <style>
   .prep-section {
     position: relative;
-    padding: 4rem 0; /* Padding lateral removido do pai para maximizar espaço no mobile */
+    padding: 4rem 0; /* Lateral padding removed from parent to maximize space on mobile */
     background-color: var(--bg-white);
     color: var(--charcoal);
     overflow: hidden;
@@ -79,7 +79,7 @@ const steps = [
     .prep-section { padding: 6rem 0; }
   }
 
-  /* Posicionamento exclusivo dos blobs nesta seção */
+  /* Exclusive blob positioning in this section */
   .prep-blob-1 {
     top: 10%;
     left: 5%;
@@ -99,7 +99,7 @@ const steps = [
     z-index: 10;
     max-width: 1024px;
     margin: 0 auto;
-    padding: 0 1.5rem; /* Padding lateral trazido para o container */
+    padding: 0 1.5rem; /* Lateral padding brought to the container */
   }
 
   .section-header {
@@ -107,16 +107,16 @@ const steps = [
     margin-bottom: 3rem;
   }
 
-  /* Estrutura Zigue-Zague */
+  /* Zig-Zag Structure */
   .zigzag-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* Espaço vertical menor no mobile */
+    gap: 2rem; /* Smaller vertical space on mobile */
   }
 
   @media (min-width: 768px) {
     .zigzag-wrapper {
-      gap: 3rem; /* Espaço vertical padrão no desktop */
+      gap: 3rem; /* Default vertical space on desktop */
     }
   }
 
@@ -124,16 +124,16 @@ const steps = [
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem; /* Espaço estreito entre card e ícone no mobile */
+    gap: 1rem; /* Narrow space between card and icon on mobile */
   }
 
   @media (min-width: 768px) {
     .step-row {
-      gap: 2.5rem; /* Espaço largo no desktop */
+      gap: 2.5rem; /* Wide space on desktop */
     }
   }
 
-  /* Lógica de intercalação (Agora funciona desde o Mobile) */
+  /* Interleaving logic (Now works from Mobile) */
   .layout-card-left {
     flex-direction: row; 
   }
@@ -142,21 +142,21 @@ const steps = [
     flex-direction: row-reverse; 
   }
 
-  /* Cartões */
+  /* Cards */
   .step-card {
     background-color: var(--bg-white);
-    padding: 1.25rem; /* Padding reduzido no mobile para poupar espaço */
+    padding: 1.25rem; /* Reduced padding on mobile to save space */
     border-radius: 1.25rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    width: 75%; /* Garante que o card deixe espaço para o ícone no mobile */
+    width: 75%; /* Ensures card leaves space for icon on mobile */
     max-width: 450px; 
     transition: transform 0.3s ease;
   }
 
   @media (min-width: 768px) {
     .step-card {
-      padding: 2rem; /* Padding generoso no desktop */
+      padding: 2rem; /* Generous padding on desktop */
       width: 100%;
     }
   }
@@ -166,7 +166,7 @@ const steps = [
   }
 
   .step-title {
-    font-size: 1.125rem; /* Fonte menor no mobile */
+    font-size: 1.125rem; /* Smaller font on mobile */
     font-family: var(--font-sans);
     font-weight: 700;
     color: var(--brand-gray);
@@ -189,7 +189,7 @@ const steps = [
   }
 
   .step-desc {
-    font-size: 0.875rem; /* 14px no mobile */
+    font-size: 0.875rem; /* 14px on mobile */
     font-family: var(--font-sans);
     color: rgba(18, 18, 18, 0.7);
     line-height: 1.5;
@@ -198,14 +198,14 @@ const steps = [
 
   @media (min-width: 768px) {
     .step-desc {
-      font-size: 1rem; /* 16px no desktop */
+      font-size: 1rem; /* 16px on desktop */
       line-height: 1.6;
     }
   }
 
-  /* Ícone */
+  /* Icon */
   .step-icon {
-    width: 50px; /* Ícone menor no mobile */
+    width: 50px; /* Smaller icon on mobile */
     height: 50px;
     background-color: var(--bg-white);
     border: 3px solid var(--brand-green);
@@ -220,7 +220,7 @@ const steps = [
 
   @media (min-width: 768px) {
     .step-icon {
-      width: 80px; /* Ícone grande no desktop */
+      width: 80px; /* Large icon on desktop */
       height: 80px;
       border-width: 4px;
     }

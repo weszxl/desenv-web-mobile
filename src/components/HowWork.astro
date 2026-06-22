@@ -122,7 +122,7 @@ const features = [
     margin-bottom: 3rem; 
   }
 
-  /* Layout Base */
+  /* Base Layout */
   .layout-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -143,7 +143,7 @@ const features = [
     gap: 1rem; 
   }
 
-  /* Estilos do Card */
+  /* Card Styles */
   .feature-card {
     background-color: var(--bg-white);
     border-radius: 1.25rem;
@@ -170,7 +170,7 @@ const features = [
     text-align: left;
   }
 
-  /* Imagens Mobile */
+  /* Mobile Images */
   .mobile-image-wrapper {
     display: block; 
     width: 100%;
@@ -311,7 +311,7 @@ const features = [
     margin-bottom: 1.25rem; 
   }
 
-  /* IMAGEM DESKTOP COM EFEITO POP-OUT */
+  /* DESKTOP IMAGE WITH POP-OUT EFFECT */
   .image-wrapper {
     position: relative; 
     width: 100%;
@@ -341,7 +341,7 @@ const features = [
 
     if (!cards.length) return;
 
-    // Função centralizada para abrir o card e trocar a imagem
+    // Centralized function to open the card and swap the image
     function activateCard(card: Element) {
       cards.forEach(el => {
         el.classList.remove('active');
@@ -363,19 +363,19 @@ const features = [
       }
     }
 
-    // Lógica de Cliques
+    // Click Logic
     cards.forEach(card => {
       const header = card.querySelector('.card-header');
       
       header?.addEventListener('click', () => {
         const isActive = card.classList.contains('active');
 
-        // Regra Desktop: Um sempre aberto
+        // Desktop Rule: Always one open
         if (isActive && window.innerWidth >= 992) {
           return;
         }
 
-        // Regra Mobile: Permite fechar no X
+        // Mobile Rule: Allow closing on X
         if (isActive && window.innerWidth < 992) {
           card.classList.remove('active');
           header.setAttribute('aria-expanded', 'false');
@@ -386,15 +386,15 @@ const features = [
       });
     });
 
-    // CORREÇÃO DO BUG DE RESIZE: Obriga o desktop a ter pelo menos 1 card aberto
+    // RESIZE BUG FIX: Forces desktop to have at least 1 card open
     const mediaQuery = window.matchMedia('(min-width: 992px)');
     
     mediaQuery.addEventListener('change', (e) => {
-      if (e.matches) { // Entrou na visualização Desktop
+      if (e.matches) { // Entered Desktop view
         const hasActive = Array.from(cards).some(card => card.classList.contains('active'));
         
         if (!hasActive) {
-          // Se todos os cards estiverem fechados, abre o primeiro automaticamente
+          // If all cards are closed, open the first one automatically
           activateCard(cards[0]);
         }
       }
