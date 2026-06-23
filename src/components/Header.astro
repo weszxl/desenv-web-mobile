@@ -9,27 +9,47 @@ const navLinks = [
 <nav id="main-nav" class="navbar">
   <div class="nav-container">
     <a href="/" class="nav-logo">
-      <img src="/images/logo_v1.svg" alt="Papa Óleo" class="logo-default" />
-      <img src="/images/logo_v2.svg" alt="Papa Óleo" class="logo-scrolled" />
+      <img
+        src="/images/logo_v1.svg"
+        alt="Logo Papa Óleo - Coleta de Óleo Usado"
+        class="logo-default"
+      />
+      <img
+        src="/images/logo_v2.svg"
+        alt="Logo Papa Óleo - Coleta de Óleo Usado"
+        class="logo-scrolled"
+      />
     </a>
 
     <div class="nav-links-desktop">
-      {navLinks.map((item) => (
-        <a href={item.href} class="nav-link">
-          {item.label}
-        </a>
-      ))}
+      {
+        navLinks.map((item) => (
+          <a href={item.href} class="nav-link">
+            {item.label}
+          </a>
+        ))
+      }
     </div>
 
-    <a href="/#contato" class="btn-cta-desktop">
-      Entrar em Contato
-    </a>
+    <a href="/#contato" class="btn-cta-desktop"> Entrar em Contato </a>
 
     <button id="mobile-menu-btn" class="mobile-toggle" aria-label="Menu">
-      <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg
+        class="menu-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
         <path d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
-      <svg class="close-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg
+        class="close-icon hidden"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
         <path d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
@@ -37,101 +57,120 @@ const navLinks = [
 
   <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-content">
-      {navLinks.map((item) => (
-        <a href={item.href} class="mobile-nav-link">
-          {item.label}
-        </a>
-      ))}
-      <a href="/#contato" class="btn-cta-mobile">
-        Entrar em Contato
-      </a>
+      {
+        navLinks.map((item) => (
+          <a href={item.href} class="mobile-nav-link">
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/#contato" class="btn-cta-mobile"> Entrar em Contato </a>
     </div>
   </div>
 </nav>
 
 <script>
-  const navbar = document.getElementById('main-nav');
-  const mobileBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.querySelector('.menu-icon');
-  const closeIcon = document.querySelector('.close-icon');
+  const navbar = document.getElementById("main-nav");
+  const mobileBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuIcon = document.querySelector(".menu-icon");
+  const closeIcon = document.querySelector(".close-icon");
 
   let lastScrollY = window.scrollY;
 
   // Centralized function to close the menu and unlock scroll
   function closeMobileMenu() {
-    if (mobileMenu?.classList.contains('open')) {
-      mobileMenu.classList.remove('open');
-      navbar?.classList.remove('menu-open');
-      menuIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-      document.body.style.overflow = ''; 
+    if (mobileMenu?.classList.contains("open")) {
+      mobileMenu.classList.remove("open");
+      navbar?.classList.remove("menu-open");
+      menuIcon?.classList.remove("hidden");
+      closeIcon?.classList.add("hidden");
+      document.body.style.overflow = "";
     }
   }
 
   // Automatically close the menu when clicking an anchor link on mobile
-  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .btn-cta-mobile');
-  mobileNavLinks.forEach(link => {
-    link.addEventListener('click', () => {
+  const mobileNavLinks = document.querySelectorAll(
+    ".mobile-nav-link, .btn-cta-mobile",
+  );
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener("click", () => {
       closeMobileMenu();
     });
   });
 
-  window.addEventListener('scroll', () => {
+  function updateNavbar() {
     const currentScrollY = window.scrollY;
-    const isMenuOpen = mobileMenu?.classList.contains('open');
+    const isMenuOpen = mobileMenu?.classList.contains("open");
 
     // 1. Visual background color control
     if (currentScrollY > 50) {
-      navbar?.classList.add('scrolled');
+      navbar?.classList.add("scrolled");
     } else {
-      navbar?.classList.remove('scrolled');
+      navbar?.classList.remove("scrolled");
     }
 
     // 2. Visibility control (Scroll down vs up)
     if (currentScrollY > lastScrollY && currentScrollY > 100 && !isMenuOpen) {
-      navbar?.classList.add('hidden-nav');
+      navbar?.classList.add("hidden-nav");
     } else {
-      navbar?.classList.remove('hidden-nav');
+      navbar?.classList.remove("hidden-nav");
     }
 
     lastScrollY = currentScrollY;
-  });
+  }
+
+  window.addEventListener("scroll", updateNavbar);
+  updateNavbar();
 
   function toggleMenu(e: Event) {
-    e.stopPropagation(); 
-    const isOpening = !mobileMenu?.classList.contains('open');
-    
+    e.stopPropagation();
+    const isOpening = !mobileMenu?.classList.contains("open");
+
     if (isOpening) {
-      mobileMenu?.classList.add('open');
-      navbar?.classList.add('menu-open'); 
-      menuIcon?.classList.add('hidden');
-      closeIcon?.classList.remove('hidden');
-      document.body.style.overflow = 'hidden'; 
+      mobileMenu?.classList.add("open");
+      navbar?.classList.add("menu-open");
+      menuIcon?.classList.add("hidden");
+      closeIcon?.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
     } else {
       closeMobileMenu();
     }
   }
 
-  mobileBtn?.addEventListener('click', toggleMenu);
+  mobileBtn?.addEventListener("click", toggleMenu);
 
-  document.addEventListener('click', (e) => {
-    if (mobileMenu?.classList.contains('open') && !navbar?.contains(e.target as Node)) {
+  document.addEventListener("click", (e) => {
+    if (
+      mobileMenu?.classList.contains("open") &&
+      !navbar?.contains(e.target as Node)
+    ) {
       closeMobileMenu();
     }
   });
 
-  document.addEventListener('wheel', () => {
-    if (mobileMenu?.classList.contains('open')) {
-      closeMobileMenu();
-    }
-  }, { passive: true });
+  document.addEventListener(
+    "wheel",
+    () => {
+      if (mobileMenu?.classList.contains("open")) {
+        closeMobileMenu();
+      }
+    },
+    { passive: true },
+  );
 
-  document.addEventListener('touchmove', (e) => {
-    if (mobileMenu?.classList.contains('open') && !navbar?.contains(e.target as Node)) {
-      closeMobileMenu();
-    }
-  }, { passive: true });
+  document.addEventListener(
+    "touchmove",
+    (e) => {
+      if (
+        mobileMenu?.classList.contains("open") &&
+        !navbar?.contains(e.target as Node)
+      ) {
+        closeMobileMenu();
+      }
+    },
+    { passive: true },
+  );
 </script>
 
 <!-- GLOBAL SCROLL RULES -->
@@ -149,7 +188,9 @@ const navLinks = [
     left: 0;
     right: 0;
     z-index: 50;
-    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    transition:
+      background-color 0.4s ease,
+      box-shadow 0.4s ease;
     background-color: transparent;
     font-family: var(--font-sans);
   }
@@ -190,7 +231,8 @@ const navLinks = [
     text-decoration: none;
   }
 
-  .logo-default, .logo-scrolled {
+  .logo-default,
+  .logo-scrolled {
     height: 48px;
     width: auto;
     object-fit: contain;
@@ -215,7 +257,9 @@ const navLinks = [
   }
 
   @media (min-width: 768px) {
-    .nav-links-desktop { display: flex; }
+    .nav-links-desktop {
+      display: flex;
+    }
   }
 
   .nav-link {
@@ -227,7 +271,8 @@ const navLinks = [
   }
 
   /* Efeito de destaque apenas no hover ou no clique (:active) */
-  .nav-link:hover, .nav-link:active {
+  .nav-link:hover,
+  .nav-link:active {
     color: var(--brand-green);
   }
 
@@ -235,7 +280,8 @@ const navLinks = [
     color: var(--bg-white);
   }
 
-  .navbar.scrolled .nav-link:hover, .navbar.scrolled .nav-link:active {
+  .navbar.scrolled .nav-link:hover,
+  .navbar.scrolled .nav-link:active {
     color: var(--brand-yellow);
   }
 
@@ -243,13 +289,16 @@ const navLinks = [
     display: none;
     background-color: var(--brand-green);
     color: var(--bg-white);
-    height: 48px; 
+    height: 48px;
     padding: 0 1.5rem;
     border-radius: 9999px;
     font-weight: 700;
     font-size: 0.9375rem;
     text-decoration: none;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      transform 0.2s;
   }
 
   @media (min-width: 768px) {
@@ -266,7 +315,7 @@ const navLinks = [
 
   .navbar.scrolled .btn-cta-desktop {
     background-color: var(--brand-yellow);
-    color: var(--bg-white); 
+    color: var(--bg-white);
   }
 
   .mobile-toggle {
@@ -283,7 +332,9 @@ const navLinks = [
   }
 
   @media (min-width: 768px) {
-    .mobile-toggle { display: none; }
+    .mobile-toggle {
+      display: none;
+    }
   }
 
   .mobile-toggle svg {
@@ -291,7 +342,9 @@ const navLinks = [
     height: 28px;
   }
 
-  .hidden { display: none; }
+  .hidden {
+    display: none;
+  }
 
   .mobile-menu {
     display: none;
@@ -303,7 +356,7 @@ const navLinks = [
 
   .navbar.scrolled .mobile-menu {
     background-color: var(--brand-green);
-    box-shadow: none; 
+    box-shadow: none;
   }
 
   .mobile-menu.open {
@@ -325,7 +378,8 @@ const navLinks = [
     transition: color 0.2s;
   }
 
-  .mobile-nav-link:hover, .mobile-nav-link:active {
+  .mobile-nav-link:hover,
+  .mobile-nav-link:active {
     color: var(--brand-green);
   }
 
@@ -333,7 +387,8 @@ const navLinks = [
     color: var(--bg-white);
   }
 
-  .navbar.scrolled .mobile-nav-link:hover, .navbar.scrolled .mobile-nav-link:active {
+  .navbar.scrolled .mobile-nav-link:hover,
+  .navbar.scrolled .mobile-nav-link:active {
     color: var(--brand-yellow);
   }
 

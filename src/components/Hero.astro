@@ -9,47 +9,51 @@
   <div class="bg-blob blob-yellow hero-blob-2"></div>
 
   <div class="hero-container">
-    
     <!-- CONTEÚDO PRINCIPAL (Texto + Imagem) -->
     <div class="hero-main-content">
-      
       <!-- 1. Título e Subtítulo -->
       <div class="hero-text">
         <h1 class="hero-title">
           <span class="block text-brand-green">NÓS COLETAMOS</span>
-          <span class="block text-brand-gray">SEU <span class="text-brand-yellow">ÓLEO</span> DE COZINHA</span>
+          <span class="block text-brand-gray"
+            >SEU <span class="text-brand-yellow">ÓLEO</span> DE COZINHA</span
+          >
         </h1>
-        
+
         <p class="hero-subtitle">
-          Facilite a sua rotina. Agende a retirada para o seu restaurante, condomínio ou casa. Ajude o meio ambiente.
+          Facilite a sua rotina. Agende a retirada para o seu restaurante,
+          condomínio ou casa. Ajude o meio ambiente.
         </p>
       </div>
 
       <!-- 2. Imagem 3D (Centralizada) -->
       <div class="hero-image-wrapper">
         <div class="image-glow"></div>
-        <img 
-          src="/images/2_hero.svg" 
-          alt="Ilustração - Coleta de óleo de cozinha no Rio Grande do Sul" 
-          width="1536" 
-          height="1024" 
-          class="hero-image" 
+        <img
+          src="/images/2_hero_v2.png"
+          alt="Ilustração - Coleta de óleo de cozinha no Rio Grande do Sul"
+          width="1536"
+          height="1024"
+          class="hero-image"
         />
       </div>
-
     </div>
 
     <!-- 3. RODAPÉ DA SEÇÃO (Botão + Link) -->
     <div class="hero-footer">
-      <a href="https://wa.me/YOURNUMBERHERE" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+      <a
+        href="https://wa.me/YOURNUMBERHERE"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-primary"
+      >
         Agendar Coleta
       </a>
-      
+
       <p class="contact-info">
         Precisa de mais informações? <a href="/contato">Fale conosco</a>
       </p>
     </div>
-
   </div>
 </section>
 
@@ -91,7 +95,7 @@
     margin: 0 auto;
     min-height: 100vh;
     /* Adicionado padding-bottom para criar o respiro final da tela */
-    padding: 7rem 1.5rem 2.5rem 1.5rem; 
+    padding: 7rem 1.5rem 2.5rem 1.5rem;
     display: flex;
     flex-direction: column;
   }
@@ -104,7 +108,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
-    flex-grow: 1; 
+    flex-grow: 1;
     align-items: center;
   }
 
@@ -133,11 +137,15 @@
   }
 
   @media (min-width: 768px) {
-    .hero-title { font-size: 4.5rem; }
+    .hero-title {
+      font-size: 4.5rem;
+    }
   }
 
-  .block { display: block; }
-  
+  .block {
+    display: block;
+  }
+
   .hero-subtitle {
     font-size: 1.125rem;
     font-family: var(--font-sans);
@@ -149,7 +157,9 @@
   }
 
   @media (min-width: 768px) {
-    .hero-subtitle { font-size: 1.25rem; }
+    .hero-subtitle {
+      font-size: 1.25rem;
+    }
   }
 
   /* Bloco de Imagem (Padronizada ao centro) */
@@ -175,8 +185,13 @@
   }
 
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(100, 180, 69, 0.3); }
-    50% { box-shadow: 0 0 40px rgba(100, 180, 69, 0.6); }
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(100, 180, 69, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(100, 180, 69, 0.6);
+    }
   }
 
   .hero-image {
