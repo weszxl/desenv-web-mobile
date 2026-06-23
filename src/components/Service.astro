@@ -112,7 +112,6 @@ const services = [
     margin-bottom: 3rem;
   }
 
-  /* COMPORTAMENTO MOBILE (SLIDER NATIVO FULL BLEED) */
   .accordion-wrapper {
     display: flex;
     gap: 1rem;
@@ -161,7 +160,6 @@ const services = [
     scroll-snap-align: start;
   }
 
-  /* COMPORTAMENTO DESKTOP (ACCORDION HOVER) */
   @media (min-width: 1024px) {
     .accordion-wrapper {
       width: 100%;
@@ -189,7 +187,6 @@ const services = [
     }
   }
 
-  /* Controle do fundo escurecido */
   .card-overlay {
     position: absolute;
     inset: 0;
@@ -207,7 +204,6 @@ const services = [
     }
   }
 
-  /* Conteúdo Interno */
   .card-content {
     position: relative;
     z-index: 2;
@@ -218,11 +214,10 @@ const services = [
     justify-content: space-between;
   }
 
-  /* LÓGICA DO TOPO DO CARD (Ícone + Título) */
   .card-top {
     display: flex;
-    align-items: center; /* Centraliza verticalmente no mobile */
-    gap: 1rem; /* Espaço entre o ícone e o título */
+    align-items: center;
+    gap: 1rem;
   }
 
   .card-icon {
@@ -231,7 +226,7 @@ const services = [
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0; /* Impede o ícone de ser esmagado */
+    flex-shrink: 0;
   }
 
   .card-icon img {
@@ -240,7 +235,6 @@ const services = [
     object-fit: contain;
   }
 
-  /* Reverte para a estrutura empilhada no Desktop */
   @media (min-width: 1024px) {
     .card-top {
       flex-direction: column;
@@ -273,7 +267,6 @@ const services = [
     }
   }
 
-  /* Bloco de Descrição e Botão */
   .card-bottom-reveal {
     display: flex;
     flex-direction: column;

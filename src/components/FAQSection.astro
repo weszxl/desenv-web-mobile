@@ -1,6 +1,5 @@
 ---
-const SHEET_URL =
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRNcFpkLvsjvJDI_u-trmMPFKZJnJOSHjiG8r_wiNTgvbxm7CrEIaeviOmmwTAi71XXRvjJW66QvGa0/pub?gid=0&single=true&output=csv";
+const SHEET_URL = import.meta.env.FAQ_SHEETS_URL;
 let faqs = [];
 
 try {
@@ -167,7 +166,6 @@ try {
         }
     }
 
-    /* --- TRANCANDO O RUÍDO DE FORMA SEGURA --- */
     .faq-noise-wrapper {
         position: absolute;
         inset: 0;
@@ -176,7 +174,6 @@ try {
         z-index: 50;
     }
 
-    /* --- TRANCANDO OS BLOBS DE FORMA SEGURA --- */
     .faq-background {
         position: absolute;
         inset: 0;
@@ -207,7 +204,6 @@ try {
         padding: 0 1.5rem;
     }
 
-    /* --- GRID --- */
     .faq-grid {
         display: grid;
         grid-template-columns: 1fr;
@@ -218,11 +214,10 @@ try {
         .faq-grid {
             grid-template-columns: 3.5fr 8.5fr;
             gap: 5rem;
-            align-items: start; /* Devolve o alinhamento exclusivo ao desktop */
+            align-items: start;
         }
     }
 
-    /* --- SIDEBAR INDEPENDENTE E FIXA --- */
     .faq-sidebar {
         display: flex;
         flex-direction: column;
@@ -269,7 +264,6 @@ try {
         }
     }
 
-    /* Card de Suporte */
     .support-card {
         background-color: transparent;
         border-radius: 1.25rem;
@@ -337,7 +331,6 @@ try {
         color: var(--brand-green);
     }
 
-    /* --- ACCORDION --- */
     .accordion-group {
         display: flex;
         flex-direction: column;

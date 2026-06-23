@@ -48,7 +48,6 @@ const steps = [
     <div class="zigzag-wrapper">
       {
         steps.map((step, index) => {
-          // Defines interleaving: even on the left, odd on the right
           const isCardLeft = index % 2 === 0;
 
           return (
@@ -76,7 +75,7 @@ const steps = [
 <style>
   .prep-section {
     position: relative;
-    padding: 4rem 0; /* Lateral padding removed from parent to maximize space on mobile */
+    padding: 4rem 0;
     background-color: var(--bg-white);
     color: var(--charcoal);
     overflow: hidden;
@@ -88,7 +87,6 @@ const steps = [
     }
   }
 
-  /* Exclusive blob positioning in this section */
   .prep-blob-1 {
     top: 10%;
     left: 5%;
@@ -108,7 +106,7 @@ const steps = [
     z-index: 10;
     max-width: 1024px;
     margin: 0 auto;
-    padding: 0 1.5rem; /* Lateral padding brought to the container */
+    padding: 0 1.5rem;
   }
 
   .section-header {
@@ -116,16 +114,15 @@ const steps = [
     margin-bottom: 3rem;
   }
 
-  /* Zig-Zag Structure */
   .zigzag-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* Smaller vertical space on mobile */
+    gap: 2rem;
   }
 
   @media (min-width: 768px) {
     .zigzag-wrapper {
-      gap: 3rem; /* Default vertical space on desktop */
+      gap: 3rem;
     }
   }
 
@@ -133,16 +130,15 @@ const steps = [
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem; /* Narrow space between card and icon on mobile */
+    gap: 1rem;
   }
 
   @media (min-width: 768px) {
     .step-row {
-      gap: 2.5rem; /* Wide space on desktop */
+      gap: 2.5rem;
     }
   }
 
-  /* Interleaving logic (Now works from Mobile) */
   .layout-card-left {
     flex-direction: row;
   }
@@ -151,21 +147,20 @@ const steps = [
     flex-direction: row-reverse;
   }
 
-  /* Cards */
   .step-card {
     background-color: var(--bg-white);
-    padding: 1.25rem; /* Reduced padding on mobile to save space */
+    padding: 1.25rem;
     border-radius: 1.25rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    width: 75%; /* Ensures card leaves space for icon on mobile */
+    width: 75%;
     max-width: 450px;
     transition: transform 0.3s ease;
   }
 
   @media (min-width: 768px) {
     .step-card {
-      padding: 2rem; /* Generous padding on desktop */
+      padding: 2rem;
       width: 100%;
     }
   }
@@ -175,7 +170,7 @@ const steps = [
   }
 
   .step-title {
-    font-size: 1.125rem; /* Smaller font on mobile */
+    font-size: 1.125rem;
     font-family: var(--font-sans);
     font-weight: 700;
     color: var(--brand-gray);
@@ -198,7 +193,7 @@ const steps = [
   }
 
   .step-desc {
-    font-size: 0.875rem; /* 14px on mobile */
+    font-size: 0.875rem;
     font-family: var(--font-sans);
     color: rgba(18, 18, 18, 0.7);
     line-height: 1.5;
@@ -207,14 +202,13 @@ const steps = [
 
   @media (min-width: 768px) {
     .step-desc {
-      font-size: 1rem; /* 16px on desktop */
+      font-size: 1rem;
       line-height: 1.6;
     }
   }
 
-  /* Icon */
   .step-icon {
-    width: 50px; /* Smaller icon on mobile */
+    width: 50px;
     height: 50px;
     background-color: var(--bg-white);
     border: 3px solid var(--brand-green);
@@ -229,7 +223,7 @@ const steps = [
 
   @media (min-width: 768px) {
     .step-icon {
-      width: 80px; /* Large icon on desktop */
+      width: 80px;
       height: 80px;
       border-width: 4px;
     }

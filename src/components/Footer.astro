@@ -12,41 +12,64 @@
     </div>
 
     <div class="contact-wrapper">
-      <form id="contact-form" class="contact-form">
-        <div class="inputs-grid">
-          <div class="input-group">
-            <input
-              type="text"
-              placeholder="Seu Nome"
-              required
-              class="contact-input"
-            />
+      <div id="form-container">
+        <form id="contact-form" class="contact-form">
+          <input type="text" name="website" class="honey-field" tabindex="-1" autocomplete="off" />
+          <div class="inputs-grid">
+            <div class="input-group">
+              <input
+                type="text"
+                name="name"
+                placeholder="Seu Nome"
+                required
+                class="contact-input"
+              />
+            </div>
+            <div class="input-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="seu@email.com"
+                required
+                class="contact-input"
+              />
+            </div>
+            <div class="input-group">
+              <input
+                type="tel"
+                name="contact"
+                placeholder="Seu Contato (WhatsApp)"
+                required
+                class="contact-input"
+              />
+            </div>
           </div>
-          <div class="input-group">
-            <input
-              type="email"
-              placeholder="seu@email.com"
-              required
-              class="contact-input"
-            />
-          </div>
-          <div class="input-group">
-            <input
-              type="tel"
-              placeholder="Seu Contato (WhatsApp)"
-              required
-              class="contact-input"
-            />
-          </div>
-        </div>
 
-        <button type="submit" id="submit-btn" class="btn-submit">
-          <span class="btn-text">Enviar dados</span>
-        </button>
-      </form>
-      <p class="contact-note">
-        Insira suas informações para que possamos entrar em contato com você.
-      </p>
+          <button type="submit" id="submit-btn" class="btn-submit">
+            <span class="btn-text">Enviar dados</span>
+          </button>
+        </form>
+        <p class="contact-note">
+          Insira suas informações para que possamos entrar em contato com você.
+        </p>
+      </div>
+
+      <div id="loading-state" class="state-message hidden">
+        <div class="spinner"></div>
+        <p>Enviando...</p>
+      </div>
+
+      <div id="success-state" class="state-message hidden">
+        <div class="success-icon">✓</div>
+        <p class="small-text">Em breve entraremos em contato.</p>
+      </div>
+
+      <div id="error-message" class="error-message hidden">
+        <p>
+          Ocorreu um erro de conexão. Por favor, tente nos chamar diretamente
+          pelo WhatsApp.
+        </p>
+      </div>
     </div>
 
     <div class="footer-links-grid">
@@ -54,8 +77,8 @@
         <h4 class="link-title">Contatos</h4>
         <ul class="link-list">
           <li>
-            <a href="tel:+5551999999999" class="link-item"
-              >Telefone: 51 9 9999-9999</a
+            <span class="link-item" style="cursor: default;"
+              >Telefone: 51 9 9999-9999</span
             >
           </li>
           <li>
@@ -134,28 +157,139 @@
 </footer>
 
 <script>
-  const form = document.getElementById("contact-form");
-  const submitBtn = document.getElementById("submit-btn");
-  const btnText = submitBtn?.querySelector(".btn-text");
+  const SCRIPT_URL = import.meta.env.PUBLIC_GOOGLE_SHEETS_URL;
+
+  const formContainer = document.getElementById("form-container");
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const loadingState = document.getElementById("loading-state");
+  const successState = document.getElementById("success-state");
+  const errorMessage = document.getElementById("error-message");
+  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
 
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
-    if (submitBtn && btnText) {
-      const originalText = btnText.textContent;
-      submitBtn.classList.add("submitting");
-      btnText.textContent = "Enviando...";
 
-      setTimeout(() => {
-        submitBtn.classList.remove("submitting");
-        btnText.textContent = originalText;
-        (form as HTMLFormElement).reset();
-        alert("Dados enviados com sucesso! Em breve entraremos em contato.");
-      }, 2000);
+    if (formContainer && loadingState && errorMessage) {
+      formContainer.classList.add("hidden");
+      errorMessage.classList.add("hidden");
+      loadingState.classList.remove("hidden");
     }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+    }
+
+    const formData = new FormData(form);
+    const data = new URLSearchParams(formData as any);
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: data,
+      mode: "no-cors",
+    })
+      .then(() => {
+        if (loadingState && successState) {
+          loadingState.classList.add("hidden");
+          successState.classList.remove("hidden");
+        }
+        form.reset();
+      })
+      .catch((error) => {
+        console.error("Erro de rede:", error);
+        if (loadingState && formContainer && errorMessage) {
+          loadingState.classList.add("hidden");
+          formContainer.classList.remove("hidden");
+          errorMessage.classList.remove("hidden");
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
+      });
   });
 </script>
 
 <style>
+  .hidden {
+    display: none !important;
+  }
+
+  .state-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1rem;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .state-message p {
+    color: var(--brand-gray);
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .state-message .small-text {
+    font-size: 1rem;
+    color: rgba(18, 18, 18, 0.6);
+    font-weight: 400;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(100, 180, 69, 0.2);
+    border-left-color: var(--brand-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .success-icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--brand-green);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .error-message {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #fee2e2;
+    border: 1px solid #f87171;
+    border-radius: 0.75rem;
+    color: #b91c1c;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    animation: fadeIn 0.3s ease;
+  }
+
   .footer-section {
     position: relative;
     background-color: var(--bg-light);
@@ -187,7 +321,6 @@
     display: block;
   }
 
-  /* Formulário */
   .contact-wrapper {
     max-width: 56rem;
     margin: 0 auto 4rem;
@@ -240,7 +373,6 @@
     box-shadow: 0 0 0 3px rgba(100, 180, 69, 0.2);
   }
 
-  /* Botão Padronizado */
   .btn-submit {
     display: inline-flex;
     align-items: center;
@@ -293,7 +425,6 @@
     margin-top: 1rem;
   }
 
-  /* Seção de Links */
   .footer-links-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -343,7 +474,6 @@
     transform: translateX(4px);
   }
 
-  /* Ícones Sociais (Atualizado para Imagens) */
   .social-icons {
     display: flex;
     gap: 1rem;
@@ -367,7 +497,6 @@
     transform: translateY(-3px) scale(1.05);
   }
 
-  /* Barra Inferior */
   .footer-bottom {
     position: relative;
     display: flex;
@@ -414,5 +543,14 @@
     font-size: 0.875rem;
     margin: 0;
     text-align: center;
+  }
+
+  /* --- Honeypot --- */
+  .honey-field {
+    position: absolute;
+    opacity: 0;
+    top: -9999px;
+    left: -9999px;
+    z-index: -1;
   }
 </style>

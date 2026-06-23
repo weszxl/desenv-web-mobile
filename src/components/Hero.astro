@@ -1,17 +1,14 @@
 ---
-// src/components/Hero.astro
+
 ---
 
 <section id="inicio" class="hero-section noise-overlay">
-  <!-- Background Elements (Herda do global.css) -->
   <div class="bg-gradient-overlay"></div>
   <div class="bg-blob blob-green hero-blob-1"></div>
   <div class="bg-blob blob-yellow hero-blob-2"></div>
 
   <div class="hero-container">
-    <!-- CONTEÚDO PRINCIPAL (Texto + Imagem) -->
     <div class="hero-main-content">
-      <!-- 1. Título e Subtítulo -->
       <div class="hero-text">
         <h1 class="hero-title">
           <span class="block text-brand-green">NÓS COLETAMOS</span>
@@ -26,7 +23,6 @@
         </p>
       </div>
 
-      <!-- 2. Imagem 3D (Centralizada) -->
       <div class="hero-image-wrapper">
         <div class="image-glow"></div>
         <img
@@ -39,7 +35,6 @@
       </div>
     </div>
 
-    <!-- 3. RODAPÉ DA SEÇÃO (Botão + Link) -->
     <div class="hero-footer">
       <a
         href="https://wa.me/YOURNUMBERHERE"
@@ -68,7 +63,6 @@
     background-color: var(--bg-white);
   }
 
-  /* Posicionamento dos Blobs locais */
   .hero-blob-1 {
     top: 5rem;
     left: 2.5rem;
@@ -83,10 +77,6 @@
     height: 8rem;
   }
 
-  /* 
-    CONTAINER PRINCIPAL
-    Usando flex-direction: column para empilhar o conteúdo e o rodapé.
-  */
   .hero-container {
     position: relative;
     z-index: 10;
@@ -94,16 +84,12 @@
     max-width: 1280px;
     margin: 0 auto;
     min-height: 100vh;
-    /* Adicionado padding-bottom para criar o respiro final da tela */
+
     padding: 7rem 1.5rem 2.5rem 1.5rem;
     display: flex;
     flex-direction: column;
   }
 
-  /* 
-    CONTEÚDO PRINCIPAL (Faz a mágica do espaçamento)
-    O flex-grow: 1 ocupa todo o espaço livre, empurrando o footer para baixo.
-  */
   .hero-main-content {
     display: grid;
     grid-template-columns: 1fr;
@@ -112,7 +98,6 @@
     align-items: center;
   }
 
-  /* No desktop, volta a ser 2 colunas */
   @media (min-width: 1024px) {
     .hero-main-content {
       grid-template-columns: repeat(2, 1fr);
@@ -120,7 +105,6 @@
     }
   }
 
-  /* Bloco de Texto (Alinhamento rigoroso à esquerda) */
   .hero-text {
     display: flex;
     flex-direction: column;
@@ -162,7 +146,6 @@
     }
   }
 
-  /* Bloco de Imagem (Padronizada ao centro) */
   .hero-image-wrapper {
     position: relative;
     display: flex;
@@ -203,20 +186,15 @@
     object-fit: contain;
   }
 
-  /* 
-    RODAPÉ DA HERO (Botão e Contato)
-    Empurrado automaticamente para o limite do monitor
-  */
   .hero-footer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Alinhamento esquerdo no mobile */
+    align-items: flex-start;
     gap: 1.25rem;
-    margin-top: 3rem; /* Espaçamento caso o celular seja muito pequeno e encoste na imagem */
+    margin-top: 3rem;
     width: 100%;
   }
 
-  /* No desktop, o botão e o texto ficam lado a lado */
   @media (min-width: 768px) {
     .hero-footer {
       flex-direction: row;
@@ -226,7 +204,6 @@
     }
   }
 
-  /* Estilos do Botão Principal */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -251,7 +228,6 @@
     transform: scale(1.05);
   }
 
-  /* Estilos do Link de Informação */
   .contact-info {
     font-size: 1.125rem;
     color: rgba(18, 18, 18, 0.7);

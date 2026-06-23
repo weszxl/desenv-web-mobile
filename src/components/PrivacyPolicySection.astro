@@ -1,5 +1,5 @@
 ---
-// src/components/PrivacyPolicySection.astro
+
 ---
 
 <section class="privacy-section">
@@ -13,8 +13,6 @@
 
   <div class="policy-container">
     <div class="policy-grid">
-      
-      <!-- Coluna da Esquerda: Sidebar Limpa e Independente -->
       <div class="policy-sidebar">
         <div class="sidebar-header">
           <span class="subtitle">TRANSPARÊNCIA E SEGURANÇA</span>
@@ -22,7 +20,6 @@
         </div>
       </div>
 
-      <!-- Coluna da Direita: Conteúdo -->
       <div class="policy-content">
         <div class="policy-card">
           <div class="policy-block">
@@ -79,7 +76,6 @@
           </div>
         </div>
       </div>
-      
     </div>
   </div>
 </section>
@@ -99,7 +95,6 @@
     }
   }
 
-  /* --- TRANCANDO O RUÍDO DE FORMA SEGURA --- */
   .privacy-noise-wrapper {
     position: absolute;
     inset: 0;
@@ -108,7 +103,6 @@
     z-index: 50;
   }
 
-  /* --- TRANCANDO OS BLOBS DE FORMA SEGURA --- */
   .privacy-background {
     position: absolute;
     inset: 0;
@@ -149,17 +143,16 @@
     .policy-grid {
       grid-template-columns: 3.5fr 8.5fr;
       gap: 5rem;
-      /* Devolvemos o alinhamento para que a coluna não estique e o sticky funcione */
-      align-items: start; 
+
+      align-items: start;
     }
   }
 
-  /* --- SIDEBAR INDEPENDENTE E FIXA --- */
   .policy-sidebar {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    /* Trava a altura do container apenas no tamanho do texto */
+
     align-self: start;
     height: max-content;
   }
@@ -202,7 +195,6 @@
     }
   }
 
-  /* --- CARD DE CONTEÚDO --- */
   .policy-card {
     background-color: transparent;
     border-radius: 1.25rem;
@@ -219,7 +211,6 @@
     }
   }
 
-  /* Blocos individuais de texto */
   .policy-block {
     display: flex;
     flex-direction: column;
@@ -243,7 +234,6 @@
     margin: 0;
   }
 
-  /* Links no meio do texto */
   .policy-block a {
     color: var(--brand-green);
     font-weight: 700;

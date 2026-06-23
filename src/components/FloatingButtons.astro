@@ -1,19 +1,32 @@
 ---
-// src/components/FloatingButtons.astro
+
 ---
 
 <div id="floating-actions" class="floating-wrapper hidden">
-  
-  <a href="https://wa.me/YOURNUMBERHERE" target="_blank" rel="noopener noreferrer" class="fab btn-whatsapp" aria-label="Falar no WhatsApp">
+  <a
+    href="https://wa.me/YOURNUMBERHERE"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="fab btn-whatsapp"
+    aria-label="Falar no WhatsApp"
+  >
     <img src="/images/whatsapp.svg" alt="WhatsApp" />
   </a>
-  
+
   <button id="btn-back-to-top" class="fab btn-top" aria-label="Voltar ao topo">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M18 15l-6-6-6 6"/>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M18 15l-6-6-6 6"></path>
     </svg>
   </button>
-
 </div>
 
 <style>
@@ -24,10 +37,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem; 
-    z-index: 90; 
-    
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+    gap: 1rem;
+    z-index: 90;
+
+    transition:
+      transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0.5s ease;
   }
 
   @media (min-width: 768px) {
@@ -40,7 +55,7 @@
   .floating-wrapper.hidden {
     transform: translateY(120px);
     opacity: 0;
-    pointer-events: none; 
+    pointer-events: none;
   }
 
   .fab {
@@ -50,7 +65,10 @@
     border-radius: 50%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
     border: none;
     outline: none;
   }
@@ -60,22 +78,20 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
 
-  /* Botão do WhatsApp (Verde e Maior) */
   .btn-whatsapp {
     width: 60px;
     height: 60px;
     background-color: var(--brand-green);
-    padding: 0; /* Remove recuos internos */
-    overflow: hidden; /* Garante que a imagem preenchida respeite o arredondamento */
+    padding: 0;
+    overflow: hidden;
   }
 
   .btn-whatsapp img {
-    width: 100%; /* Preenche todo o botão */
+    width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  /* Botão Voltar ao Topo (Cinza e Menor) */
   .btn-top {
     width: 44px;
     height: 44px;
@@ -89,22 +105,22 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const floatingWrapper = document.getElementById('floating-actions');
-    const backToTopBtn = document.getElementById('btn-back-to-top');
-    
-    window.addEventListener('scroll', () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const floatingWrapper = document.getElementById("floating-actions");
+    const backToTopBtn = document.getElementById("btn-back-to-top");
+
+    window.addEventListener("scroll", () => {
       if (window.scrollY > window.innerHeight * 0.8) {
-        floatingWrapper?.classList.remove('hidden');
+        floatingWrapper?.classList.remove("hidden");
       } else {
-        floatingWrapper?.classList.add('hidden');
+        floatingWrapper?.classList.add("hidden");
       }
     });
 
-    backToTopBtn?.addEventListener('click', () => {
+    backToTopBtn?.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     });
   });
