@@ -41,7 +41,7 @@ body {
 .text-charcoal { color: var(--charcoal); }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: clamp(2.5rem, 5vw, 3rem);
   font-weight: 900;
   font-family: var(--font-sans);
   color: var(--brand-gray);
@@ -49,12 +49,8 @@ body {
   margin: 0;
 }
 
-@media (min-width: 768px) {
-  .section-title { font-size: 3rem; }
-}
-
 .section-subtitle {
-  font-size: 1.125rem;
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
   font-family: var(--font-sans);
   color: rgba(18, 18, 18, 0.8);
   letter-spacing: -0.025em;
@@ -62,10 +58,6 @@ body {
   line-height: 1.5;
   max-width: 40rem;
   margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-  .section-subtitle { font-size: 1.25rem; }
 }
 
 /* =========================================

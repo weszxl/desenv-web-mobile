@@ -113,17 +113,11 @@ import heroImg from '../assets/images/2_hero_v2.png';
   }
 
   .hero-title {
-    font-size: 3rem;
+    font-size: clamp(3rem, 8vw, 4.5rem);
     font-weight: 900;
     letter-spacing: -0.05em;
     line-height: 1.1;
     margin: 0;
-  }
-
-  @media (min-width: 768px) {
-    .hero-title {
-      font-size: 4.5rem;
-    }
   }
 
   .block {
@@ -131,19 +125,13 @@ import heroImg from '../assets/images/2_hero_v2.png';
   }
 
   .hero-subtitle {
-    font-size: 1.125rem;
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
     font-family: var(--font-sans);
     color: rgba(18, 18, 18, 0.8);
     letter-spacing: -0.025em;
     max-width: 28rem;
     line-height: 1.5;
     margin: 0;
-  }
-
-  @media (min-width: 768px) {
-    .hero-subtitle {
-      font-size: 1.25rem;
-    }
   }
 
   .hero-image-wrapper {
