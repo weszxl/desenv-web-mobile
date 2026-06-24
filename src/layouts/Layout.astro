@@ -1,6 +1,9 @@
 ---
 import "../styles/global.css";
 import FloatingButtons from "../components/FloatingButtons.astro";
+
+// Cria a URL canônica com base no caminho atual e no domínio configurado
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
 ---
 
 <!doctype html>
@@ -10,6 +13,9 @@ import FloatingButtons from "../components/FloatingButtons.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>PapaÓleo Coleta</title>
+    
+    <link rel="canonical" href={canonicalURL} />
+
     <meta
       name="description"
       content="Agende a coleta do seu óleo de cozinha usado. Região Metropolitana e Litoral do RS."

@@ -1,5 +1,6 @@
 ---
-
+import { Image } from 'astro:assets';
+import heroImg from '../assets/images/2_hero_v2.png';
 ---
 
 <section id="inicio" class="hero-section noise-overlay">
@@ -25,11 +26,9 @@
 
       <div class="hero-image-wrapper">
         <div class="image-glow"></div>
-        <img
-          src="/images/2_hero_v2.png"
+        <Image
+          src={heroImg}
           alt="Ilustração - Coleta de óleo de cozinha no Rio Grande do Sul"
-          width="1536"
-          height="1024"
           class="hero-image"
           fetchpriority="high"
         />

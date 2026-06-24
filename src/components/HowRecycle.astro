@@ -1,32 +1,38 @@
 ---
+import { Image } from 'astro:assets';
+import step1 from '../assets/images/5_how-recycle_step1.svg';
+import step2 from '../assets/images/5_how-recycle_step2.svg';
+import step3 from '../assets/images/5_how-recycle_step3.svg';
+import step4 from '../assets/images/5_how-recycle_step4.svg';
+
 const steps = [
   {
     number: "1º",
     title: "Espere o óleo esfriar",
     description:
       "Após a fritura, deixe o líquido esfriar completamente antes do descarte para evitar acidentes ou o derretimento do recipiente.",
-    icon: "/images/5_how-recycle_step1.svg",
+    icon: step1,
   },
   {
     number: "2º",
     title: "Armazene em um recipiente",
     description:
       "Utilize as nossas bombonas ou garrafas PET bem fechadas. Não é necessário coar.",
-    icon: "/images/5_how-recycle_step2.svg",
+    icon: step2,
   },
   {
     number: "3º",
     title: "Coloque em um lugar adequado",
     description:
       "Mantenha o material armazenado em um local seguro, arejado e protegido do sol ou fontes de calor até o dia da retirada.",
-    icon: "/images/5_how-recycle_step3.svg",
+    icon: step3,
   },
   {
     number: "4º",
     title: "Nos chame",
     description:
       "Recipiente cheio? Envie uma mensagem com a quantidade e o bairro. Seu endereço entra na nossa próxima rota programada.",
-    icon: "/images/5_how-recycle_step4.svg",
+    icon: step4,
   },
 ];
 ---
@@ -62,7 +68,7 @@ const steps = [
               </div>
 
               <div class="step-icon">
-                <img src={step.icon} alt={step.title} loading="lazy" />
+                <Image src={step.icon} alt={step.title} loading="lazy" />
               </div>
             </div>
           );

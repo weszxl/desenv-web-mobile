@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import logoV1 from '../assets/images/logo_v1.svg';
+import logoV2 from '../assets/images/logo_v2.svg';
+
 const navLinks = [
   { label: "Início", href: "/" },
   { label: "Como funciona", href: "/#o-que-fazemos" },
@@ -9,13 +13,13 @@ const navLinks = [
 <nav id="main-nav" class="navbar">
   <div class="nav-container">
     <a href="/" class="nav-logo">
-      <img
-        src="/images/logo_v1.svg"
+      <Image
+        src={logoV1}
         alt="Logo Papa Óleo - Coleta de Óleo Usado"
         class="logo-default"
       />
-      <img
-        src="/images/logo_v2.svg"
+      <Image
+        src={logoV2}
         alt="Logo Papa Óleo - Coleta de Óleo Usado"
         class="logo-scrolled"
       />

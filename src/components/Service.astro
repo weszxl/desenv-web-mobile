@@ -1,36 +1,46 @@
 ---
+import { Image } from 'astro:assets';
+import img01 from '../assets/images/4_services_01.png';
+import img02 from '../assets/images/4_services_02.png';
+import img03 from '../assets/images/4_services_03.png';
+import img04 from '../assets/images/4_services_04.png';
+import icon01 from '../assets/images/4_services-icon_01.svg';
+import icon02 from '../assets/images/4_services-icon_02.svg';
+import icon03 from '../assets/images/4_services-icon_03.svg';
+import icon04 from '../assets/images/4_services-icon_04.svg';
+
 const services = [
   {
     id: 1,
     title: "Coleta Comercial",
     description:
       "Retirada programada de resíduos gordurosos para restaurantes, bares e comércios de alimentação.",
-    image: "/images/4_services_01.png",
-    icon: "/images/4_services-icon_01.svg",
+    image: img01,
+    icon: icon01,
   },
   {
     id: 2,
     title: "Coleta em Condomínio",
     description:
       "Sistemas de descarte ecológico e bombonas sob medida para edifícios residenciais.",
-    image: "/images/4_services_02.png",
-    icon: "/images/4_services-icon_02.svg",
+    image: img02,
+    icon: icon02,
   },
   {
     id: 3,
     title: "Coleta Residencial",
     description:
       "Atendimento agendado para descarte correto diretamente na sua casa.",
-    image: "/images/4_services_03.png",
-    icon: "/images/4_services-icon_03.svg",
+    image: img03,
+    icon: icon03,
   },
   {
     id: 4,
     title: "Coleta Industrial",
     description:
       "Logística e destinação correta de grandes volumes de óleo para indústrias e fábricas.",
-    image: "/images/4_services_04.png",
-    icon: "/images/4_services-icon_04.svg",
+    image: img04,
+    icon: icon04,
   },
 ];
 ---
@@ -49,7 +59,7 @@ const services = [
       {
         services.map((service, index) => (
           <div class={`accordion-card ${index === 0 ? "active" : ""}`}>
-            <img
+            <Image
               src={service.image}
               alt={`Serviço de ${service.title} de óleo`}
               class="card-bg-image"
@@ -60,7 +70,7 @@ const services = [
             <div class="card-content">
               <div class="card-top">
                 <div class="card-icon">
-                  <img
+                  <Image
                     src={service.icon}
                     alt={`Ícone ${service.title}`}
                     loading="lazy"
