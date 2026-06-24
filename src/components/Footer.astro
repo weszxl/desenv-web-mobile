@@ -14,7 +14,13 @@
     <div class="contact-wrapper">
       <div id="form-container">
         <form id="contact-form" class="contact-form">
-          <input type="text" name="website" class="honey-field" tabindex="-1" autocomplete="off" />
+          <input
+            type="text"
+            name="website"
+            class="honey-field"
+            tabindex="-1"
+            autocomplete="off"
+          />
           <div class="inputs-grid">
             <div class="input-group">
               <input
@@ -78,7 +84,7 @@
         <ul class="link-list">
           <li>
             <span class="link-item" style="cursor: default;"
-              >Telefone: 51 9 9999-9999</span
+              >Telefone: (51) 9631-9035</span
             >
           </li>
           <li>
@@ -89,22 +95,21 @@
         </ul>
 
         <div class="social-icons">
-          <a href="#" aria-label="Instagram" class="social-icon">
+          <a
+            href="https://www.instagram.com/papaoleocoleta/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="social-icon"
+          >
             <img
               src="/images/instagram_icon.svg"
               alt="Instagram"
               loading="lazy"
             />
           </a>
-          <a href="#" aria-label="Facebook" class="social-icon">
-            <img
-              src="/images/facebook_icon.svg"
-              alt="Facebook"
-              loading="lazy"
-            />
-          </a>
           <a
-            href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}`}
+            href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Gostaria de agendar uma coleta de óleo.")}`}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp"
@@ -184,6 +189,9 @@
 
     fetch(SCRIPT_URL, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
       body: data,
       mode: "no-cors",
     })

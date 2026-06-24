@@ -72,7 +72,7 @@ const services = [
               <div class="card-bottom-reveal">
                 <p class="card-description">{service.description}</p>
                 <a
-                  href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}`}
+                  href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Tenho interesse no serviço de " + service.title + " de óleo. Como podemos agendar?")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="btn-schedule"

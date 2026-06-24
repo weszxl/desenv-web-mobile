@@ -1,11 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
-  <Header />
   <main>
     <section class="not-found-section noise-overlay">
       <div class="bg-gradient-overlay"></div>
@@ -16,10 +13,7 @@ import Footer from "../components/Footer.astro";
         <div class="hero-main-content">
           <div class="hero-text">
             <h1 class="hero-title">
-              <span class="block text-brand-gray"
-                >ERRO <span class="text-brand-yellow">404</span></span
-              >
-              <span class="block text-brand-green">PÁGINA NÃO ENCONTRADA</span>
+              <span class="block text-brand-green error-404">404</span>
             </h1>
 
             <p class="hero-subtitle">
@@ -29,12 +23,12 @@ import Footer from "../components/Footer.astro";
 
             <div class="hero-footer">
               <a
-                href="https://wa.me/YOURNUMBERHERE"
+                href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Gostaria de agendar uma coleta de óleo.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-primary"
               >
-                Falar pelo WhatsApp
+                Agendar Coleta
               </a>
 
               <p class="contact-info">
@@ -46,10 +40,20 @@ import Footer from "../components/Footer.astro";
       </div>
     </section>
   </main>
-  <Footer />
 </Layout>
 
 <style>
+  .error-404 {
+    font-size: 6rem;
+    line-height: 1;
+  }
+
+  @media (min-width: 768px) {
+    .error-404 {
+      font-size: 8rem;
+    }
+  }
+
   .not-found-section {
     position: relative;
     min-height: 100vh;
@@ -104,17 +108,10 @@ import Footer from "../components/Footer.astro";
   }
 
   .hero-title {
-    font-size: 3rem;
     font-weight: 900;
     letter-spacing: -0.05em;
     line-height: 1.1;
     margin: 0;
-  }
-
-  @media (min-width: 768px) {
-    .hero-title {
-      font-size: 4.5rem;
-    }
   }
 
   .block {
