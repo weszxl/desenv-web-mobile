@@ -1,9 +1,9 @@
 ---
-import { Image } from 'astro:assets';
-import step1 from '../assets/images/5_how-recycle_step1.svg';
-import step2 from '../assets/images/5_how-recycle_step2.svg';
-import step3 from '../assets/images/5_how-recycle_step3.svg';
-import step4 from '../assets/images/5_how-recycle_step4.svg';
+import { Image } from "astro:assets";
+import step1 from "../assets/images/5_how-recycle_step1.svg";
+import step2 from "../assets/images/5_how-recycle_step2.svg";
+import step3 from "../assets/images/5_how-recycle_step3.svg";
+import step4 from "../assets/images/5_how-recycle_step4.svg";
 
 const steps = [
   {
@@ -44,10 +44,9 @@ const steps = [
 
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Como descartar o seu óleo de cozinha</h2>
+      <h2 class="section-title">Como descartar o seu óleo usado</h2>
       <p class="section-subtitle">
-        Siga este passo a passo simples para garantir que a coleta seja feita de
-        forma segura e eficiente.
+        Etapas simples para garantir que a coleta seja feita de forma eficiente.
       </p>
     </div>
 
@@ -134,6 +133,7 @@ const steps = [
 
   .step-row {
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -145,12 +145,14 @@ const steps = [
     }
   }
 
-  .layout-card-left {
-    flex-direction: row;
-  }
+  @media (min-width: 768px) {
+    .layout-card-left {
+      flex-direction: row;
+    }
 
-  .layout-card-right {
-    flex-direction: row-reverse;
+    .layout-card-right {
+      flex-direction: row-reverse;
+    }
   }
 
   .step-card {
@@ -159,7 +161,7 @@ const steps = [
     border-radius: 1.25rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    width: 75%;
+    width: 100%;
     max-width: 450px;
     transition: transform 0.3s ease;
   }
@@ -214,8 +216,8 @@ const steps = [
   }
 
   .step-icon {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     background-color: var(--bg-white);
     border: 3px solid var(--brand-green);
     border-radius: 50%;

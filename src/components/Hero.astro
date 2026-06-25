@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import heroImg from '../assets/images/2_hero_v2.png';
+import { Image } from "astro:assets";
+import heroImg from "../assets/images/2_hero_v2.png";
 ---
 
 <section id="inicio" class="hero-section noise-overlay">
@@ -46,7 +46,7 @@ import heroImg from '../assets/images/2_hero_v2.png';
       </a>
 
       <p class="contact-info">
-        Precisa de mais informações? <a href="/contato">Fale conosco</a>
+        Mais informações? <a href="/contato">Fale conosco</a>
       </p>
     </div>
   </div>
@@ -85,15 +85,21 @@ import heroImg from '../assets/images/2_hero_v2.png';
     margin: 0 auto;
     min-height: 100vh;
 
-    padding: 7rem 1.5rem 2.5rem 1.5rem;
+    padding: 5rem 1.5rem 1.5rem 1.5rem;
     display: flex;
     flex-direction: column;
+  }
+
+  @media (min-width: 768px) {
+    .hero-container {
+      padding-top: 7rem;
+    }
   }
 
   .hero-main-content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1rem;
     flex-grow: 1;
     align-items: center;
   }
@@ -113,7 +119,7 @@ import heroImg from '../assets/images/2_hero_v2.png';
   }
 
   .hero-title {
-    font-size: clamp(3rem, 8vw, 4.5rem);
+    font-size: clamp(2.25rem, 8vw, 4.5rem);
     font-weight: 900;
     letter-spacing: -0.05em;
     line-height: 1.1;
@@ -170,8 +176,15 @@ import heroImg from '../assets/images/2_hero_v2.png';
     z-index: 10;
     width: 100%;
     max-width: 550px;
+    max-height: 35vh;
     height: auto;
     object-fit: contain;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-image {
+      max-height: none;
+    }
   }
 
   .hero-footer {
@@ -179,7 +192,7 @@ import heroImg from '../assets/images/2_hero_v2.png';
     flex-direction: column;
     align-items: flex-start;
     gap: 1.25rem;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     width: 100%;
   }
 
