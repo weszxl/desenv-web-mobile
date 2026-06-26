@@ -2,196 +2,24 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-  <main>
-    <section class="not-found-section noise-overlay">
-      <div class="bg-gradient-overlay"></div>
-      <div class="bg-blob blob-green hero-blob-1"></div>
-      <div class="bg-blob blob-yellow hero-blob-2"></div>
-
-      <div class="hero-container">
-        <div class="hero-main-content">
-          <div class="hero-text">
-            <h1 class="hero-title">
-              <span class="block text-brand-green error-404">404</span>
-            </h1>
-
-            <p class="hero-subtitle">
-              Ops! Ocorreu um pequeno problema. Mas não se preocupe, estamos
-              aqui para ajudar.
-            </p>
-
-            <div class="hero-footer">
-              <a
-                href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Gostaria de agendar uma coleta de óleo.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-primary"
-              >
-                Agendar Coleta
-              </a>
-
-              <p class="contact-info">
-                Ou volte para o <a href="/">Início</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<Layout title="404: Not Found">
+  <main class="default-404">
+    <h1>404</h1>
+    <p>Page Not Found</p>
   </main>
 </Layout>
 
 <style>
-  .error-404 {
-    font-size: 6rem;
-    line-height: 1;
-  }
-
-  @media (min-width: 768px) {
-    .error-404 {
-      font-size: 8rem;
-    }
-  }
-
-  .not-found-section {
-    position: relative;
+  .default-404 {
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    overflow: hidden;
-    background-color: var(--bg-white);
-  }
-
-  .hero-blob-1 {
-    top: 10rem;
-    left: 2.5rem;
-    width: 6rem;
-    height: 6rem;
-  }
-
-  .hero-blob-2 {
-    bottom: 15rem;
-    right: 5rem;
-    width: 8rem;
-    height: 8rem;
-  }
-
-  .hero-container {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 7rem 1.5rem 2.5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
+    font-family: system-ui, sans-serif;
   }
-
-  .hero-main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 800px;
-  }
-
-  .hero-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  .hero-title {
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    line-height: 1.1;
-    margin: 0;
-  }
-
-  .block {
-    display: block;
-  }
-
-  .hero-subtitle {
-    font-size: 1.125rem;
-    font-family: var(--font-sans);
-    color: rgba(18, 18, 18, 0.8);
-    letter-spacing: -0.025em;
-    max-width: 36rem;
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  @media (min-width: 768px) {
-    .hero-subtitle {
-      font-size: 1.25rem;
-    }
-  }
-
-  .hero-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    margin-top: 2rem;
-    width: 100%;
-  }
-
-  @media (min-width: 768px) {
-    .hero-footer {
-      flex-direction: row;
-      justify-content: center;
-      gap: 2.5rem;
-    }
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    padding: 1rem 2.5rem;
-    border-radius: 9999px;
-    font-weight: 700;
-    font-size: 1.125rem;
-    letter-spacing: 0.025em;
-    cursor: pointer;
-    transition: transform 0.2s;
-    border: none;
-  }
-
-  .btn-primary {
-    background-color: var(--brand-green);
-    color: var(--bg-white);
-  }
-
-  .btn-primary:hover {
-    transform: scale(1.05);
-  }
-
-  .contact-info {
-    font-size: 1.125rem;
-    color: rgba(18, 18, 18, 0.7);
-    font-weight: 500;
-    margin: 0;
-  }
-
-  .contact-info a {
-    color: var(--charcoal);
-    text-decoration: underline;
-    text-decoration-color: var(--brand-green);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-    transition: color 0.2s;
-  }
-
-  .contact-info a:hover {
-    color: var(--brand-green);
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
   }
 </style>

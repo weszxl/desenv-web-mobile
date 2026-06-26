@@ -59,14 +59,15 @@ const steps = [
             <div
               class={`step-row ${isCardLeft ? "layout-card-left" : "layout-card-right"}`}
             >
-              <div class="step-card">
+              <div class="step-content">
+                <div class="step-badge"><span class="dot">&bull;</span> PASSO {step.number}</div>
                 <h3 class="step-title">
-                  <span class="step-number">{step.number}</span> {step.title}
+                  {step.title}
                 </h3>
                 <p class="step-desc">{step.description}</p>
               </div>
 
-              <div class="step-icon">
+              <div class="step-image-wrapper">
                 <Image src={step.icon} alt={step.title} loading="lazy" />
               </div>
             </div>
@@ -133,15 +134,25 @@ const steps = [
 
   .step-row {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
+  }
+
+  .step-row:not(:last-child) {
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+    padding-bottom: 2rem;
   }
 
   @media (min-width: 768px) {
     .step-row {
       gap: 2.5rem;
+    }
+    
+    .step-row:not(:last-child) {
+      border-bottom: none;
+      padding-bottom: 0;
     }
   }
 
@@ -155,25 +166,26 @@ const steps = [
     }
   }
 
-  .step-card {
-    background-color: var(--bg-white);
-    padding: 1.25rem;
-    border-radius: 1.25rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+  .step-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     width: 100%;
     max-width: 450px;
     transition: transform 0.3s ease;
   }
 
   @media (min-width: 768px) {
-    .step-card {
-      padding: 2rem;
+    .step-content {
       width: 100%;
+      max-width: 450px;
+      text-align: left;
+      align-items: flex-start;
     }
   }
 
-  .step-card:hover {
+  .step-content:hover {
     transform: translateY(-5px);
   }
 
@@ -183,9 +195,6 @@ const steps = [
     font-weight: 700;
     color: var(--brand-gray);
     margin: 0 0 0.5rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     line-height: 1.2;
   }
 
@@ -195,9 +204,22 @@ const steps = [
     }
   }
 
-  .step-number {
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 1rem;
+    border-radius: 999px;
+    background-color: rgba(65, 163, 76, 0.1);
     color: var(--brand-green);
-    font-weight: 900;
+    font-weight: 700;
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    margin-bottom: 1rem;
+  }
+
+  .step-badge .dot {
+    margin-right: 0.5rem;
+    font-size: 1.2em;
   }
 
   .step-desc {
@@ -215,31 +237,23 @@ const steps = [
     }
   }
 
-  .step-icon {
-    width: 80px;
-    height: 80px;
-    background-color: var(--bg-white);
-    border: 3px solid var(--brand-green);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  .step-image-wrapper {
+    width: 100%;
+    max-width: 150px;
   }
 
   @media (min-width: 768px) {
-    .step-icon {
-      width: 80px;
-      height: 80px;
-      border-width: 4px;
+    .step-image-wrapper {
+      max-width: 250px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 
-  .step-icon img {
+  .step-image-wrapper img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
   }
 </style>

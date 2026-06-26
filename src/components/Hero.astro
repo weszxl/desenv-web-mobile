@@ -46,7 +46,11 @@ import heroImg from "../assets/images/2_hero_v2.png";
       </a>
 
       <p class="contact-info">
-        Mais informações? <a href="/contato">Fale conosco</a>
+        Mais informações? <a
+          href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Poderia me dar mais informações.")}`}
+          target="_blank"
+          rel="noopener noreferrer">Fale conosco</a
+        >
       </p>
     </div>
   </div>

@@ -2,6 +2,21 @@
 const SHEET_URL = import.meta.env.FAQ_SHEETS_URL;
 let faqs = [];
 
+const hardcodedFaqs = [
+    {
+        question: "Vocês fazem coleta de óleo em Porto Alegre e no litoral?",
+        answer: "Sim. Atendemos toda a região metropolitana de Porto Alegre. Também realizamos coletas no litoral gaúcho, de Tramandaí a Capão da Canoa. Para os atendimentos no litoral, a retirada depende da quantidade de litros armazenada. Entre em contato conosco para confirmarmos a rota.",
+    },
+    {
+        question: "Como descartar o óleo de cozinha corretamente?",
+        answer: "Nunca jogue o líquido na pia. Espere o óleo esfriar e armazene em garrafas PET ou bombonas bem fechadas. Não é necessário coar. Depois, basta armazenar em local seguro e agendar a retirada.",
+    },
+    {
+        question: "Quem pode agendar a retirada do óleo usado?",
+        answer: "Atendemos todos os perfis de geradores. Fazemos a coleta em restaurantes, condomínios, padarias, lancherias e residências. Se você tem óleo usado acumulado, nós vamos até o seu endereço.",
+    },
+];
+
 try {
     const response = await fetch(SHEET_URL);
     const csvText = await response.text();
@@ -48,6 +63,8 @@ try {
         },
     ];
 }
+
+const allFaqs = [...hardcodedFaqs, ...faqs];
 ---
 
 <script
@@ -55,7 +72,7 @@ try {
     set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        mainEntity: faqs.map((faq) => ({
+        mainEntity: allFaqs.map((faq) => ({
             "@type": "Question",
             name: faq.question,
             acceptedAnswer: {
@@ -110,7 +127,7 @@ try {
             <div class="faq-content">
                 <div class="accordion-group">
                     {
-                        faqs.map((faq, index) => (
+                        allFaqs.map((faq, index) => (
                             <div class="faq-item">
                                 <button
                                     class="faq-button"
