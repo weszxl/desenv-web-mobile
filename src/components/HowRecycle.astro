@@ -60,10 +60,10 @@ const steps = [
               class={`step-row ${isCardLeft ? "layout-card-left" : "layout-card-right"}`}
             >
               <div class="step-content">
-                <div class="step-badge"><span class="dot">&bull;</span> PASSO {step.number}</div>
-                <h3 class="step-title">
-                  {step.title}
-                </h3>
+                <div class="step-badge">
+                  <span class="dot">&bull;</span> PASSO {step.number}
+                </div>
+                <h3 class="step-title">{step.title}</h3>
                 <p class="step-desc">{step.description}</p>
               </div>
 
@@ -149,7 +149,7 @@ const steps = [
     .step-row {
       gap: 2.5rem;
     }
-    
+
     .step-row:not(:last-child) {
       border-bottom: none;
       padding-bottom: 0;

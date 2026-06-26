@@ -1,4 +1,8 @@
 ---
+import imgHowWork01 from "../assets/images/3_how-work_01.png";
+import imgHowWork02 from "../assets/images/3_how-work_01.png";
+import imgHowWork03 from "../assets/images/3_how-work_01.png";
+
 const features = [
   {
     id: "coleta",
@@ -10,7 +14,7 @@ const features = [
       "Rotas programadas para a sua região.",
       "Coleta rápida sem interromper sua rotina.",
     ],
-    image: "/images/3_how-work_01_v2.svg",
+    image: imgHowWork01,
   },
   {
     id: "preparacao",
@@ -22,7 +26,7 @@ const features = [
       "Extração da umidade do óleo.",
       "Armazenamento em tanques próprios.",
     ],
-    image: "/images/3_how-work_02.svg",
+    image: imgHowWork02,
   },
   {
     id: "reciclagem",
@@ -34,7 +38,7 @@ const features = [
       "Insumo para produtos de limpeza.",
       "Prevenção de contaminação da rede de esgoto.",
     ],
-    image: "/images/3_how-work_03.svg",
+    image: imgHowWork03,
   },
 ];
 ---
@@ -54,7 +58,7 @@ const features = [
           features.map((feature, index) => (
             <div
               class={`feature-card ${index === 0 ? "active" : ""}`}
-              data-image={feature.image}
+              data-image={feature.image.src}
             >
               <button
                 class="card-header"
@@ -62,7 +66,7 @@ const features = [
               >
                 <div class="mobile-image-wrapper">
                   <img
-                    src={feature.image}
+                    src={feature.image.src}
                     alt={`Ilustração: ${feature.title}`}
                     loading="lazy"
                   />
@@ -133,7 +137,7 @@ const features = [
         <div class="image-wrapper">
           <img
             id="dynamic-feature-image"
-            src={features[0].image}
+            src={features[0].image.src}
             alt="Ilustração do processo de coleta e reciclagem de óleo de cozinha"
             loading="lazy"
           />
