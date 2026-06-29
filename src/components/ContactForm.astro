@@ -33,155 +33,109 @@
 
             <div class="contact-content">
                 <div class="form-card">
+                    <!-- Mensagem de Sucesso -->
+                    <div id="success-message" class="success-message hidden">
+                        <div class="success-icon">✓</div>
+                        <p class="small-text">Obrigado! Entraremos em contato o quanto antes.</p>
+                    </div>
+
                     <form id="robust-contact-form" class="robust-form">
+                        <!-- Honeypot -->
+                        <div class="honeypot" style="display: none;" aria-hidden="true">
+                            <label for="fax">Não preencha este campo se for humano:</label>
+                            <input type="text" id="fax" name="fax" tabindex="-1" autocomplete="off" />
+                        </div>
+
                         <!-- 1. Campos de Identificação Básica -->
                         <div class="form-group">
                             <label for="name">Nome / Razão Social</label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                required
-                                placeholder="Seu nome ou nome da empresa"
-                                class="form-control"
-                            />
+                            <input type="text" id="name" name="name" required placeholder="Seu nome ou nome da empresa" class="form-control" />
+                            <span class="error-text">Este campo é obrigatório</span>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    required
-                                    placeholder="seu@email.com"
-                                    class="form-control"
-                                />
+                                <input type="email" id="email" name="email" required placeholder="seu@email.com" class="form-control" />
+                                <span class="error-text">Formato de e-mail inválido</span>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">Telefone / WhatsApp</label>
-                                <input
-                                    type="tel"
-                                    id="phone"
-                                    name="phone"
-                                    required
-                                    placeholder="(00) 00000-0000"
-                                    class="form-control phone-mask"
-                                />
+                                <input type="tel" id="phone" name="phone" required placeholder="(00) 00000-0000" class="form-control phone-mask" />
+                                <span class="error-text">Telefone inválido</span>
                             </div>
                         </div>
 
                         <!-- 2. O Filtro Principal -->
                         <div class="form-group">
                             <label for="reason">Motivo do Contato</label>
-                            <select
-                                id="reason"
-                                name="reason"
-                                required
-                                class="form-control custom-select"
-                            >
-                                <option value="" disabled selected
-                                    >Selecione uma opção</option
-                                >
+                            <select id="reason" name="reason" required class="form-control custom-select">
+                                <option value="" disabled selected>Selecione uma opção</option>
                                 <option value="agendar">Agendar coleta</option>
                                 <option value="duvida">Dúvida geral</option>
-                                <option value="sugestao"
-                                    >Sugestão ou Reclamação</option
-                                >
-                                <option value="parceria"
-                                    >Parcerias / Outros</option
-                                >
+                                <option value="sugestao">Sugestão ou Reclamação</option>
+                                <option value="parceria">Parcerias / Outros</option>
                             </select>
+                            <span class="error-text">Selecione uma opção</span>
                         </div>
 
-                        <!-- 3. Qualificação Logística (Para Agendamentos) -->
-                        <div
-                            id="logistic-fields"
-                            class="logistic-fields hidden"
-                        >
-                            <h3 class="section-subtitle">Detalhes da Coleta</h3>
+                        <!-- 3. Qualificação Logística -->
+                        <div id="logistic-container" class="slide-down-container">
+                            <div class="slide-down-content">
+                                <div class="logistic-fields">
+                                    <h3 class="section-subtitle">Detalhes da Coleta</h3>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="profile">Perfil do local</label>
+                                            <select id="profile" name="profile" class="form-control custom-select">
+                                                <option value="" disabled selected>Selecione o perfil</option>
+                                                <option value="residência">Residência</option>
+                                                <option value="condomínio">Condomínio</option>
+                                                <option value="restaurante">Restaurante/Comércio</option>
+                                                <option value="indústria">Indústria</option>
+                                                <option value="outro">Outro</option>
+                                            </select>
+                                            <span class="error-text">Selecione uma opção</span>
+                                        </div>
 
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="profile">Perfil do local</label>
-                                    <select
-                                        id="profile"
-                                        name="profile"
-                                        class="form-control custom-select"
-                                    >
-                                        <option value="" disabled selected
-                                            >Selecione o perfil</option
-                                        >
-                                        <option value="residência"
-                                            >Residência</option
-                                        >
-                                        <option value="condomínio"
-                                            >Condomínio</option
-                                        >
-                                        <option value="restaurante"
-                                            >Restaurante/Comércio</option
-                                        >
-                                        <option value="indústria"
-                                            >Indústria</option
-                                        >
-                                        <option value="outro">Outro</option>
-                                    </select>
+                                        <div class="form-group">
+                                            <label for="volume">Volume estimado de óleo</label>
+                                            <select id="volume" name="volume" class="form-control custom-select">
+                                                <option value="" disabled selected>Selecione o volume</option>
+                                                <option value="menos-20">Menos de 20 Litros</option>
+                                                <option value="20-a-50">20 a 50 Litros</option>
+                                                <option value="mais-50">Mais de 50 Litros</option>
+                                            </select>
+                                            <span class="error-text">Selecione uma opção</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="city">Cidade / Bairro</label>
+                                        <input type="text" id="city" name="city" placeholder="Ex: Porto Alegre / Centro Histórico" class="form-control" />
+                                        <span class="error-text">Este campo é obrigatório</span>
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="volume"
-                                        >Volume estimado de óleo</label
-                                    >
-                                    <select
-                                        id="volume"
-                                        name="volume"
-                                        class="form-control custom-select"
-                                    >
-                                        <option value="" disabled selected
-                                            >Selecione o volume</option
-                                        >
-                                        <option value="menos-20"
-                                            >Menos de 20 Litros</option
-                                        >
-                                        <option value="20-a-50"
-                                            >20 a 50 Litros</option
-                                        >
-                                        <option value="mais-50"
-                                            >Mais de 50 Litros</option
-                                        >
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="city">Cidade / Bairro</label>
-                                <input
-                                    type="text"
-                                    id="city"
-                                    name="city"
-                                    placeholder="Ex: Porto Alegre / Centro Histórico"
-                                    class="form-control"
-                                />
                             </div>
                         </div>
 
                         <!-- 4. O Campo Livre -->
-                        <div id="message-field" class="form-group hidden">
-                            <label for="message">Mensagem</label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                rows="4"
-                                placeholder="Descreva sua dúvida, sugestão, ou detalhes para a coleta"
-                                class="form-control"></textarea>
+                        <div id="message-container" class="slide-down-container">
+                            <div class="slide-down-content">
+                                <div class="form-group message-wrapper">
+                                    <label for="message">Mensagem</label>
+                                    <textarea id="message" name="message" rows="4" placeholder="Descreva sua dúvida, sugestão, ou detalhes para a coleta" class="form-control"></textarea>
+                                    <span class="error-text">A mensagem é obrigatória</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit" class="btn-submit"
-                                >Enviar Mensagem</button
-                            >
+                            <button type="submit" id="btn-submit" class="btn-submit" disabled>
+                                <span class="btn-text">Enviar Mensagem</span>
+                                <svg class="btn-spinner" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -364,6 +318,26 @@
         gap: 1.5rem;
     }
 
+    .slide-down-container {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s ease-in-out;
+    }
+
+    .slide-down-container.open {
+        grid-template-rows: 1fr;
+    }
+
+    .slide-down-content {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .message-wrapper {
+        margin-top: 1.5rem;
+    }
+
     .form-row {
         display: grid;
         grid-template-columns: 1fr;
@@ -384,19 +358,19 @@
 
     label {
         font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--charcoal, #121212);
+        font-weight: 500;
+        color: #374151;
     }
 
     .form-control {
         width: 100%;
         padding: 0.875rem 1rem;
         border: 1px solid #e5e7eb;
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         font-size: 1rem;
         font-family: var(--font-sans, system-ui, sans-serif);
         color: var(--charcoal, #121212);
-        background-color: #f9fafb;
+        background-color: #ffffff;
         transition: all 0.3s ease;
         box-sizing: border-box;
     }
@@ -405,7 +379,7 @@
         outline: none;
         border-color: var(--brand-green, #64b445);
         background-color: #ffffff;
-        box-shadow: 0 0 0 3px rgba(100, 180, 69, 0.2);
+        box-shadow: 0 0 0 3px rgba(100, 180, 69, 0.15);
     }
 
     .custom-select {
@@ -418,7 +392,7 @@
     }
 
     textarea.form-control {
-        resize: vertical;
+        resize: none;
         min-height: 100px;
     }
 
@@ -429,8 +403,8 @@
     .logistic-fields {
         background-color: #f8fafc;
         padding: 1.5rem;
-        border-radius: 1rem;
-        border: 1px dashed #cbd5e1;
+        border-radius: 0.75rem;
+        border: 1px solid #f1f5f9;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -439,16 +413,17 @@
     }
 
     .section-subtitle {
-        font-size: 1.125rem;
-        font-weight: 700;
+        font-size: 1rem;
+        font-weight: 600;
         color: var(--brand-green, #64b445);
         margin: 0;
     }
 
     .form-actions {
-        margin-top: 1rem;
+        margin-top: auto;
         display: flex;
         justify-content: flex-end;
+        padding-top: 1rem;
     }
 
     .btn-submit {
@@ -459,7 +434,7 @@
         color: var(--bg-white, #ffffff);
         padding: 1rem 2rem;
         border: none;
-        border-radius: 9999px;
+        border-radius: 0.5rem;
         font-weight: 700;
         font-size: 1rem;
         cursor: pointer;
@@ -475,40 +450,159 @@
         }
     }
 
-    .btn-submit:hover {
+    .btn-submit:hover:not(:disabled) {
         transform: scale(1.02);
         background-color: #559c38;
+    }
+
+    .btn-submit:disabled {
+        background-color: #d1d5db;
+        color: #6b7280;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .form-control.invalid {
+        border-color: #ef4444;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+    }
+    
+    .error-text {
+        color: #ef4444;
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+        display: none;
+    }
+    
+    .form-control.invalid + .error-text {
+        display: block;
+    }
+    
+    .success-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 3rem 1.5rem;
+    }
+    
+    .success-icon {
+        width: 60px;
+        height: 60px;
+        background-color: var(--brand-green, #64b445);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    
+    .success-message .small-text {
+        color: var(--charcoal, #121212);
+        opacity: 0.8;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .btn-spinner {
+        animation: spin 1s linear infinite;
+        margin-left: 0.5rem;
+        display: none;
+    }
+    
+    .btn-spinner.show {
+        display: block;
+    }
+    
+    @keyframes spin {
+        100% { transform: rotate(360deg); }
     }
 </style>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const reasonSelect = document.getElementById(
-            "reason",
-        ) as HTMLSelectElement;
-        const logisticFields = document.getElementById("logistic-fields");
-        const messageField = document.getElementById("message-field");
+        const form = document.getElementById("robust-contact-form") as HTMLFormElement;
+        const successMessage = document.getElementById("success-message");
+        const btnSubmit = document.getElementById("btn-submit") as HTMLButtonElement;
+        const btnText = document.querySelector(".btn-text");
+        const btnSpinner = document.querySelector(".btn-spinner");
+        const faxInput = document.getElementById("fax") as HTMLInputElement;
 
-        // Form fields that might need required attribute toggling
-        const profileInput = document.getElementById(
-            "profile",
-        ) as HTMLSelectElement;
-        const volumeInput = document.getElementById(
-            "volume",
-        ) as HTMLSelectElement;
-        const cityInput = document.getElementById("city") as HTMLInputElement;
-        const messageInput = document.getElementById(
-            "message",
-        ) as HTMLTextAreaElement;
+        const reasonSelect = document.getElementById("reason") as HTMLSelectElement;
+        const logisticContainer = document.getElementById("logistic-container");
+        const messageContainer = document.getElementById("message-container");
 
+        const nameInput = document.getElementById("name") as HTMLInputElement;
+        const emailInput = document.getElementById("email") as HTMLInputElement;
         const phoneInput = document.getElementById("phone") as HTMLInputElement;
 
-        // Simple phone mask
+        const profileInput = document.getElementById("profile") as HTMLSelectElement;
+        const volumeInput = document.getElementById("volume") as HTMLSelectElement;
+        const cityInput = document.getElementById("city") as HTMLInputElement;
+        const messageInput = document.getElementById("message") as HTMLTextAreaElement;
+
+        const allInputs = [nameInput, emailInput, phoneInput, reasonSelect, profileInput, volumeInput, cityInput, messageInput];
+
+        function checkValidity(input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
+            if (!input || !input.required) return true;
+            let isValid = input.value.trim() !== "";
+            if (isValid && input.type === "email") {
+                isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
+            }
+            if (isValid && input.id === "phone") {
+                isValid = input.value.replace(/\D/g, "").length >= 10;
+            }
+            return isValid;
+        }
+
+        function handleInputValidation(input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
+            if (!input) return;
+            // Only show red border if user interacted with field
+            if (input.dataset.touched === "true") {
+                if (!checkValidity(input)) {
+                    input.classList.add("invalid");
+                } else {
+                    input.classList.remove("invalid");
+                }
+            }
+        }
+
+        function validateForm() {
+            let allValid = true;
+            allInputs.forEach(input => {
+                if (input && input.required) {
+                    if (!checkValidity(input)) allValid = false;
+                    handleInputValidation(input);
+                } else if (input) {
+                    input.classList.remove("invalid"); // remove invalid if no longer required
+                }
+            });
+
+            if (btnSubmit) {
+                btnSubmit.disabled = !allValid;
+            }
+        }
+
+        allInputs.forEach(input => {
+            if (input) {
+                input.addEventListener("blur", () => {
+                    input.dataset.touched = "true";
+                    validateForm();
+                });
+                input.addEventListener("input", validateForm);
+                input.addEventListener("change", validateForm);
+            }
+        });
+
         if (phoneInput) {
             phoneInput.addEventListener("input", (e) => {
                 let v = phoneInput.value.replace(/\D/g, "");
 
-                // Limit to 11 digits (e.g. 51 99999 9999)
                 if (v.length > 11) v = v.slice(0, 11);
 
                 if (v.length > 10) {
@@ -520,37 +614,62 @@
                 }
 
                 phoneInput.value = v;
+                validateForm();
             });
         }
 
-        if (reasonSelect) {
-            reasonSelect.addEventListener("change", (e) => {
-                const value = (e.target as HTMLSelectElement).value;
+        reasonSelect?.addEventListener("change", (e) => {
+            const value = (e.target as HTMLSelectElement).value;
 
-                // Hide all conditional logic fields first
-                logisticFields?.classList.add("hidden");
-                messageField?.classList.add("hidden");
+            if (profileInput) profileInput.required = false;
+            if (volumeInput) volumeInput.required = false;
+            if (cityInput) cityInput.required = false;
+            if (messageInput) messageInput.required = false;
 
-                // Remove required state
-                if (profileInput) profileInput.required = false;
-                if (volumeInput) volumeInput.required = false;
-                if (cityInput) cityInput.required = false;
-                if (messageInput) messageInput.required = false;
+            if (value === "agendar") {
+                logisticContainer?.classList.add("open");
+                messageContainer?.classList.add("open");
 
-                if (value === "agendar") {
-                    // Show logistic and message for scheduling
-                    logisticFields?.classList.remove("hidden");
-                    messageField?.classList.remove("hidden");
+                if (profileInput) profileInput.required = true;
+                if (volumeInput) volumeInput.required = true;
+                if (cityInput) cityInput.required = true;
+            } else if (value) {
+                logisticContainer?.classList.remove("open");
+                messageContainer?.classList.add("open");
 
-                    if (profileInput) profileInput.required = true;
-                    if (volumeInput) volumeInput.required = true;
-                    if (cityInput) cityInput.required = true;
-                } else if (value) {
-                    // For anything else, just show message
-                    messageField?.classList.remove("hidden");
-                    if (messageInput) messageInput.required = true;
-                }
+                if (messageInput) messageInput.required = true;
+            } else {
+                logisticContainer?.classList.remove("open");
+                messageContainer?.classList.remove("open");
+            }
+            
+            // Mark conditionally shown fields as untouched so they don't light up red immediately
+            [profileInput, volumeInput, cityInput, messageInput].forEach(inp => {
+                if (inp) inp.dataset.touched = "false";
             });
-        }
+
+            validateForm();
+        });
+
+        form?.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            // Honeypot check (anti-spam)
+            if (faxInput && faxInput.value !== "") {
+                console.warn("Spam detectado.");
+                return;
+            }
+
+            // Lock double clicks
+            btnSubmit.disabled = true;
+            if (btnText) btnText.textContent = "Enviando...";
+            if (btnSpinner) btnSpinner.classList.add("show");
+
+            // Simula uma requisição (Fake API call)
+            setTimeout(() => {
+                form.classList.add("hidden");
+                successMessage?.classList.remove("hidden");
+            }, 1500);
+        });
     });
 </script>
