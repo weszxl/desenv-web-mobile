@@ -1,8 +1,8 @@
 ---
-import { Image } from 'astro:assets';
-import instagramIcon from '../assets/images/instagram_icon.svg';
-import whatsappIcon from '../assets/images/whatsapp_icon.svg';
-import logoV3 from '../assets/images/logo_v3.svg';
+import { Image } from "astro:assets";
+import instagramIcon from "../assets/images/instagram_icon.svg";
+import whatsappIcon from "../assets/images/whatsapp_icon.svg";
+import logoV3 from "../assets/images/logo_v3.svg";
 ---
 
 <footer id="contato" class="footer-section">
@@ -30,6 +30,7 @@ import logoV3 from '../assets/images/logo_v3.svg';
                 type="text"
                 name="name"
                 placeholder="Seu Nome"
+                aria-label="Seu Nome"
                 required
                 class="contact-input"
               />
@@ -39,6 +40,7 @@ import logoV3 from '../assets/images/logo_v3.svg';
                 type="email"
                 name="email"
                 placeholder="seu@email.com"
+                aria-label="Seu endereço de e-mail"
                 required
                 class="contact-input"
               />
@@ -48,6 +50,7 @@ import logoV3 from '../assets/images/logo_v3.svg';
                 type="tel"
                 name="contact"
                 placeholder="Seu Contato (WhatsApp)"
+                aria-label="Seu número de WhatsApp"
                 required
                 class="contact-input"
               />
@@ -105,11 +108,7 @@ import logoV3 from '../assets/images/logo_v3.svg';
             aria-label="Instagram"
             class="social-icon"
           >
-            <Image
-              src={instagramIcon}
-              alt="Instagram"
-              loading="lazy"
-            />
+            <Image src={instagramIcon} alt="Instagram" loading="lazy" />
           </a>
           <a
             href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Gostaria de agendar uma coleta de óleo.")}`}
@@ -118,28 +117,27 @@ import logoV3 from '../assets/images/logo_v3.svg';
             aria-label="WhatsApp"
             class="social-icon"
           >
-            <Image
-              src={whatsappIcon}
-              alt="WhatsApp"
-              loading="lazy"
-            />
+            <Image src={whatsappIcon} alt="WhatsApp" loading="lazy" />
           </a>
         </div>
       </div>
 
-      <div class="footer-link-col">
-        <h4 class="link-title">Navegação</h4>
+      <nav class="footer-link-col" aria-labelledby="title-nav">
+        <h4 id="title-nav" class="link-title">Navegação</h4>
         <ul class="link-list">
           <li><a href="/" class="link-item">Início</a></li>
           <li><a href="/#o-que-fazemos" class="link-item">Como Funciona</a></li>
           <li>
             <a href="/#quem-atendemos" class="link-item">Quem atendemos</a>
           </li>
+          <li>
+            <a href="/#cobertura" class="link-item">Onde atendemos</a>
+          </li>
         </ul>
-      </div>
+      </nav>
 
-      <div class="footer-link-col">
-        <h4 class="link-title">Informações gerais</h4>
+      <nav class="footer-link-col" aria-labelledby="title-info">
+        <h4 id="title-info" class="link-title">Informações gerais</h4>
         <ul class="link-list">
           <li><a href="/faq" class="link-item">FAQ</a></li>
           <li>
@@ -148,7 +146,7 @@ import logoV3 from '../assets/images/logo_v3.svg';
             >
           </li>
         </ul>
-      </div>
+      </nav>
     </div>
 
     <div class="footer-bottom">

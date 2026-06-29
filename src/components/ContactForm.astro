@@ -1,0 +1,556 @@
+---
+
+---
+
+<section class="contact-form-section">
+    <div class="contact-form-background">
+        <div class="bg-gradient-overlay"></div>
+        <div class="bg-blob blob-green contact-blob-1"></div>
+        <div class="bg-blob blob-yellow contact-blob-2"></div>
+    </div>
+
+    <div class="contact-noise-wrapper noise-overlay"></div>
+
+    <div class="contact-container">
+        <div class="contact-grid">
+            <div class="contact-sidebar">
+                <div class="sidebar-header">
+                    <span class="subtitle">FALE CONOSCO</span>
+                    <h2 class="title">Envie sua mensagem</h2>
+                </div>
+
+                <div class="support-card">
+                    <h3 class="support-title">Deixe-nos uma mensagem</h3>
+                    <p class="support-text">Nessa área você pode:</p>
+                    <ul class="support-list">
+                        <li>Agendar uma coleta</li>
+                        <li>Tirar dúvidas</li>
+                        <li>Enviar sugestões ou reclamações</li>
+                        <li>Propor novas parcerias</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="contact-content">
+                <div class="form-card">
+                    <form id="robust-contact-form" class="robust-form">
+                        <!-- 1. Campos de Identificação Básica -->
+                        <div class="form-group">
+                            <label for="name">Nome / Razão Social</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                placeholder="Seu nome ou nome da empresa"
+                                class="form-control"
+                            />
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    placeholder="seu@email.com"
+                                    class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Telefone / WhatsApp</label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    required
+                                    placeholder="(00) 00000-0000"
+                                    class="form-control phone-mask"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- 2. O Filtro Principal -->
+                        <div class="form-group">
+                            <label for="reason">Motivo do Contato</label>
+                            <select
+                                id="reason"
+                                name="reason"
+                                required
+                                class="form-control custom-select"
+                            >
+                                <option value="" disabled selected
+                                    >Selecione uma opção</option
+                                >
+                                <option value="agendar">Agendar coleta</option>
+                                <option value="duvida">Dúvida geral</option>
+                                <option value="sugestao"
+                                    >Sugestão ou Reclamação</option
+                                >
+                                <option value="parceria"
+                                    >Parcerias / Outros</option
+                                >
+                            </select>
+                        </div>
+
+                        <!-- 3. Qualificação Logística (Para Agendamentos) -->
+                        <div
+                            id="logistic-fields"
+                            class="logistic-fields hidden"
+                        >
+                            <h3 class="section-subtitle">Detalhes da Coleta</h3>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="profile">Perfil do local</label>
+                                    <select
+                                        id="profile"
+                                        name="profile"
+                                        class="form-control custom-select"
+                                    >
+                                        <option value="" disabled selected
+                                            >Selecione o perfil</option
+                                        >
+                                        <option value="residência"
+                                            >Residência</option
+                                        >
+                                        <option value="condomínio"
+                                            >Condomínio</option
+                                        >
+                                        <option value="restaurante"
+                                            >Restaurante/Comércio</option
+                                        >
+                                        <option value="indústria"
+                                            >Indústria</option
+                                        >
+                                        <option value="outro">Outro</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="volume"
+                                        >Volume estimado de óleo</label
+                                    >
+                                    <select
+                                        id="volume"
+                                        name="volume"
+                                        class="form-control custom-select"
+                                    >
+                                        <option value="" disabled selected
+                                            >Selecione o volume</option
+                                        >
+                                        <option value="menos-20"
+                                            >Menos de 20 Litros</option
+                                        >
+                                        <option value="20-a-50"
+                                            >20 a 50 Litros</option
+                                        >
+                                        <option value="mais-50"
+                                            >Mais de 50 Litros</option
+                                        >
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city">Cidade / Bairro</label>
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    placeholder="Ex: Porto Alegre / Centro Histórico"
+                                    class="form-control"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- 4. O Campo Livre -->
+                        <div id="message-field" class="form-group hidden">
+                            <label for="message">Mensagem</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="4"
+                                placeholder="Descreva sua dúvida, sugestão, ou detalhes para a coleta"
+                                class="form-control"></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-submit"
+                                >Enviar Mensagem</button
+                            >
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .contact-form-section {
+        position: relative;
+        padding: 8rem 0 6rem 0;
+        background-color: var(--bg-white, #fafafa);
+        color: var(--charcoal, #121212);
+        min-height: 100vh;
+    }
+
+    @media (min-width: 768px) {
+        .contact-form-section {
+            padding: 10rem 0 8rem 0;
+        }
+    }
+
+    .contact-noise-wrapper {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 50;
+    }
+
+    .contact-form-background {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .contact-blob-1 {
+        top: 5%;
+        left: -5%;
+        width: 15rem;
+        height: 15rem;
+        position: absolute;
+        background-color: var(--brand-green, #64b445);
+        opacity: 0.2;
+        filter: blur(60px);
+        border-radius: 50%;
+    }
+
+    .contact-blob-2 {
+        bottom: 10%;
+        right: -5%;
+        width: 20rem;
+        height: 20rem;
+        position: absolute;
+        background-color: var(--brand-yellow, #fbb342);
+        opacity: 0.15;
+        filter: blur(80px);
+        border-radius: 50%;
+    }
+
+    .contact-container {
+        position: relative;
+        z-index: 10;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    @media (min-width: 992px) {
+        .contact-grid {
+            grid-template-columns: 3.5fr 8.5fr;
+            gap: 5rem;
+            align-items: start;
+        }
+    }
+
+    .contact-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-self: start;
+        height: max-content;
+    }
+
+    @media (min-width: 992px) {
+        .contact-sidebar {
+            top: 10rem;
+        }
+    }
+
+    .sidebar-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .subtitle {
+        font-size: 0.75rem;
+        font-weight: 700;
+        font-family: var(--font-mono, monospace);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--charcoal, #121212);
+        opacity: 0.6;
+    }
+
+    .title {
+        font-size: clamp(2.5rem, 5vw, 3rem);
+        font-weight: 900;
+        font-family: var(--font-sans, system-ui, sans-serif);
+        color: var(--brand-gray, #555555);
+        letter-spacing: -0.025em;
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .support-card {
+        background-color: transparent;
+        border-radius: 1.25rem;
+        padding: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .support-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--charcoal, #121212);
+        margin: 0 0 0.25rem 0;
+    }
+
+    .support-text {
+        font-size: 0.875rem;
+        color: var(--charcoal, #121212);
+        opacity: 0.8;
+        margin: 0 0 1.5rem 0;
+    }
+
+    .support-list {
+        list-style-type: disc;
+        padding-left: 1.25rem;
+        margin: 0;
+        color: var(--charcoal, #121212);
+        opacity: 0.8;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-card {
+        background-color: #ffffff;
+        border-radius: 1.25rem;
+        padding: 2.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 640px) {
+        .form-card {
+            padding: 1.5rem;
+        }
+    }
+
+    .robust-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+        .form-row {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--charcoal, #121212);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-family: var(--font-sans, system-ui, sans-serif);
+        color: var(--charcoal, #121212);
+        background-color: #f9fafb;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--brand-green, #64b445);
+        background-color: #ffffff;
+        box-shadow: 0 0 0 3px rgba(100, 180, 69, 0.2);
+    }
+
+    .custom-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1rem;
+        padding-right: 2.5rem;
+    }
+
+    textarea.form-control {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .logistic-fields {
+        background-color: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        border: 1px dashed #cbd5e1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .section-subtitle {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--brand-green, #64b445);
+        margin: 0;
+    }
+
+    .form-actions {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .btn-submit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--brand-green, #64b445);
+        color: var(--bg-white, #ffffff);
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition:
+            transform 0.2s,
+            background-color 0.2s;
+        width: 100%;
+    }
+
+    @media (min-width: 640px) {
+        .btn-submit {
+            width: auto;
+        }
+    }
+
+    .btn-submit:hover {
+        transform: scale(1.02);
+        background-color: #559c38;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const reasonSelect = document.getElementById(
+            "reason",
+        ) as HTMLSelectElement;
+        const logisticFields = document.getElementById("logistic-fields");
+        const messageField = document.getElementById("message-field");
+
+        // Form fields that might need required attribute toggling
+        const profileInput = document.getElementById(
+            "profile",
+        ) as HTMLSelectElement;
+        const volumeInput = document.getElementById(
+            "volume",
+        ) as HTMLSelectElement;
+        const cityInput = document.getElementById("city") as HTMLInputElement;
+        const messageInput = document.getElementById(
+            "message",
+        ) as HTMLTextAreaElement;
+
+        const phoneInput = document.getElementById("phone") as HTMLInputElement;
+
+        // Simple phone mask
+        if (phoneInput) {
+            phoneInput.addEventListener("input", (e) => {
+                let v = phoneInput.value.replace(/\D/g, "");
+
+                // Limit to 11 digits (e.g. 51 99999 9999)
+                if (v.length > 11) v = v.slice(0, 11);
+
+                if (v.length > 10) {
+                    v = v.replace(/^(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+                } else if (v.length > 6) {
+                    v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+                } else if (v.length > 2) {
+                    v = v.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
+                }
+
+                phoneInput.value = v;
+            });
+        }
+
+        if (reasonSelect) {
+            reasonSelect.addEventListener("change", (e) => {
+                const value = (e.target as HTMLSelectElement).value;
+
+                // Hide all conditional logic fields first
+                logisticFields?.classList.add("hidden");
+                messageField?.classList.add("hidden");
+
+                // Remove required state
+                if (profileInput) profileInput.required = false;
+                if (volumeInput) volumeInput.required = false;
+                if (cityInput) cityInput.required = false;
+                if (messageInput) messageInput.required = false;
+
+                if (value === "agendar") {
+                    // Show logistic and message for scheduling
+                    logisticFields?.classList.remove("hidden");
+                    messageField?.classList.remove("hidden");
+
+                    if (profileInput) profileInput.required = true;
+                    if (volumeInput) volumeInput.required = true;
+                    if (cityInput) cityInput.required = true;
+                } else if (value) {
+                    // For anything else, just show message
+                    messageField?.classList.remove("hidden");
+                    if (messageInput) messageInput.required = true;
+                }
+            });
+        }
+    });
+</script>

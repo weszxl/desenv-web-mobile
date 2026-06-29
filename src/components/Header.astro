@@ -1,12 +1,13 @@
 ---
-import { Image } from 'astro:assets';
-import logoV1 from '../assets/images/logo_v1.svg';
-import logoV2 from '../assets/images/logo_v2.svg';
+import { Image } from "astro:assets";
+import logoV1 from "../assets/images/logo_v1.svg";
+import logoV2 from "../assets/images/logo_v2.svg";
 
 const navLinks = [
   { label: "Início", href: "/" },
   { label: "Como funciona", href: "/#o-que-fazemos" },
   { label: "Quem atendemos", href: "/#quem-atendemos" },
+  { label: "Onde atendemos", href: "/#cobertura" },
 ];
 ---
 
@@ -25,17 +26,19 @@ const navLinks = [
       />
     </a>
 
-    <div class="nav-links-desktop">
+    <ol class="nav-links-desktop">
       {
         navLinks.map((item) => (
-          <a href={item.href} class="nav-link">
-            {item.label}
-          </a>
+          <li>
+            <a href={item.href} class="nav-link">
+              {item.label}
+            </a>
+          </li>
         ))
       }
-    </div>
+    </ol>
 
-    <a href="/#contato" class="btn-cta-desktop"> Entrar em Contato </a>
+    <a href="/formulario-de-contato" class="btn-cta-desktop"> Entrar em Contato </a>
 
     <button id="mobile-menu-btn" class="mobile-toggle" aria-label="Menu">
       <svg
@@ -61,14 +64,18 @@ const navLinks = [
 
   <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-content">
-      {
-        navLinks.map((item) => (
-          <a href={item.href} class="mobile-nav-link">
-            {item.label}
-          </a>
-        ))
-      }
-      <a href="/#contato" class="btn-cta-mobile"> Entrar em Contato </a>
+      <ol class="mobile-nav-list">
+        {
+          navLinks.map((item) => (
+            <li>
+              <a href={item.href} class="mobile-nav-link">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+      <a href="/formulario-de-contato" class="btn-cta-mobile"> Entrar em Contato </a>
     </div>
   </div>
 </nav>
@@ -252,6 +259,9 @@ const navLinks = [
     display: none;
     align-items: center;
     gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   @media (min-width: 768px) {
@@ -362,6 +372,15 @@ const navLinks = [
 
   .mobile-menu-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
