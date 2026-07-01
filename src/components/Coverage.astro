@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import mapMetroOn from "../assets/images/coverage_map_poa-selected.svg";
 import mapBeachOn from "../assets/images/coverage_map_coastal-selected.svg";
 import poaIcon from "../assets/images/coverage_poa_icon.svg";
@@ -20,7 +19,6 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
   </div>
   <div class="coverage-container">
     <div class="coverage-grid">
-      <!-- Coluna Esquerda: Mapa Dinâmico -->
       <div class="map-wrapper">
         <img
           src={mapMetroOn.src}
@@ -30,18 +28,16 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
         />
       </div>
 
-      <!-- Coluna Direita: Interface -->
       <div class="content-wrapper">
-        <div class="tab-buttons">
-          <button class="active" data-target="metro"
+        <div class="tab-buttons" role="tablist">
+          <button class="active" data-target="metro" role="tab" aria-selected="true" id="btn-metro" aria-controls="metro"
             >Região Metropolitana</button
           >
-          <button data-target="litoral">Litoral Gaúcho</button>
+          <button data-target="litoral" role="tab" aria-selected="false" id="btn-litoral" aria-controls="litoral">Litoral Gaúcho</button>
         </div>
 
         <div class="tab-contents-container">
-          <!-- Tab Metro -->
-          <div class="tab-content active" id="metro">
+          <div class="tab-content active" id="metro" role="tabpanel" aria-labelledby="btn-metro">
             <div class="tab-card">
               <div class="card-header">
                 <div class="card-icon">
@@ -65,8 +61,7 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
             </div>
           </div>
 
-          <!-- Tab Litoral -->
-          <div class="tab-content" id="litoral">
+          <div class="tab-content" id="litoral" role="tabpanel" aria-labelledby="btn-litoral">
             <div class="tab-card">
               <div class="card-header">
                 <div class="card-icon">
@@ -121,7 +116,6 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
     z-index: 2;
   }
 
-  /* Grid Responsivo */
   .coverage-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -143,7 +137,6 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
     }
   }
 
-  /* Coluna Esquerda: Mapa e Pinos */
   .map-wrapper {
     position: relative;
     margin-right: auto;
@@ -159,7 +152,6 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
     filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.05));
   }
 
-  /* Coluna Direita: Interface */
   .content-wrapper {
     display: flex;
     flex-direction: column;
@@ -176,7 +168,6 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
     margin-bottom: 0.5rem;
   }
 
-  /* Sistema de Abas - Botões */
   .tab-buttons {
     display: flex;
     gap: 1rem;
@@ -222,9 +213,8 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
     transform: scaleX(1);
   }
 
-  /* Sistema de Abas - Conteúdo */
   .tab-contents-container {
-    min-height: 180px; /* Previne pulo de layout */
+    min-height: 180px;
   }
 
   .tab-content {
@@ -310,7 +300,6 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
 
     if (!section) return;
 
-    // Caminhos das imagens extraídos do HTML
     const paths = {
       mapMetro: section.getAttribute("data-map-metro") || "",
       mapBeach: section.getAttribute("data-map-beach") || "",
@@ -318,8 +307,9 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
 
     const mainMap = document.getElementById("main-map");
 
-    // Garante que o estado inicial está correto ao carregar a página
-    const initialActiveBtn = document.querySelector(".tab-buttons button.active");
+    const initialActiveBtn = document.querySelector(
+      ".tab-buttons button.active",
+    );
     if (mainMap && initialActiveBtn) {
       const initialTarget = initialActiveBtn.getAttribute("data-target");
       if (initialTarget === "metro") {
@@ -331,14 +321,15 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
 
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
-        // Remove 'active' de todos os botões e conteúdos
-        buttons.forEach((btn) => btn.classList.remove("active"));
+        buttons.forEach((btn) => {
+          btn.classList.remove("active");
+          btn.setAttribute("aria-selected", "false");
+        });
         contents.forEach((content) => content.classList.remove("active"));
 
-        // Adiciona 'active' no botão clicado
         button.classList.add("active");
+        button.setAttribute("aria-selected", "true");
 
-        // Busca o ID do conteúdo alvo e exibe
         const targetId = button.getAttribute("data-target");
         if (targetId) {
           const targetElement = document.getElementById(targetId);
@@ -348,10 +339,8 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
 
           if (mainMap) {
             if (targetId === "metro") {
-              // Ativa Metropolitana
               mainMap.setAttribute("src", paths.mapMetro);
             } else if (targetId === "litoral") {
-              // Ativa Litoral
               mainMap.setAttribute("src", paths.mapBeach);
             }
           }
