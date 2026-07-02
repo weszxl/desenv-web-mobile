@@ -1,0 +1,238 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition:
+    background-color 0.4s ease,
+    box-shadow 0.4s ease;
+  background-color: transparent;
+  font-family: var(--font-sans);
+}
+
+.navbar.menu-open {
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .navbar.menu-open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.navbar.hidden-nav {
+  transform: translateY(-100%);
+}
+
+.navbar.scrolled {
+  background-color: var(--brand-green);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-default,
+.logo-scrolled {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logo-scrolled {
+  display: none;
+}
+
+.navbar.scrolled .logo-default {
+  display: none;
+}
+
+.navbar.scrolled .logo-scrolled {
+  display: block;
+}
+
+.nav-links-desktop {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .nav-links-desktop {
+    display: flex;
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  transition: color 0.3s;
+}
+
+.nav-link:hover,
+.nav-link:active {
+  color: var(--brand-green);
+}
+
+.navbar.scrolled .nav-link {
+  color: var(--bg-white);
+}
+
+.navbar.scrolled .nav-link:hover,
+.navbar.scrolled .nav-link:active {
+  color: var(--brand-yellow);
+}
+
+.btn-cta-desktop {
+  display: none;
+  background-color: var(--brand-green);
+  color: var(--bg-white);
+  height: 48px;
+  padding: 0 1.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition:
+    background-color 0.3s,
+    color 0.3s,
+    transform 0.2s;
+}
+
+@media (min-width: 768px) {
+  .btn-cta-desktop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.btn-cta-desktop:hover {
+  transform: scale(1.02);
+}
+
+.navbar.scrolled .btn-cta-desktop {
+  background-color: var(--brand-yellow);
+  color: var(--bg-white);
+}
+
+.mobile-toggle {
+  display: block;
+  background: transparent;
+  border: none;
+  color: var(--charcoal);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.navbar.scrolled .mobile-toggle {
+  color: var(--bg-white);
+}
+
+@media (min-width: 768px) {
+  .mobile-toggle {
+    display: none;
+  }
+}
+
+.mobile-toggle svg {
+  width: 28px;
+  height: 28px;
+}
+
+.hidden {
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+  background-color: var(--bg-white);
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled .mobile-menu {
+  background-color: var(--brand-green);
+  box-shadow: none;
+}
+
+.mobile-menu.open {
+  display: block;
+}
+
+.mobile-menu-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mobile-nav-link {
+  text-decoration: none;
+  color: var(--charcoal);
+  font-size: 1.125rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:active {
+  color: var(--brand-green);
+}
+
+.navbar.scrolled .mobile-nav-link {
+  color: var(--bg-white);
+}
+
+.navbar.scrolled .mobile-nav-link:hover,
+.navbar.scrolled .mobile-nav-link:active {
+  color: var(--brand-yellow);
+}
+
+.btn-cta-mobile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background-color: var(--brand-green);
+  color: var(--bg-white);
+  border-radius: 9999px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+.navbar.scrolled .btn-cta-mobile {
+  background-color: var(--brand-yellow);
+  color: var(--bg-white);
+}

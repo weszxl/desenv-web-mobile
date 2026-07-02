@@ -1,0 +1,159 @@
+.privacy-section {
+  position: relative;
+  padding: 8rem 0 6rem 0;
+  background-color: var(--bg-white);
+  color: var(--charcoal);
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .privacy-section {
+    padding: 10rem 0 8rem 0;
+  }
+}
+
+.privacy-noise-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.privacy-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.policy-blob-1 {
+  top: 5%;
+  left: -5%;
+  width: 15rem;
+  height: 15rem;
+}
+
+.policy-blob-2 {
+  bottom: 10%;
+  right: -5%;
+  width: 20rem;
+  height: 20rem;
+}
+
+.policy-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.policy-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 992px) {
+  .policy-grid {
+    grid-template-columns: 3.5fr 8.5fr;
+    gap: 5rem;
+
+    align-items: start;
+  }
+}
+
+.policy-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  align-self: start;
+  height: max-content;
+}
+
+@media (min-width: 992px) {
+  .policy-sidebar {
+    top: 8rem;
+  }
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--charcoal);
+  opacity: 0.6;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 3rem);
+  font-weight: 900;
+  font-family: var(--font-sans);
+  color: var(--brand-gray);
+  letter-spacing: -0.025em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.policy-card {
+  background-color: transparent;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .policy-card {
+    padding: 3rem;
+  }
+}
+
+.policy-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.policy-block h2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  color: var(--charcoal);
+  margin: 0;
+}
+
+.policy-block p {
+  font-size: 0.9375rem;
+  font-family: var(--font-sans);
+  color: var(--charcoal);
+  opacity: 0.8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.policy-block a {
+  color: var(--brand-green);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.policy-block a:hover {
+  color: var(--brand-yellow);
+}

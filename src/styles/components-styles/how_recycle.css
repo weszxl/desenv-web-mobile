@@ -1,0 +1,177 @@
+.prep-section {
+  position: relative;
+  padding: 4rem 0;
+  background-color: var(--bg-white);
+  color: var(--charcoal);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .prep-section {
+    padding: 6rem 0;
+  }
+}
+
+.prep-blob-1 {
+  top: 10%;
+  left: 5%;
+  width: 8rem;
+  height: 8rem;
+}
+
+.prep-blob-2 {
+  bottom: 10%;
+  right: 5%;
+  width: 10rem;
+  height: 10rem;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.zigzag-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .zigzag-wrapper {
+    gap: 3rem;
+  }
+}
+
+.step-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.step-row:not(:last-child) {
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .step-row {
+    gap: 2.5rem;
+  }
+
+  .step-row:not(:last-child) {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .layout-card-left {
+    flex-direction: row;
+  }
+
+  .layout-card-right {
+    flex-direction: row-reverse;
+  }
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 450px;
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .step-content {
+    width: 100%;
+    max-width: 450px;
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+.step-content:hover {
+  transform: translateY(-5px);
+}
+
+.step-title {
+  font-size: 1.125rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--brand-gray);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .step-title {
+    font-size: 1.25rem;
+  }
+}
+
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 1rem;
+  border-radius: 999px;
+  background-color: rgba(65, 163, 76, 0.1);
+  color: var(--brand-green);
+  font-weight: 700;
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  margin-bottom: 1rem;
+}
+
+.step-badge .dot {
+  margin-right: 0.5rem;
+  font-size: 1.2em;
+}
+
+.step-desc {
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  color: rgba(18, 18, 18, 0.7);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .step-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+.step-image-wrapper {
+  width: 100%;
+  max-width: 150px;
+}
+
+@media (min-width: 768px) {
+  .step-image-wrapper {
+    max-width: 250px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.step-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}

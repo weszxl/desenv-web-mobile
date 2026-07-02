@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import whatsappIcon from '../assets/images/whatsapp.svg';
+import { Image } from "astro:assets";
+import whatsappIcon from "../assets/images/whatsapp.svg";
 ---
 
 <div id="floating-actions" class="floating-wrapper hidden">
@@ -31,98 +31,7 @@ import whatsappIcon from '../assets/images/whatsapp.svg';
 </div>
 
 <style>
-  .floating-wrapper {
-    position: fixed;
-    bottom: 2rem;
-    right: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    z-index: 90;
-
-    transition:
-      transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-      opacity 0.5s ease;
-  }
-
-  @media (min-width: 768px) {
-    .floating-wrapper {
-      bottom: 2.5rem;
-      right: 2.5rem;
-    }
-  }
-
-  .floating-wrapper.hidden {
-    transform: translateY(120px);
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .fab {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease,
-      box-shadow 0.2s ease;
-    border: none;
-    outline: none;
-  }
-
-  .fab:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  .btn-whatsapp {
-    width: 60px;
-    height: 60px;
-    background-color: var(--brand-green);
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .btn-whatsapp img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .btn-top {
-    width: 44px;
-    height: 44px;
-    background-color: var(--bg-white);
-    color: var(--brand-gray);
-  }
-
-  .btn-top:hover {
-    color: var(--brand-green);
-  }
+  @import "../styles/components-styles/floating_buttons.css";
 </style>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const floatingWrapper = document.getElementById("floating-actions");
-    const backToTopBtn = document.getElementById("btn-back-to-top");
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > window.innerHeight * 0.8) {
-        floatingWrapper?.classList.remove("hidden");
-      } else {
-        floatingWrapper?.classList.add("hidden");
-      }
-    });
-
-    backToTopBtn?.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    });
-  });
-</script>
+<script src="../scripts/floating_buttons.js"></script>

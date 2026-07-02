@@ -5,9 +5,8 @@
   --brand-gray: #555555;
   --charcoal: #121212;
   --bg-white: #ffffff;
-  --bg-light: #f0ece0; 
+  --bg-light: #f0ece0;
 
-  /* Fontes */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -16,7 +15,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Reset básico */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -34,13 +32,21 @@ body {
   overflow-x: auto;
 }
 
-/* =========================================
-   Tipografia e Classes Utilitárias globais
-   ========================================= */
-.text-brand-green { color: var(--brand-green); }
-.text-brand-yellow { color: var(--brand-yellow); }
-.text-brand-gray { color: var(--brand-gray); }
-.text-charcoal { color: var(--charcoal); }
+.text-brand-green {
+  color: var(--brand-green);
+}
+
+.text-brand-yellow {
+  color: var(--brand-yellow);
+}
+
+.text-brand-gray {
+  color: var(--brand-gray);
+}
+
+.text-charcoal {
+  color: var(--charcoal);
+}
 
 .section-title {
   font-size: clamp(2.5rem, 5vw, 3rem);
@@ -62,9 +68,6 @@ body {
   margin: 0 auto;
 }
 
-/* =========================================
-   Elementos de Background (Blobs e Gradientes)
-   ========================================= */
 .bg-gradient-overlay {
   position: absolute;
   inset: 0;
@@ -73,8 +76,15 @@ body {
 }
 
 @keyframes float {
-  0%, 100% { transform: translate3d(0, 0px, 0) rotate(0deg); }
-  50% { transform: translate3d(0, -20px, 0) rotate(3deg); }
+
+  0%,
+  100% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(3deg);
+  }
 }
 
 .bg-blob {
@@ -94,16 +104,32 @@ body {
   animation: float 8s ease-in-out infinite reverse;
 }
 
-/* =========================================
-   Efeito de Ruído (Noise)
-   ========================================= */
 @keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -10%); }
-  30% { transform: translate(3%, -15%); }
-  50% { transform: translate(12%, 9%); }
-  70% { transform: translate(9%, 4%); }
-  90% { transform: translate(-1%, 7%); }
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-5%, -10%);
+  }
+
+  30% {
+    transform: translate(3%, -15%);
+  }
+
+  50% {
+    transform: translate(12%, 9%);
+  }
+
+  70% {
+    transform: translate(9%, 4%);
+  }
+
+  90% {
+    transform: translate(-1%, 7%);
+  }
 }
 
 .noise-overlay {

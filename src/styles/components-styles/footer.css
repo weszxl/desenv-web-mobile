@@ -1,0 +1,359 @@
+.hidden {
+  display: none !important;
+}
+
+.state-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  animation: fadeIn 0.5s ease;
+}
+
+.state-message p {
+  color: var(--brand-gray);
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+}
+
+.state-message .small-text {
+  font-size: 1rem;
+  color: rgba(18, 18, 18, 0.6);
+  font-weight: 400;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(100, 180, 69, 0.2);
+  border-left-color: var(--brand-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--brand-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fee2e2;
+  border: 1px solid #f87171;
+  border-radius: 0.75rem;
+  color: #b91c1c;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.footer-section {
+  position: relative;
+  background-color: var(--bg-light);
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .footer-section {
+    padding-top: 6rem;
+  }
+}
+
+.footer-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-cta-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.block {
+  display: block;
+}
+
+.contact-wrapper {
+  max-width: 56rem;
+  margin: 0 auto 4rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .inputs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.input-group {
+  width: 100%;
+  position: relative;
+}
+
+.contact-input {
+  width: 100%;
+  background-color: var(--bg-white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  color: var(--charcoal);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.contact-input::placeholder {
+  color: rgba(18, 18, 18, 0.4);
+}
+
+.contact-input:focus {
+  border-color: var(--brand-green);
+  box-shadow: 0 0 0 3px rgba(100, 180, 69, 0.2);
+}
+
+.contact-input.invalid {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.35rem;
+  display: none;
+}
+
+.contact-input.invalid + .error-text {
+  display: block;
+}
+
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border: none;
+  background-color: var(--brand-green);
+  color: var(--bg-white);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .btn-submit {
+    width: fit-content;
+    align-self: center;
+  }
+}
+
+.btn-submit:hover {
+  transform: scale(1.05);
+}
+
+.btn-submit.submitting {
+  opacity: 0.7;
+  pointer-events: none;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.contact-note {
+  color: rgba(18, 18, 18, 0.6);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2.5rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .footer-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.link-title {
+  font-weight: 900;
+  font-family: var(--font-sans);
+  color: var(--brand-gray);
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.link-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+}
+
+.link-item {
+  color: rgba(18, 18, 18, 0.6);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+  display: inline-block;
+}
+
+.link-item:hover {
+  color: var(--brand-green);
+  transform: translateX(4px);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.social-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.footer-bottom {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .copyright {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo img:hover {
+  transform: scale(1.05);
+}
+
+.copyright {
+  color: rgba(18, 18, 18, 0.5);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  margin: 0;
+  text-align: center;
+}
+
+.honey-field {
+  position: absolute;
+  opacity: 0;
+  top: -9999px;
+  left: -9999px;
+  z-index: -1;
+}

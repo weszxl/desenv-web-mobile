@@ -1,0 +1,109 @@
+---
+import { Image } from "astro:assets";
+
+import img1 from "../assets/images/notice_gazeta24horasrio.com.br-descarte-de-oleo-de-cozinha-ainda-causa-entupimentos-nas-cidades.png";
+import img2 from "../assets/images/notice_globorural.globo.com-pesquisa-indica-resultados-positivos-do-oleo-de-cozinha-usado-na-producao-de-biodiesel.png";
+import img3 from "../assets/images/notice_tribunadosertao.com.br-oleo-de-cozinha-descartado-de-forma-irregular-ameaca-solo-e-lencois-freaticos.png";
+import img4 from "../assets/images/tip_sudema.pb.gov.br-descarte-incorreto-do-oleo-de-cozinha-contamina-o-meio-ambiente-saiba-o-que-fazer.png";
+
+const newsItems = [
+  {
+    image: img1,
+    title: "Título de exemplo para esta notícia impactante",
+    info: "15 Out 2023 • Notícia",
+    description:
+      "Uma breve descrição explicativa sobre a notícia, dando um pequeno contexto do que o usuário vai ler se clicar em saiba mais.",
+    link: "#",
+    tagColor: "brand-green",
+  },
+  {
+    image: img2,
+    title: "Outro título de exemplo para artigo",
+    info: "20 Out 2023 • Artigo",
+    description:
+      "Uma breve descrição explicativa sobre a notícia, dando um pequeno contexto do que o usuário vai ler se clicar em saiba mais.",
+    link: "#",
+    tagColor: "brand-yellow",
+  },
+  {
+    image: img3,
+    title: "Mais um título de exemplo interessante",
+    info: "05 Nov 2023 • Notícia",
+    description:
+      "Uma breve descrição explicativa sobre a notícia, dando um pequeno contexto do que o usuário vai ler se clicar em saiba mais.",
+    link: "#",
+    tagColor: "brand-green",
+  },
+  {
+    image: img4,
+    title: "Exemplo de título de dica prática",
+    info: "10 Nov 2023 • Dica",
+    description:
+      "Uma breve descrição explicativa sobre a dica, dando um pequeno contexto do que o usuário vai ler se clicar em saiba mais.",
+    link: "#",
+    tagColor: "charcoal",
+  },
+];
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<section class="news-section" id="noticias">
+  <div class="news-container">
+    <div class="news-header text-center">
+      <h2 class="section-title">Notícias e Informações</h2>
+      <p class="section-subtitle">
+        Fique por dentro das novidades, dicas e artigos sobre sustentabilidade.
+      </p>
+    </div>
+
+    <div class="slider-wrapper">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          {
+            newsItems.map((item, index) => (
+              <article class="news-card swiper-slide" data-index={index}>
+                <div class="card-image-wrapper">
+                  <Image src={item.image} alt={item.title} class="card-image" />
+                </div>
+
+                <div class="card-content">
+                  <h3 class="card-title">{item.title}</h3>
+                  <span class="card-date">
+                    {item.info.replace("•", "-")}
+                  </span>
+                  <p class="card-description">{item.description}</p>
+
+                  <a href={item.link} class="card-link">
+                    Saiba mais
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @import "../styles/components-styles/news_section.css";
+</style>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="../scripts/news_section.js"></script>
