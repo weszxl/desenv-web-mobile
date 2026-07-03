@@ -19,7 +19,6 @@
   padding: 0 1.5rem;
 }
 
-/* Header */
 .blog-header-container {
   margin-bottom: 2rem;
   border-bottom: 2px solid var(--brand-green);
@@ -54,7 +53,6 @@
   margin: 0;
 }
 
-/* Filters */
 .blog-filters {
   display: flex;
   gap: 1rem;
@@ -97,7 +95,6 @@
   }
 }
 
-/* Card */
 .blog-card {
   display: flex;
   flex-direction: column;
@@ -122,7 +119,7 @@
 @media (min-width: 640px) {
   .blog-image-wrapper {
     width: 35%;
-    aspect-ratio: 1/1; /* Or whatever fits best */
+    aspect-ratio: 1/1;
   }
 }
 

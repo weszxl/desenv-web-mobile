@@ -14,68 +14,95 @@ const newsItems = [
   {
     image: img1,
     title: "Descarte incorreto de óleo causa entupimentos",
-    info: "15 Out 2023 - Notícia",
+    info: "10 Mar 2026 - Notícia",
     description:
-      "Uma breve descrição explicativa sobre a notícia, dando um pequeno contexto do que o usuário vai ler se clicar em saiba mais.",
-    link: "#",
+      "Descubra como o descarte inadequado de óleo de cozinha nas pias e ralos está causando problemas crônicos nas redes de esgoto e gerando prejuízos.",
+    link: "https://gazeta24horasrio.com.br/2026/03/14/descarte-de-oleo-de-cozinha-ainda-causa-entupimentos-nas-cidades",
   },
   {
     image: img2,
     title: "Pesquisa indica resultados positivos na produção de biodiesel",
-    info: "20 Out 2023 - Artigo",
+    info: "11 Jan 2026 - Artigo",
     description:
-      "Uma breve descrição explicativa sobre a notícia, dando um pequeno contexto do que o usuário vai ler se clicar em saiba mais.",
-    link: "#",
+      "Estudos recentes demonstram a viabilidade e os benefícios crescentes de se utilizar óleo residual para impulsionar a matriz de energia sustentável.",
+    link: "https://globorural.globo.com/biocombustiveis/noticia/2026/01/pesquisa-indica-resultados-positivos-do-oleo-de-cozinha-usado-na-producao-de-biodiesel.ghtml",
   },
   {
     image: img3,
     title: "Óleo descartado ameaça lençóis freáticos",
-    info: "05 Nov 2023 - Notícia",
+    info: "11 jun 2026 - Notícia",
     description:
-      "Uma breve descrição explicativa sobre a notícia, dando um pequeno contexto do que o usuário vai ler se clicar em saiba mais.",
-    link: "#",
+      "O descarte irregular no solo tem um impacto direto nos aquíferos, comprometendo seriamente o abastecimento de água potável em diversas regiões.",
+    link: "https://www.tribunadosertao.com.br/geral/2026/06/11/919445-oleo-de-cozinha-descartado-de-forma-irregular-ameaca-solo-e-lencois-freaticos",
   },
   {
     image: img4,
     title: "Descarte incorreto contamina o meio ambiente",
-    info: "10 Nov 2023 - Dica",
+    info: "16 Ago 2022 - Dica",
     description:
-      "Uma breve descrição explicativa sobre a dica, dando um pequeno contexto do que o usuário vai ler se clicar em saiba mais.",
-    link: "#",
+      "Veja os impactos diretos do descarte inadequado na natureza e confira um guia rápido com as melhores atitudes para adotar no seu dia a dia.",
+    link: "https://sudema.pb.gov.br/noticias/descarte-incorreto-do-oleo-de-cozinha-contamina-o-meio-ambiente-saiba-o-que-fazer",
   },
   {
     image: img5,
     title: "Como o óleo de cozinha deve ser descartado",
-    info: "12 Nov 2023 - Dica",
+    info: "24 Mar 2026 - Dica",
     description:
       "Aprenda o passo a passo correto para armazenar e reciclar seu óleo de fritura em casa.",
-    link: "#",
+    link: "https://binatural.com.br/como-o-oleo-de-cozinha-deve-ser-descartado/",
   },
   {
     image: img6,
     title: "Cartilha ensina a usar e descartar óleo de cozinha",
-    info: "18 Nov 2023 - Dica",
+    info: "20 Dez 2025 - Dica",
     description:
       "Novos materiais educativos ajudam a conscientizar sobre o processo de reciclagem do óleo vegetal.",
-    link: "#",
+    link: "https://ciclovivo.com.br/mao-na-massa/faca-voce-mesmo/cartilha-ensina-a-usar-e-descartar-oleo-de-cozinha/",
   },
   {
     image: img7,
     title: "Demanda da indústria de biodiesel por óleo usado dispara",
-    info: "25 Nov 2023 - Notícia",
+    info: "13 Nov 2023 - Notícia",
     description:
       "O setor de biocombustíveis registra um aumento expressivo na procura por resíduos residenciais.",
-    link: "#",
+    link: "https://agronoticia.com.br/noticia/22110/demanda-da-industria-de-biodiesel-por-oleo-de-cozinha-usado-dispara.html",
   },
   {
     image: img8,
     title: "Óleo usado ganha força na produção de biodiesel",
-    info: "02 Dez 2023 - Notícia",
+    info: "14 Nov 2023 - Notícia",
     description:
       "Mercado se aquece e a coleta seletiva de óleo de cozinha se torna cada vez mais lucrativa e sustentável.",
-    link: "#",
+    link: "https://globorural.globo.com/agricultura/noticia/2023/11/demanda-da-industria-de-biodiesel-por-oleo-de-cozinha-usado-dispara.ghtml",
   },
 ];
+
+const monthMap = {
+  jan: 0,
+  fev: 1,
+  mar: 2,
+  abr: 3,
+  mai: 4,
+  jun: 5,
+  jul: 6,
+  ago: 7,
+  set: 8,
+  out: 9,
+  nov: 10,
+  dez: 11,
+};
+
+newsItems.sort((a, b) => {
+  const parseDate = (infoStr) => {
+    const datePart = infoStr.split("-")[0].trim().toLowerCase();
+    const parts = datePart.split(" ");
+    const day = parseInt(parts[0], 10);
+    const month = monthMap[parts[1]];
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day).getTime();
+  };
+  return parseDate(b.info) - parseDate(a.info);
+});
 ---
 
 <section class="news-section" id="noticias">
@@ -136,7 +163,10 @@ const newsItems = [
       }
     </div>
 
-    <div class="load-more-container" style="margin-top: 3rem; display: flex; justify-content: center;">
+    <div
+      class="load-more-container"
+      style="margin-top: 3rem; display: flex; justify-content: center;"
+    >
       <button class="filter-btn" id="load-more-btn">Exibir mais</button>
     </div>
   </div>

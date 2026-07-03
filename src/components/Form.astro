@@ -34,34 +34,65 @@ const whatsappNumber =
 
       <div class="form-page-content">
         <div class="form-card">
-          <form id="contact-form" data-whatsapp={whatsappNumber} data-validate="true" data-submit-type="whatsapp">
+          <form
+            id="contact-form"
+            data-whatsapp={whatsappNumber}
+            data-validate="true"
+            data-submit-type="whatsapp"
+          >
             <div class="form-row">
               <div class="form-group flex-1">
                 <label for="name" class="form-label">Nome <span>*</span></label>
-                <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome completo" required />
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-control"
+                  placeholder="Seu nome completo"
+                  required
+                />
                 <span class="error-text">Preencha este campo</span>
               </div>
 
               <div class="form-group flex-1">
-                <label for="phone" class="form-label">Número <span>*</span></label>
-                <input type="tel" id="phone" name="phone" class="form-control" placeholder="(00) 00000-0000" required />
+                <label for="phone" class="form-label"
+                  >Número <span>*</span></label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="form-control"
+                  placeholder="(00) 00000-0000"
+                  required
+                />
                 <span class="error-text">Telefone inválido</span>
               </div>
             </div>
 
             <div class="form-group">
               <label for="email" class="form-label">E-mail</label>
-              <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="seu@email.com"
+              />
               <span class="error-text">Formato de e-mail inválido</span>
             </div>
 
             <div class="form-group">
-              <label for="subject" class="form-label">Assunto <span>*</span></label>
+              <label for="subject" class="form-label"
+                >Assunto <span>*</span></label
+              >
               <select id="subject" name="subject" class="form-control" required>
                 <option value="" disabled selected>Selecione uma opção</option>
                 <option value="agendar_coleta">Agendar coleta</option>
                 <option value="duvida">Dúvida</option>
-                <option value="reclamacao_sugestao">Fazer reclamação ou sugestão</option>
+                <option value="reclamacao_sugestao"
+                  >Fazer reclamação ou sugestão</option
+                >
                 <option value="parceria">Parceria</option>
                 <option value="outro">Outro</option>
               </select>
@@ -71,9 +102,17 @@ const whatsappNumber =
             <div id="agendar-fields" class="conditional-field flex-column">
               <div class="form-row">
                 <div class="form-group flex-1">
-                  <label for="collection-type" class="form-label">Tipo de Coleta <span>*</span></label>
-                  <select id="collection-type" name="collection-type" class="form-control">
-                    <option value="" disabled selected>Selecione o tipo de coleta</option>
+                  <label for="collection-type" class="form-label"
+                    >Tipo de Coleta <span>*</span></label
+                  >
+                  <select
+                    id="collection-type"
+                    name="collection-type"
+                    class="form-control"
+                  >
+                    <option value="" disabled selected
+                      >Selecione o tipo de coleta</option
+                    >
                     <option value="comercial">Comercial</option>
                     <option value="residencial">Residencial</option>
                     <option value="restaurante">Restaurante</option>
@@ -81,38 +120,79 @@ const whatsappNumber =
                   </select>
                   <span class="error-text">Selecione uma opção</span>
                 </div>
-                
+
                 <div class="form-group flex-1">
-                  <label for="liters" class="form-label">Quantidade de litros <span>*</span></label>
-                  <input type="number" id="liters" name="liters" class="form-control" placeholder="Ex: 50" min="1" />
+                  <label for="liters" class="form-label"
+                    >Quantidade de litros <span>*</span></label
+                  >
+                  <input
+                    type="number"
+                    id="liters"
+                    name="liters"
+                    class="form-control"
+                    placeholder="Ex: 50"
+                    min="1"
+                  />
                   <span class="error-text">Preencha este campo</span>
                 </div>
               </div>
 
               <div class="form-row address-row">
                 <div class="form-group flex-2">
-                  <label for="address" class="form-label">Endereço (Rua/Av, Bairro, Cidade) <span>*</span></label>
-                  <input type="text" id="address" name="address" class="form-control" placeholder="Sua rua, bairro, cidade" />
+                  <label for="address" class="form-label"
+                    >Endereço (Rua/Av, Bairro, Cidade) <span>*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    class="form-control"
+                    placeholder="Sua rua, bairro, cidade"
+                  />
                   <span class="error-text">Preencha este campo</span>
                 </div>
 
                 <div class="form-group flex-1">
-                  <label for="address-number" class="form-label">Nº <span>*</span></label>
-                  <input type="text" id="address-number" name="address-number" class="form-control" placeholder="Número" />
+                  <label for="address-number" class="form-label"
+                    >Nº <span>*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="address-number"
+                    name="address-number"
+                    class="form-control"
+                    placeholder="Número"
+                  />
                   <span class="error-text">Preencha este campo</span>
                 </div>
               </div>
             </div>
 
             <div class="form-group conditional-field" id="message-group">
-              <label for="message" class="form-label" id="message-label">Mensagem <span id="message-required-span">*</span></label>
-              <textarea id="message" name="message" class="form-control" placeholder="Escreva sua mensagem aqui..." required></textarea>
+              <label for="message" class="form-label" id="message-label"
+                >Mensagem <span id="message-required-span">*</span></label
+              >
+              <textarea
+                id="message"
+                name="message"
+                class="form-control"
+                placeholder="Escreva sua mensagem aqui..."
+                required></textarea>
               <span class="error-text">Preencha este campo</span>
             </div>
 
             <button type="submit" class="form-submit-btn">
               Enviar Mensagem
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>

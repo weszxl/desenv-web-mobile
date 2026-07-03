@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const litersInput = document.getElementById("liters");
   const addressInput = document.getElementById("address");
   const addressNumberInput = document.getElementById("address-number");
-  
+
   const messageGroup = document.getElementById("message-group");
   const messageInput = document.getElementById("message");
   const messageLabelSpan = document.getElementById("message-required-span");
@@ -25,40 +25,33 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (val === "agendar_coleta") {
-        // Show collection type & address
         collectionTypeGroup.classList.add("active");
         collectionTypeSelect.setAttribute("required", "required");
         litersInput.setAttribute("required", "required");
         addressInput.setAttribute("required", "required");
         addressNumberInput.setAttribute("required", "required");
-        
-        // Show message but optional
+
         messageGroup.classList.add("active");
         messageInput.removeAttribute("required");
         messageLabelSpan.style.display = "none";
-        
-        // Update label
+
         messageLabel.innerHTML = 'Instruções para coleta';
       } else {
-        // Hide collection type & address
         collectionTypeGroup.classList.remove("active");
         collectionTypeSelect.removeAttribute("required");
         litersInput.removeAttribute("required");
         addressInput.removeAttribute("required");
         addressNumberInput.removeAttribute("required");
-        
-        // reset values
+
         collectionTypeSelect.value = "";
         litersInput.value = "";
         addressInput.value = "";
         addressNumberInput.value = "";
-        
-        // Show message as required
+
         messageGroup.classList.add("active");
         messageInput.setAttribute("required", "required");
         messageLabelSpan.style.display = "inline";
-        
-        // Update label
+
         messageLabel.innerHTML = 'Mensagem <span id="message-required-span">*</span>';
       }
     });
