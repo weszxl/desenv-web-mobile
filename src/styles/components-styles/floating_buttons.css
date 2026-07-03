@@ -1,18 +1,38 @@
-.floating-wrapper {
-  position: fixed;
-  bottom: 2rem;
-  right: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  z-index: 90;
+/**
+ * Estilos para o componente FloatingButtons.astro.
+ * 
+ * Este arquivo CSS é responsável pela aparência e posicionamento dos botões flutuantes
+ * (como o botão de WhatsApp e o botão de "Voltar ao topo").
+ * 
+ * Ele inclui:
+ * - Posicionamento fixo na tela para manter os botões sempre visíveis após o scroll.
+ * - Animações suaves de surgimento (com efeito "bounce") e de hover.
+ * - Estilização comum de Floating Action Buttons (FAB).
+ */
 
+/* =========================================
+   Container Principal (Wrapper)
+   ========================================= */
+
+/* Container que envolve todos os botões flutuantes */
+.floating-wrapper {
+  position: fixed; /* Fixa o container na janela do navegador, ignorando a rolagem */
+  bottom: 2rem; /* Distância da parte inferior da tela */
+  right: 1.5rem; /* Distância da borda direita da tela */
+  display: flex; /* Utilizado para empilhar os botões */
+  flex-direction: column; /* Coloca um botão em cima do outro */
+  align-items: center; /* Centraliza os botões horizontalmente no container */
+  gap: 1rem; /* Espaçamento vertical entre os botões */
+  z-index: 90; /* Garante que ficará acima de quase todo o conteúdo da página */
+
+  /* Transições para quando a classe .hidden é removida/adicionada.
+     A curva cubic-bezier cria um leve efeito de "salto" (bounce) ao aparecer. */
   transition:
     transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     opacity 0.5s ease;
 }
 
+/* Ajusta o posicionamento em telas maiores (tablets/desktops) para ficar mais afastado da borda */
 @media (min-width: 768px) {
   .floating-wrapper {
     bottom: 2.5rem;
@@ -20,53 +40,75 @@
   }
 }
 
+/* Estado oculto: movimenta os botões para baixo (fora de visão inicial) e deixa invisível */
 .floating-wrapper.hidden {
-  transform: translateY(120px);
-  opacity: 0;
-  pointer-events: none;
+  transform: translateY(120px); /* Joga o elemento 120 pixels para baixo */
+  opacity: 0; /* Torna totalmente transparente */
+  pointer-events: none; /* Previne cliques acidentais enquanto estiver invisível */
 }
 
+/* =========================================
+   Estilo Base dos Botões Flutuantes (FAB)
+   ========================================= */
+
+/* Classe base compartilhada por todos os botões flutuantes (Floating Action Button) */
 .fab {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 50%; /* Faz o botão ser perfeitamente redondo */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Sombra suave para dar profundidade e destacá-lo do fundo */
   cursor: pointer;
+  
+  /* Transições suaves para os estados de interação (hover/focus) */
   transition:
     transform 0.2s ease,
     background-color 0.2s ease,
     box-shadow 0.2s ease;
-  border: none;
-  outline: none;
+  
+  border: none; /* Remove a borda padrão de botões HTML */
+  outline: none; /* Remove a linha de foco externa padrão (cuidado com acessibilidade, ideal ter alternative de focus) */
 }
 
+/* Efeito quando o mouse passa sobre qualquer botão flutuante */
 .fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1); /* Aumenta o tamanho do botão em 10% */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Torna a sombra maior/mais escura para aumentar a sensação de elevação */
 }
 
+/* =========================================
+   Estilos Específicos: Botão do WhatsApp
+   ========================================= */
+
+/* Estilização exclusiva do botão principal (WhatsApp) */
 .btn-whatsapp {
-  width: 60px;
+  width: 60px; /* Um pouco maior para ter mais destaque */
   height: 60px;
-  background-color: var(--brand-green);
+  background-color: var(--brand-green); /* Cor de fundo principal da marca / verde WhatsApp */
   padding: 0;
-  overflow: hidden;
+  overflow: hidden; /* Garante que a imagem dentro não vaze do formato circular */
 }
 
+/* Ajuste da imagem (ícone) dentro do botão do WhatsApp */
 .btn-whatsapp img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Faz a imagem preencher todo o espaço disponível mantendo a proporção */
 }
 
+/* =========================================
+   Estilos Específicos: Botão "Voltar ao Topo"
+   ========================================= */
+
+/* Estilização exclusiva do botão secundário (Voltar ao Topo) */
 .btn-top {
-  width: 44px;
+  width: 44px; /* Um pouco menor para não competir com o WhatsApp */
   height: 44px;
-  background-color: var(--bg-white);
-  color: var(--brand-gray);
+  background-color: var(--bg-white); /* Fundo branco para diferenciar */
+  color: var(--brand-gray); /* Cor do ícone (SVG) interno */
 }
 
+/* Efeito hover apenas na cor do ícone do botão "Voltar ao topo" */
 .btn-top:hover {
-  color: var(--brand-green);
+  color: var(--brand-green); /* Ícone fica verde ao interagir */
 }

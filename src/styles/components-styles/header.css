@@ -1,21 +1,43 @@
+/**
+ * Estilos para o componente Header.astro (Barra de Navegação).
+ * 
+ * Este arquivo CSS é responsável pela aparência do cabeçalho do site, incluindo:
+ * - Fixação da barra no topo da tela (position: fixed).
+ * - Transições de estado (fundo transparente inicial vs. fundo sólido verde ao rolar a tela).
+ * - Alternância entre duas versões de logotipo (V1 clara e V2 escura/invertida).
+ * - Estilização responsiva dos links de navegação (Desktop vs Mobile).
+ * - Comportamento e estilo do menu hambúrguer para dispositivos móveis.
+ */
+
+/* =========================================
+   Container Principal (Navbar)
+   ========================================= */
+
+/* Classe base da barra de navegação */
 .navbar {
-  position: fixed;
+  position: fixed; /* Fixa no topo, acompanhando o scroll da janela */
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 50; /* Garante que fique acima da maioria do conteúdo (como a seção FAQ) */
+  
+  /* Transição suave ao mudar a cor de fundo, a sombra e a posição vertical */
   transition:
     background-color 0.4s ease,
-    box-shadow 0.4s ease;
-  background-color: transparent;
+    box-shadow 0.4s ease,
+    transform 0.4s ease; 
+    
+  background-color: transparent; /* Transparente quando no topo absoluto da página */
   font-family: var(--font-sans);
 }
 
+/* Quando o menu mobile está aberto, arredonda os cantos inferiores do bloco da barra */
 .navbar.menu-open {
   border-bottom-left-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
 }
 
+/* Remove o arredondamento em telas maiores (tablets+), pois o menu mobile não é utilizado lá */
 @media (min-width: 768px) {
   .navbar.menu-open {
     border-bottom-left-radius: 0;
@@ -23,49 +45,65 @@
   }
 }
 
+/* Classe aplicada via JS ao rolar a página para baixo. Oculta a barra movendo-a para cima */
 .navbar.hidden-nav {
-  transform: translateY(-100%);
+  transform: translateY(-100%); /* Desliza 100% do seu próprio tamanho para fora da tela */
 }
 
+/* Classe aplicada via JS quando o usuário sai do topo absoluto (scrollY > 50) */
 .navbar.scrolled {
-  background-color: var(--brand-green);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--brand-green); /* Fundo sólido verde */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave para destacar do conteúdo subjacente */
 }
 
+/* Container interno que limita a largura do conteúdo da navbar e alinha os itens */
 .nav-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 1rem 1.5rem;
-  display: flex;
+  display: flex; /* Distribui logo, links e botões na mesma linha horizontal */
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Afasta a logo para a esquerda e os botões para a direita */
 }
 
+/* =========================================
+   Logomarcas (Alternância)
+   ========================================= */
+
+/* Envolve o logotipo, removendo formatações de link (sublinhado) */
 .nav-logo {
   display: flex;
   align-items: center;
   text-decoration: none;
 }
 
+/* Tamanho base compartilhado para ambas as versões do logo */
 .logo-default,
 .logo-scrolled {
   height: 48px;
   width: auto;
-  object-fit: contain;
+  object-fit: contain; /* Mantém proporção da imagem */
 }
 
+/* Oculta o logo V2 (usado no fundo verde) por padrão */
 .logo-scrolled {
   display: none;
 }
 
+/* Quando a navbar ganha a classe 'scrolled', inverte a exibição das logos */
 .navbar.scrolled .logo-default {
-  display: none;
+  display: none; /* Esconde logo V1 (projetada para fundo claro) */
 }
 
 .navbar.scrolled .logo-scrolled {
-  display: block;
+  display: block; /* Exibe logo V2 (projetada para fundo verde escuro) */
 }
 
+/* =========================================
+   Navegação Desktop
+   ========================================= */
+
+/* Lista de links principal. Inicia invisível (display: none) no mobile (Mobile First) */
 .nav-links-desktop {
   display: none;
   align-items: center;
@@ -75,41 +113,47 @@
   padding: 0;
 }
 
+/* Exibe a lista de links apenas a partir de tablets (768px) */
 @media (min-width: 768px) {
   .nav-links-desktop {
     display: flex;
   }
 }
 
+/* Estilo base de cada item de navegação no menu desktop */
 .nav-link {
   text-decoration: none;
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--charcoal);
+  color: var(--charcoal); /* Cor escura adequada para fundo claro/transparente inicial */
   transition: color 0.3s;
 }
 
+/* Interação de hover/active nos links na barra em seu estado transparente inicial */
 .nav-link:hover,
 .nav-link:active {
   color: var(--brand-green);
 }
 
+/* Quando a barra rola e fica verde (scrolled), muda a cor padrão dos links para branco para manter legibilidade */
 .navbar.scrolled .nav-link {
   color: var(--bg-white);
 }
 
+/* Interação de hover nos links quando a barra está verde: as letras ficam amarelas */
 .navbar.scrolled .nav-link:hover,
 .navbar.scrolled .nav-link:active {
   color: var(--brand-yellow);
 }
 
+/* Botão principal de ação (Call to Action) versão Desktop */
 .btn-cta-desktop {
-  display: none;
+  display: none; /* Invisível no mobile */
   background-color: var(--brand-green);
   color: var(--bg-white);
   height: 48px;
   padding: 0 1.5rem;
-  border-radius: 9999px;
+  border-radius: 9999px; /* Arredondamento em formato de pílula */
   font-weight: 700;
   font-size: 0.9375rem;
   text-decoration: none;
@@ -119,6 +163,7 @@
     transform 0.2s;
 }
 
+/* Exibe o botão CTA a partir de resoluções tablet */
 @media (min-width: 768px) {
   .btn-cta-desktop {
     display: inline-flex;
@@ -127,60 +172,76 @@
   }
 }
 
+/* Efeito sutil de aumento de tamanho (zoom) no botão ao interagir com o mouse */
 .btn-cta-desktop:hover {
   transform: scale(1.02);
 }
 
+/* Se a barra está verde (scrolled), o fundo do CTA fica amarelo para gerar contraste e destacar do fundo */
 .navbar.scrolled .btn-cta-desktop {
   background-color: var(--brand-yellow);
   color: var(--bg-white);
 }
 
+/* =========================================
+   Menu Mobile e Botão Hambúrguer
+   ========================================= */
+
+/* Botão de abrir/fechar o menu para telas pequenas */
 .mobile-toggle {
-  display: block;
+  display: block; /* Exibido por padrão (mobile-first) */
   background: transparent;
   border: none;
-  color: var(--charcoal);
+  color: var(--charcoal); /* Cor inicial escura para o ícone SVG */
   cursor: pointer;
   padding: 0.5rem;
 }
 
+/* O ícone hambúrguer fica branco quando a barra ganha fundo verde */
 .navbar.scrolled .mobile-toggle {
   color: var(--bg-white);
 }
 
+/* Esconde o botão hambúrguer completamente no desktop (onde os links extensos já são visíveis) */
 @media (min-width: 768px) {
   .mobile-toggle {
     display: none;
   }
 }
 
+/* Define tamanho padrão para os SVGs injetados no botão (Hambúrguer e X) */
 .mobile-toggle svg {
   width: 28px;
   height: 28px;
 }
 
+/* Utilitário auxiliar para alternância visual de elementos via JS (ex: fechar ícone) */
 .hidden {
   display: none;
 }
 
+/* Container branco que suspende os links no ambiente Mobile */
 .mobile-menu {
-  display: none;
+  display: none; /* Inicialmente recolhido/invisível */
   background-color: var(--bg-white);
   border-bottom-left-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Gera sensação de menu suspenso em camadas */
 }
 
+/* Se o usuário abrir o menu enquanto a página já estiver rolada (barra verde), 
+   o menu assume a cor verde para casar com a barra superior */
 .navbar.scrolled .mobile-menu {
   background-color: var(--brand-green);
-  box-shadow: none;
+  box-shadow: none; /* Remove a sombra caso prefira um design flat integrado com a barra superior */
 }
 
+/* Classe ativadora de visibilidade do menu, inserida/removida via JS no clique do Hambúrguer */
 .mobile-menu.open {
   display: block;
 }
 
+/* Ajustes de margens/respiros internos (padding) para o card do menu mobile */
 .mobile-menu-content {
   padding: 1.5rem;
   display: flex;
@@ -188,6 +249,7 @@
   gap: 1.25rem;
 }
 
+/* Container do tipo lista (ol/ul) englobando os itens no mobile */
 .mobile-nav-list {
   list-style: none;
   margin: 0;
@@ -197,19 +259,22 @@
   gap: 1.25rem;
 }
 
+/* Estilo individual para os links dentro do menu Mobile */
 .mobile-nav-link {
   text-decoration: none;
   color: var(--charcoal);
-  font-size: 1.125rem;
+  font-size: 1.125rem; /* Fonte um pouco maior que a do desktop para facilitar o clique no touch */
   font-weight: 500;
   transition: color 0.2s;
 }
 
+/* Retorno visual ao encostar (touch/hover) no item */
 .mobile-nav-link:hover,
 .mobile-nav-link:active {
   color: var(--brand-green);
 }
 
+/* Modificação de cor caso a navbar já esteja verde */
 .navbar.scrolled .mobile-nav-link {
   color: var(--bg-white);
 }
@@ -219,6 +284,7 @@
   color: var(--brand-yellow);
 }
 
+/* Botão CTA exibido ao final da lista de links no Mobile */
 .btn-cta-mobile {
   display: flex;
   align-items: center;
@@ -229,9 +295,10 @@
   border-radius: 9999px;
   font-weight: 700;
   text-decoration: none;
-  margin-top: 0.5rem;
+  margin-top: 0.5rem; /* Força um distanciamento final dos links textuais */
 }
 
+/* Quando o menu mobile ganha fundo verde, o CTA inverte a cor para o amarelo secundário */
 .navbar.scrolled .btn-cta-mobile {
   background-color: var(--brand-yellow);
   color: var(--bg-white);

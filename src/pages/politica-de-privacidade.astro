@@ -1,16 +1,35 @@
 ---
+/**
+ * Página: Política de Privacidade
+ * 
+ * O que faz:
+ * Renderiza a página legal e burocrática essencial para o compliance da empresa (LGPD).
+ * Ela injeta o "miolo" textual massivo no centro da página através do componente `PrivacyPolicySection`.
+ * 
+ * Onde é usado:
+ * É renderizada na rota oficial `/politica-de-privacidade`. Tipicamente lincada apenas no rodapé (Footer).
+ */
+
+// Esqueleto estrutural fundamental da página HTML
 import Layout from "../layouts/Layout.astro";
+
+// Cabeçalho e Rodapé padrão da interface
 import Header from "../components/Header.astro";
-import PrivacyPolicySection from "../components/PrivacyPolicySection.astro";
 import Footer from "../components/Footer.astro";
+
+// O bloco isolado que detém de fato os extensos artigos jurídicos da política
+import PrivacyPolicySection from "../components/PrivacyPolicySection.astro";
 ---
 
 <Layout>
+  <!-- Início: Barra de Navegação -->
   <Header />
 
+  <!-- Centro: Sinalização semântica (main) indicando aos robôs onde o texto jurídico será desenhado -->
   <main>
     <PrivacyPolicySection />
   </main>
 
+  <!-- Fim: Rodapé institucional e links vitais -->
   <Footer />
 </Layout>

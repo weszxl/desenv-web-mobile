@@ -1,16 +1,43 @@
 ---
+/**
+ * Página: Formulário (Contato)
+ * 
+ * O que faz:
+ * Monta a página dedicada de contato (Formulário complexo) com a estrutura padrão.
+ * Destaque técnico: Esta página passa uma string de texto personalizada ('Entre em Contato...') 
+ * através de uma propriedade (prop) direto para o componente <Layout>, o que permite alterar
+ * dinamicamente o título que aparece na aba do navegador do usuário.
+ * 
+ * Onde é usado:
+ * Acessível via rota no navegador pela URL `/formulario`.
+ */
+
+// Importa o esqueleto base de infraestrutura HTML
 import Layout from "../layouts/Layout.astro";
+
+// Importa os blocos modulares de construção visual
 import Header from "../components/Header.astro";
 import Form from "../components/Form.astro";
 import Footer from "../components/Footer.astro";
 import FloatingButtons from "../components/FloatingButtons.astro";
 ---
 
+<!-- O Layout recebe a prop mágica 'title' que irá sobrescrever a velha tag <title> do HTML Base -->
 <Layout title="Entre em Contato - Papa Óleo">
+  <!-- Navegação superior -->
   <Header />
+  
   <main>
+    <!-- Renderiza o componente massivo que detém a lógica visual de inputs e botões de envio -->
     <Form />
   </main>
+  
+  <!-- Encerramento -->
   <Footer />
+  
+  <!-- 
+    Botões flutuantes absolutos. Foram injetados nesta página especificamente
+    para que o usuário consiga chamar o WhatsApp ou os Filtros de Acessibilidade.
+  -->
   <FloatingButtons />
 </Layout>

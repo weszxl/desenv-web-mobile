@@ -1,7 +1,24 @@
+/**
+ * Estilos para a seção de Rodapé (Footer).
+ * Arquivo utilizado primariamente no componente Footer.astro.
+ * 
+ * Este arquivo CSS é responsável por estilizar:
+ * - O formulário de contato integrado no rodapé e seus estados (erro, sucesso, carregamento).
+ * - A grid de navegação com links úteis e informações de contato.
+ * - Os botões de mídias sociais e o logotipo.
+ * - A estrutura responsiva geral do rodapé.
+ */
+
+/* =========================================
+   Classes Utilitárias e Estados do Formulário
+   ========================================= */
+
+/* Classe genérica para ocultar elementos (usada nos feedbacks do form) */
 .hidden {
   display: none !important;
 }
 
+/* Container de mensagens de estado (Sucesso, Carregamento) */
 .state-message {
   display: flex;
   flex-direction: column;
@@ -9,9 +26,10 @@
   justify-content: center;
   text-align: center;
   padding: 3rem 1rem;
-  animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.5s ease; /* Animação de surgimento suave */
 }
 
+/* Estilo do título nas mensagens de estado */
 .state-message p {
   color: var(--brand-gray);
   font-family: var(--font-sans);
@@ -20,27 +38,31 @@
   margin: 1rem 0 0.5rem;
 }
 
+/* Estilo do subtítulo nas mensagens de estado */
 .state-message .small-text {
   font-size: 1rem;
   color: rgba(18, 18, 18, 0.6);
   font-weight: 400;
 }
 
+/* Spinner (círculo giratório) usado na tela de carregamento (Enviando...) */
 .spinner {
   width: 40px;
   height: 40px;
   border: 4px solid rgba(100, 180, 69, 0.2);
-  border-left-color: var(--brand-green);
+  border-left-color: var(--brand-green); /* Destaca uma das bordas para o efeito visual de giro */
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
+/* Animação infinita de rotação para o spinner */
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
+/* Animação suave para revelar elementos (Fade In) */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -52,6 +74,7 @@
   }
 }
 
+/* Ícone de check (sucesso) verde */
 .success-icon {
   width: 60px;
   height: 60px;
@@ -66,6 +89,7 @@
   margin-bottom: 1rem;
 }
 
+/* Caixa de aviso vermelha para mensagens de erro */
 .error-message {
   margin-top: 1.5rem;
   padding: 1rem;
@@ -79,20 +103,27 @@
   animation: fadeIn 0.3s ease;
 }
 
+/* =========================================
+   Container Principal do Rodapé
+   ========================================= */
+
+/* Bloco que envolve todo o rodapé */
 .footer-section {
   position: relative;
-  background-color: var(--bg-light);
+  background-color: var(--bg-light); /* Fundo claro padrão */
   padding-top: 4rem;
   padding-bottom: 2rem;
   overflow: hidden;
 }
 
+/* Aumenta o respiro no topo para dispositivos maiores */
 @media (min-width: 768px) {
   .footer-section {
     padding-top: 6rem;
   }
 }
 
+/* Container centralizador de conteúdo */
 .footer-container {
   position: relative;
   z-index: 10;
@@ -101,44 +132,56 @@
   padding: 0 1.5rem;
 }
 
+/* Cabeçalho da área de contato (Call To Action) */
 .footer-cta-header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
+/* Transforma o span num bloco para empilhar o título "PRONTO PARA RECICLAR?" */
 .block {
   display: block;
 }
 
+/* =========================================
+   Formulário de Contato
+   ========================================= */
+
+/* Centraliza e delimita a largura do formulário */
 .contact-wrapper {
   max-width: 56rem;
   margin: 0 auto 4rem;
 }
 
+/* Layout flexível para a estrutura do form */
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
+/* Grid que dispõe os inputs (Nome, E-mail, Telefone) */
 .inputs-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* Coluna única no mobile */
   gap: 1rem;
   width: 100%;
 }
 
+/* Altera para 3 colunas em telas de tablet para cima */
 @media (min-width: 768px) {
   .inputs-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
+/* Embalagem para cada input (importante para posicionar as mensagens de erro) */
 .input-group {
   width: 100%;
   position: relative;
 }
 
+/* Estilo padrão de cada campo de texto (input) */
 .contact-input {
   width: 100%;
   background-color: var(--bg-white);
@@ -153,38 +196,44 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
+/* Cor do texto descritivo dentro do campo (placeholder) */
 .contact-input::placeholder {
   color: rgba(18, 18, 18, 0.4);
 }
 
+/* Estilo verde brilhante ao focar (clicar) no campo */
 .contact-input:focus {
   border-color: var(--brand-green);
-  box-shadow: 0 0 0 3px rgba(100, 180, 69, 0.2);
+  box-shadow: 0 0 0 3px rgba(100, 180, 69, 0.2); /* Sombra mais espessa servindo de contorno (outline) */
 }
 
+/* Estilo vermelho caso a validação do campo falhe (via JS) */
 .contact-input.invalid {
   border-color: #ef4444;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
 }
 
+/* Texto de erro exibido abaixo do campo inválido */
 .error-text {
   color: #ef4444;
   font-size: 0.75rem;
   margin-top: 0.35rem;
-  display: none;
+  display: none; /* Escondido por padrão */
 }
 
+/* Se o input adjacente for inválido, exibe a mensagem de erro correspondente */
 .contact-input.invalid + .error-text {
   display: block;
 }
 
+/* Botão principal de enviar do formulário */
 .btn-submit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   padding: 1rem 2.5rem;
-  border-radius: 9999px;
+  border-radius: 9999px; /* Arredondamento em formato de pílula */
   font-weight: 700;
   font-size: 1.125rem;
   letter-spacing: 0.025em;
@@ -193,9 +242,10 @@
   border: none;
   background-color: var(--brand-green);
   color: var(--bg-white);
-  width: 100%;
+  width: 100%; /* Ocupa 100% no mobile */
 }
 
+/* No desktop, o botão centraliza e se adapta ao tamanho do texto */
 @media (min-width: 768px) {
   .btn-submit {
     width: fit-content;
@@ -203,16 +253,19 @@
   }
 }
 
+/* Efeito de aumento sutil ao passar o mouse */
 .btn-submit:hover {
   transform: scale(1.05);
 }
 
+/* Classe aplicada via JS enquanto os dados são enviados (feedback visual e trava de clique) */
 .btn-submit.submitting {
   opacity: 0.7;
-  pointer-events: none;
+  pointer-events: none; /* Impede envios múltiplos acidentais */
   animation: pulse 1s infinite alternate;
 }
 
+/* Animação suave piscante para o estado submitting */
 @keyframes pulse {
   from {
     opacity: 0.5;
@@ -222,6 +275,7 @@
   }
 }
 
+/* Nota explicativa abaixo do formulário */
 .contact-note {
   color: rgba(18, 18, 18, 0.6);
   font-family: var(--font-sans);
@@ -230,20 +284,27 @@
   margin-top: 1rem;
 }
 
+/* =========================================
+   Grid de Links do Rodapé
+   ========================================= */
+
+/* Grid que aloca as colunas de links (Navegação, Info, Contato) */
 .footer-links-grid {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(1, 1fr); /* 1 coluna mobile */
   gap: 2.5rem;
   padding: 2.5rem 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Linha sutil de divisão */
 }
 
+/* 3 Colunas no desktop */
 @media (min-width: 768px) {
   .footer-links-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
+/* Títulos de cada coluna de links */
 .link-title {
   font-weight: 900;
   font-family: var(--font-sans);
@@ -254,6 +315,7 @@
   letter-spacing: 0.05em;
 }
 
+/* Reset básico de lista */
 .link-list {
   list-style: none;
   display: flex;
@@ -263,6 +325,7 @@
   margin: 0;
 }
 
+/* Estilo individual para cada link/item de rodapé */
 .link-item {
   color: rgba(18, 18, 18, 0.6);
   font-family: var(--font-sans);
@@ -274,17 +337,24 @@
   display: inline-block;
 }
 
+/* Efeito ao passar o mouse: texto verde e se move levemente à direita (1 seta implícita) */
 .link-item:hover {
   color: var(--brand-green);
   transform: translateX(4px);
 }
 
+/* =========================================
+   Mídias Sociais e Fim do Rodapé
+   ========================================= */
+
+/* Container horizontal de botões sociais (WhatsApp, Insta) */
 .social-icons {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
 }
 
+/* Estilo flex center para alinhar a imagem de cada ícone social */
 .social-icon {
   display: flex;
   align-items: center;
@@ -295,13 +365,15 @@
 .social-icon img {
   width: 24px;
   height: 24px;
-  object-fit: contain;
+  object-fit: contain; /* Não deixa a logo social distorcer */
 }
 
+/* Move o ícone ligeiramente para cima no hover */
 .social-icon:hover {
   transform: translateY(-3px) scale(1.05);
 }
 
+/* Barra inferior contendo o logo e possível texto legal */
 .footer-bottom {
   position: relative;
   display: flex;
@@ -313,12 +385,14 @@
   gap: 1rem;
 }
 
+/* Ajustes de layout para telas maiores (separa copyright de logo, se for o caso) */
 @media (min-width: 768px) {
   .footer-bottom {
     flex-direction: row;
     justify-content: space-between;
   }
 
+  /* Caso tenha um copyright impresso, ele fica no meio da tela no desktop */
   .copyright {
     position: absolute;
     left: 50%;
@@ -326,6 +400,7 @@
   }
 }
 
+/* Caixa limitadora do logo institucional no final da página */
 .footer-logo {
   display: flex;
   align-items: center;
@@ -342,6 +417,7 @@
   transform: scale(1.05);
 }
 
+/* Estilização para o texto de direitos autorais (caso presente no HTML) */
 .copyright {
   color: rgba(18, 18, 18, 0.5);
   font-family: var(--font-sans);
@@ -350,6 +426,13 @@
   text-align: center;
 }
 
+/* =========================================
+   Honeypot (Antispam)
+   ========================================= */
+
+/* Oculta o campo armadilha para bots de spam. 
+   Não usa 'display: none', para não revelar o truque aos scripts automatizados,
+   em vez disso esconde visualmente reposicionando para fora da tela. */
 .honey-field {
   position: absolute;
   opacity: 0;

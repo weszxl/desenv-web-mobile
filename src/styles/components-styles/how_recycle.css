@@ -1,16 +1,34 @@
+/**
+ * Estilos para o componente HowRecycle.astro (Passo a passo de como reciclar).
+ * 
+ * Este arquivo CSS formata:
+ * - O layout base da seção (espaçamentos, fundo e posições relativas).
+ * - A estrutura flexível do layout em zigue-zague (texto/imagem alternados).
+ * - A tipografia dos títulos, subtítulos e texto explicativo de cada passo.
+ * - O emblema (badge) que numera os passos (ex: "PASSO 1").
+ * - O comportamento responsivo para empilhar itens em telas pequenas.
+ */
+
+/* =========================================
+   Container Base e Background
+   ========================================= */
+
+/* Bloco principal da seção "Como Reciclar" */
 .prep-section {
   position: relative;
-  padding: 4rem 0;
+  padding: 4rem 0; /* Espaçamento interno vertical no mobile */
   background-color: transparent;
   color: var(--charcoal);
 }
 
+/* Aumenta o espaçamento superior e inferior em telas maiores */
 @media (min-width: 768px) {
   .prep-section {
     padding: 6rem 0;
   }
 }
 
+/* Configuração inicial para elementos decorativos soltos no fundo (blobs) */
 .prep-blob-1 {
   top: 10%;
   left: 5%;
@@ -25,88 +43,119 @@
   height: 10rem;
 }
 
+/* =========================================
+   Estrutura e Cabeçalho (Header)
+   ========================================= */
+
+/* Container central que alinha e delimita a largura do conteúdo interno */
 .container {
   position: relative;
-  z-index: 10;
+  z-index: 10; /* Garante que os textos e passos fiquem por cima do fundo decorativo */
   max-width: 1024px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
+/* Título principal e subtítulo introdutório da seção */
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
+/* =========================================
+   Estrutura Flex (Layout Zig-Zag)
+   ========================================= */
+
+/* Invólucro (Wrapper) que engloba toda a lista de passos */
 .zigzag-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* No mobile, exibe um bloco abaixo do outro linearmente */
   gap: 2rem;
 }
 
+/* Aumenta a distância entre os blocos (linhas) de passo no desktop */
 @media (min-width: 768px) {
   .zigzag-wrapper {
     gap: 3rem;
   }
 }
 
+/* Bloco base (Linha) que representa um passo individual (texto + imagem) */
 .step-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Mobile first: texto e depois imagem empilhados na vertical */
   align-items: center;
   justify-content: center;
   gap: 2rem;
 }
 
+/* 
+  Adiciona uma linha divisória sutil abaixo de cada passo no celular, 
+  exceto no último passo (:not(:last-child)).
+*/
 .step-row:not(:last-child) {
   border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
   padding-bottom: 2rem;
 }
 
+/* Ajustes de flexbox para o layout em telas médias/grandes (desktop e tablets horizontais) */
 @media (min-width: 768px) {
   .step-row {
     gap: 2.5rem;
   }
 
+  /* Remove a linha divisória pontilhada em telas grandes (layout espalha mais a visão horizontalmente) */
   .step-row:not(:last-child) {
     border-bottom: none;
     padding-bottom: 0;
   }
 }
 
+/* 
+  Estilos aplicados condicionalmente via Javascript no Astro:
+  Alterna a ordem entre texto na esquerda/imagem na direita e vice-versa no desktop.
+*/
 @media (min-width: 768px) {
   .layout-card-left {
-    flex-direction: row;
+    flex-direction: row; /* Texto vem primeiro, depois a imagem (padrão visual ocidental ltr) */
   }
 
   .layout-card-right {
-    flex-direction: row-reverse;
+    flex-direction: row-reverse; /* Inverte a ordem flexível (Imagem renderiza antes, texto depois) */
   }
 }
 
+/* =========================================
+   Textos e Estilização do Cartão (Step)
+   ========================================= */
+
+/* Caixa (box) que envolve o distintivo numérico, título e descrição de um passo */
 .step-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  text-align: center; /* Centraliza o texto no mobile para visualização simétrica */
   width: 100%;
   max-width: 450px;
   transition: transform 0.3s ease;
 }
 
+/* No desktop, o conteúdo do texto deve se alinhar com as margens naturais (Esquerda ou Direita) */
 @media (min-width: 768px) {
   .step-content {
     width: 100%;
     max-width: 450px;
-    text-align: left;
+    text-align: left; /* Tira o texto do centro para maior legibilidade e fluidez de leitura contínua */
     align-items: flex-start;
   }
 }
 
+/* Efeito sutil de levantar o bloco inteiro do texto e título (hover state) */
 .step-content:hover {
   transform: translateY(-5px);
 }
 
+/* Título de cada passo específico (Ex: "Espere o óleo esfriar") */
 .step-title {
   font-size: 1.125rem;
   font-family: var(--font-sans);
@@ -122,12 +171,13 @@
   }
 }
 
+/* Distintivo com a indicação numérica do passo (Ex: "PASSO 1") */
 .step-badge {
   display: inline-flex;
   align-items: center;
   padding: 0.25rem 1rem;
-  border-radius: 999px;
-  background-color: rgba(65, 163, 76, 0.1);
+  border-radius: 999px; /* Formato pílula completa */
+  background-color: rgba(65, 163, 76, 0.1); /* Fundo verde super claro e translúcido (alfa 0.1) */
   color: var(--brand-green);
   font-weight: 700;
   font-size: 0.875rem;
@@ -135,11 +185,13 @@
   margin-bottom: 1rem;
 }
 
+/* Ponto estilizado visualmente antes da escrita de PASSO */
 .step-badge .dot {
   margin-right: 0.5rem;
   font-size: 1.2em;
 }
 
+/* Parágrafo explicativo da regra/ação técnica a ser feita no passo */
 .step-desc {
   font-size: 0.875rem;
   font-family: var(--font-sans);
@@ -148,6 +200,7 @@
   margin: 0;
 }
 
+/* Aumenta um pouco a fonte de leitura no desktop para garantir uma leitura menos cansativa na tela maior */
 @media (min-width: 768px) {
   .step-desc {
     font-size: 1rem;
@@ -155,11 +208,17 @@
   }
 }
 
+/* =========================================
+   Imagens dos Passos
+   ========================================= */
+
+/* Caixa (Wrapper) que envolve o arquivo SVG da ilustração, restringindo o tamanho máximo da imagem */
 .step-image-wrapper {
   width: 100%;
-  max-width: 150px;
+  max-width: 150px; /* Tamanho contido/reduzido para não ocupar a tela inteira do mobile */
 }
 
+/* Libera o tamanho da ilustração para ficar mais destacada quando houver tela horizontal sobrando (Desktop) */
 @media (min-width: 768px) {
   .step-image-wrapper {
     max-width: 250px;
@@ -169,6 +228,7 @@
   }
 }
 
+/* Impede a quebra de proporção geométrica da imagem importada dos assets */
 .step-image-wrapper img {
   width: 100%;
   height: auto;

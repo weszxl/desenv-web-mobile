@@ -1,12 +1,29 @@
+/**
+ * Estilos da Seção de Serviços (Service.astro).
+ * 
+ * Responsabilidades deste arquivo CSS:
+ * - Layout do Acordeão Responsivo: 
+ *   - No Mobile: Carrossel Horizontal simples utilizando o nativo "scroll-snap" para prender os cartões como um ímã.
+ *   - No Desktop: Acordeão de Expansão Hover complexo utilizando flex-grow animado (ex: de flex 1 para flex 2.2).
+ * - Tratamento contínuo de legibilidade (Overlay linear Gradiente Escuro automatizado por cima das fotos).
+ * - Revelação fluida e dinâmica de textos descritivos que nascem de max-height 0 para 250px quando em estado :active.
+ */
+
+/* =========================================
+   Container Principal da Seção
+   ========================================= */
+
+/* Bloco mãe de sustentação da seção de Serviços. Centraliza verticalmente e cria os imensos respiros visuais */
 .services-section {
   position: relative;
   display: flex;
   align-items: center;
   padding: 6rem 0 8rem;
-  background: var(--bg-light);
-  overflow: hidden;
+  background: var(--bg-light); /* Fundo em tom pastel cinza/gelo, contrastando com áreas brancas do site */
+  overflow: hidden; /* Guilhotina: corta brutalmente qualquer cartão solto que tente transbordar vazar pelas laterais puras da janela */
 }
 
+/* Limite máximo restritivo de largura, recriando as margens padronizadas do wireframe mesmo em monitores gigantescos (Ultra Wide) */
 .services-container {
   position: relative;
   z-index: 10;
@@ -16,137 +33,178 @@
   padding: 0 1.5rem;
 }
 
+/* Simples centralização visual do título principal ("Serviços de Coleta") e seu descritivo parceiro */
 .services-header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
+/* =========================================
+   Layout Mestre do Acordeão / Carrossel
+   ========================================= */
+
+/* 
+  Mobile First Hibrido: 
+  No celular inteiro funciona como um App Nativo (um carrossel que você arrasta maciamente com o polegar).
+  Baseia-se em "scroll-snap-type: x mandatory" para a tela "travar" magneticamente no meio exato do próximo cartão.
+*/
 .accordion-wrapper {
   display: flex;
   gap: 1rem;
 
+  /* Técnica agressiva e avançada para fazer a listagem de cartões ignorar (vazar) propositalmente o padding pai 
+     e encostar diretamente nas bordas de vidro cruas reais do celular */
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 
   padding: 0 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.5rem; /* Margem gorda extra no rodapé da listagem pro scrollbar horizontal não devorar a parte inferior da foto */
 
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  overflow-x: auto; /* Permite arrastar os dedos pros lados no celular */
+  scroll-snap-type: x mandatory; /* Eixo X (horizontal), parada obrigatória (mandatory) no ponto magnético do card */
   scroll-padding-left: 1.5rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch; /* Aplica uma rolagem fluida e inercial semelhante ao aplicativo nativo no iOS (iPhone) */
+  scrollbar-width: none; /* Ordena Firefox esconder a antiestética barra de rolagem */
 }
 
+/* Pseudoseletor: Ordena motores Webkit (Chrome, Edge, Safari) também ocultarem/dinamitarem visualmente a barra de rolagem */
 .accordion-wrapper::-webkit-scrollbar {
   display: none;
 }
 
+/* =========================================
+   Design Individual do Cartão (Acordeão)
+   ========================================= */
+
+/* Classe protetora da foto fotográfica real de fundo para o cartão. Precisa cobrir vorazmente 100% da div pai */
 .card-bg-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Recurso supremo de proporção: garante que a foto nunca achate ou distorça, apenas corta e joga fora os excessos */
   z-index: 0;
 }
 
+/* Estética primária estruturadora (caixa) de cada cartão de serviço */
 .accordion-card {
   position: relative;
-  border-radius: 2.25rem;
+  border-radius: 2.25rem; /* Cantos severamente arredondados (Design moderno/Apple) */
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  transition: all 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Um fino traço branco semitransparente emulando luz artificial incidindo na borda (Gloss) */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); /* Sombra difusa e pálida para gerar sensação 3D de elevação descolada do fundo gelo */
+  transition: all 0.4s cubic-bezier(0.25, 0.4, 0.25, 1); /* Animação hiper macia baseada em física pura (Cubic Bezier) executada apenas quando o card for expandido pelo CSS/JS */
 
-  flex: 0 0 92%;
+  /* Tamanhos fixos rígidos para domar a consistência do carrossel no celular */
+  flex: 0 0 92%; /* Exige que 1 cartão pegue quase toda a tela (92%), deixando apenas uma "pontinha" instigante do segundo cartão à vista do usuário */
   min-width: 290px;
   max-width: 420px;
   min-height: 460px;
-  height: 65vh;
+  height: 65vh; /* Altura elástica dinâmica que preenche de forma generosa a tela do smartphone sem estourar limites */
   max-height: 550px;
 
-  scroll-snap-align: start;
+  scroll-snap-align: start; /* É o ímã em si: o ponto exato onde a rolagem com o dedo vai travar para estacionar e alinhar o cartão */
 }
 
+/* 
+  A MAGIA (Transformação Completa e Radical):
+  O Layout Mobile entra em colapso e um Acordeão Expansivo Desktop toma conta.
+*/
 @media (min-width: 1024px) {
   .accordion-wrapper {
     width: 100%;
-    margin-left: 0;
+    margin-left: 0; /* Remove a margem maluca de 100vw adotada no mobile */
     padding: 0;
 
     flex-direction: row;
-    overflow-x: visible;
-    scroll-snap-type: none;
+    overflow-x: visible; /* Mata o scroll lateral e trava permanentemente os itens fixos */
+    scroll-snap-type: none; /* Mata os super imãs de rolagem mobile, o mouse reinará */
 
     min-height: 380px;
     height: 50vh;
     max-height: 500px;
   }
 
+  /* No PC, todos os cartões começam nascendo minúsculos, tímidos e apertados espremidos (flex: 1) dividindo precisamente o espaço igualmente entre os 4 */
   .accordion-card {
     flex: 1;
-    min-width: 0;
+    min-width: 0; /* Reseta as limitações mobile */
     max-width: none;
     height: 100%;
     scroll-snap-align: none;
   }
 
+  /* O pulo do gato astronômico: Apenas o cartão isolado que ganhar a medalha (classe 'active' fornecida pelo Javascript) receberá mais espaço devorador na tela (flex: 2.2) engolindo impiedosamente os outros irmãos */
   .accordion-card.active {
     flex: 2.2;
   }
 }
 
+/* =========================================
+   Película Escura Automatizada (Overlay)
+   ========================================= */
+
+/* Película negra sintética, quase opaca, que cobre a imagem original brutalmente para gerar o alto contraste necessário para leituras de textos brancos finos no mobile */
 .card-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(18, 18, 18, 0.75);
-  transition: background-color 0.4s ease;
+  background-color: rgba(18, 18, 18, 0.75); /* Escuro denso, padrão para mobile */
+  transition: background-color 0.4s ease; /* Prepara uma lenta transição caso a cor precise mudar num futuro click */
   z-index: 1;
 }
 
 @media (min-width: 1024px) {
+  /* No PC em estado de repouso (fechado flex 1), o cartão é irrelevante, fica MUITO escuro (0.8) em luto, pedindo para não chamar sua atenção desnecessariamente... */
   .card-overlay {
     background-color: rgba(18, 18, 18, 0.8);
   }
 
+  /* ...MAS quando finalmente ganha 'active' e acorda (expande gloriomente no hover flex 2.2), o CSS limpa o vidro! A opacidade clareia dramaticamente (para 0.4) para o humano poder contemplar a foto completa sob ela. */
   .accordion-card.active .card-overlay {
     background-color: rgba(18, 18, 18, 0.4);
   }
 }
 
+/* =========================================
+   Conteúdo Interno e Flutuante (Textos)
+   ========================================= */
+
+/* A div transparente protetora que carrega heroicamente os textos por cima do caos da overlay e da foto */
 .card-content {
   position: relative;
-  z-index: 2;
+  z-index: 2; /* Fica no topo da cadeia alimentar (acima do bg-image 0, e overlay 1) */
   height: 100%;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; /* Efeito separador brutal: O Título gruda e voa pro teto, O Texto/Botão despenca para o chão isolados. */
 }
 
+/* Agrupa intencionalmente Ícone Decorativo e Título (Esses guerreiros SEMPRE ficarão visíveis pra você saber do que se trata) */
 .card-top {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
+/* Quadrado estático flexbox isolado onde o ícone SVG amarelo de cada especialidade descansa confortavelmente */
 .card-icon {
   width: 3rem;
   height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Proibe sumariamente a div pai e navegadores crueis de tentar amassar, achatar ou esmagar este rico ícone circular */
 }
 
 .card-icon img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: contain; /* Proíbe o SVG de estourar a sua humilde div */
 }
 
+/* No desktop os ícones voam para o alto sozinhos, e o texto cai para baixo, quebrando de linha para sobreviver melhor espremido (largura estreita) */
 @media (min-width: 1024px) {
   .card-top {
     flex-direction: column;
@@ -160,6 +218,7 @@
   }
 }
 
+/* Título alvo impresso sempre em branco do Serviço especificado (Ex: "Coleta Residencial", "Coleta Indústrial") */
 .card-title {
   font-size: 1.25rem;
   font-family: var(--font-sans);
@@ -170,16 +229,21 @@
   line-height: 1.2;
 }
 
+/* Engorda sutilmente a fonte (Títulos) quando no desktop */
 @media (min-width: 768px) {
   .services-section {
-    padding: 6rem 0 10rem;
+    padding: 6rem 0 10rem; /* Margem extra grossa embaixo (bottom) */
   }
-
   .card-title {
     font-size: 1.375rem;
   }
 }
 
+/* =========================================
+   Área Oculta / Textos Reveláveis (Botão)
+   ========================================= */
+
+/* Comportamento Humilde: No celular (mobile-first real), o texto inferior e o botão verde já nascem soltos, plenamente visíveis e com total opacidade (1) sem necessitar intervenção */
 .card-bottom-reveal {
   display: flex;
   flex-direction: column;
@@ -190,12 +254,14 @@
     max-height 0.4s ease,
     margin 0.4s ease;
 
-  opacity: 1;
-  max-height: 250px;
-  transform: translateY(0);
+  opacity: 1; /* Nasce vivo */
+  max-height: 250px; /* Nasce espaçoso e com teto alto */
+  transform: translateY(0); /* Nasce já em sua posição natural e correta do mundo real */
   margin-top: 1rem;
 }
 
+/* Comportamento Parasitário/Hostil: No PC, ocorre uma cruel inversão de poderes para economizar espaço de tela! 
+   Todo aquele lindo conteúdo nasce sumariamente assassinado/oculto (0), violentamente achatado/enjaulado numa caixa irrisória (max-height 0) com um translateY empurrando-o miseravelmente e pesadamente para as profundezas */
 @media (min-width: 1024px) {
   .card-bottom-reveal {
     opacity: 0;
@@ -204,39 +270,44 @@
     margin-top: 0;
   }
 
+  /* O Resgate Triunfante: Quando, e somente QUANDO, o script injetar majestosamente 'active' no card principal no momento sagrado do hover, 
+     esses textos massacrados ressuscitarão incólumes nascendo num belíssimo e lento "fade-in", deslizando vagarosamente para cima vindo do pó. */
   .accordion-card.active .card-bottom-reveal {
     opacity: 1;
-    max-height: 250px;
-    transform: translateY(0);
+    max-height: 250px; /* Restitui generoso ar respirável */
+    transform: translateY(0); /* Cancela a força descendente e joga o texto pra posição oficial */
     margin-top: 1rem;
   }
 }
 
+/* O corpo de texto brando da descrição detalhada (O real "porquê" deste cartão existir) */
 .card-description {
   font-size: 0.9375rem;
-  color: #f3f4f6;
+  color: #f3f4f6; /* Quase um gelo branco. Cinza claro de altíssima escala luminosa, menos agressivo aos olhos, porém ainda de leiturabilidade divina em fundos trevosos */
   line-height: 1.5;
   font-family: var(--font-sans);
   margin: 0 0 1.25rem 0;
 }
 
+/* O Poderoso Botão Mestre central (Agendamento Expresso para fechar a jornada via WhatsApp API) */
 .btn-schedule {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   padding: 0.875rem 2rem;
-  border-radius: 9999px;
+  border-radius: 9999px; /* O clássico contemporâneo botão redondo "pílula gorda" (Pill Shape Button) */
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: 0.025em;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s; /* Somente avisa de transformação, pois o hover fará mágica exclusiva geométrica (evita repinturas inúteis de background na RAM) */
   border: none;
   background-color: var(--brand-green);
   color: var(--bg-white);
 }
 
+/* Pequeno e charmoso "susto/pulo" rápido ao esbarrar o mouse, provocando o extinto da caça do usuário em tentar clicar freneticamente (Escala bruta em 5%) */
 .btn-schedule:hover {
   transform: scale(1.05);
 }

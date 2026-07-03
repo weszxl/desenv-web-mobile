@@ -1,37 +1,72 @@
-:root {
-  /* Paleta de cores padronizada */
-  --brand-green: #64b445;
-  --brand-yellow: #FBB342;
-  --brand-gray: #555555;
-  --charcoal: #121212;
-  --bg-white: #ffffff;
-  --bg-light: #f0ece0;
+/**
+ * Estilos Globais do Projeto (global.css)
+ * 
+ * O que faz:
+ * Este é o coração visual do site. Ele define as variáveis de cores institucionais (CSS Custom Properties),
+ * a tipografia base, e as regras CSS de reset padrão.
+ * Além disso, contém utilitários globais de formatação (títulos e cores de texto) e as complexas animações
+ * artísticas que se repetem pelas páginas (bolhas flutuantes e efeito de ruído/grain).
+ * 
+ * Onde é usado:
+ * Importado diretamente no arquivo mestre (Layout.astro), aplicando suas regras e variáveis em 
+ * absolutamente TODAS as páginas geradas pelo sistema. Qualquer modificação aqui afetará o site inteiro.
+ */
 
+/* =========================================
+   Variáveis CSS (Design System)
+   ========================================= */
+:root {
+  /* Paleta de cores oficial da marca */
+  --brand-green: #64b445;   /* Verde Institucional principal */
+  --brand-yellow: #FBB342;  /* Amarelo de alerta/destaque/CTAs */
+  --brand-gray: #555555;    /* Cinza escuro neutro para textos/títulos */
+  --charcoal: #121212;      /* Preto suave (carvão) para textos de leitura fluida */
+  
+  /* Cores de fundo (Backgrounds) */
+  --bg-white: #ffffff;      /* Fundo primário limpo */
+  --bg-light: #f0ece0;      /* Fundo secundário terroso (creme/gelo) */
+
+  /* Tipografia oficial importada globalmente via Google Fonts (no Layout.astro) */
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+/* =========================================
+   Reset Básico e Comportamentos (CSS Reset)
+   ========================================= */
+
+/* Torna a rolagem gerada por âncoras internas (Links com #) suave e natural nativamente */
 html {
   scroll-behavior: smooth;
 }
 
+/* Zera margens padronizadas dos navegadores e define o cálculo seguro de bordas (border-box) */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* =========================================
+   Configurações Fundamentais do Corpo (Body)
+   ========================================= */
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-white);
   color: var(--charcoal);
+  /* Deixa as fontes vetorizadas muito mais nítidas, finas e antisserrilhadas nos sistemas Mac/iOS */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Previne que o layout quebre visualmente caso o usuário não tenha quase nada renderizado na tela */
   min-height: 100vh;
   min-width: 319px;
   overflow-x: auto;
 }
 
+/* =========================================
+   Classes Utilitárias de Cores
+   ========================================= */
 .text-brand-green {
   color: var(--brand-green);
 }
@@ -48,15 +83,22 @@ body {
   color: var(--charcoal);
 }
 
+/* =========================================
+   Estilização Global de Títulos Padronizados
+   ========================================= */
+
+/* Estilo mestre para os H2 (Títulos primários) de todas as seções. 
+   O uso da função clamp() permite uma tipografia fluida perfeita do celular (2.5rem) ao desktop (3rem) */
 .section-title {
   font-size: clamp(2.5rem, 5vw, 3rem);
   font-weight: 900;
   font-family: var(--font-sans);
   color: var(--brand-gray);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.025em; /* Aperta levemente a distância entre as letras para um formato moderno e aglutinado */
   margin: 0;
 }
 
+/* Estilo padrão para os subtítulos ou pequenos parágrafos explicativos abaixo dos grandes Títulos */
 .section-subtitle {
   font-size: clamp(1.125rem, 2vw, 1.25rem);
   font-family: var(--font-sans);
@@ -64,10 +106,15 @@ body {
   letter-spacing: -0.025em;
   padding-top: 0.5rem;
   line-height: 1.5;
-  max-width: 40rem;
+  max-width: 40rem; /* Limite de leitura vital: impede que a linha do texto se alongue ao infinito cansando os olhos num monitor Ultrawide */
   margin: 0 auto;
 }
 
+/* =========================================
+   Utilitários de Fundo (Backgrounds)
+   ========================================= */
+
+/* Fundo padronizado provendo um microscópico degradê esverdeado transversal no painel branco (Aumenta o Volume) */
 .bg-gradient-overlay {
   position: absolute;
   inset: 0;
@@ -75,80 +122,90 @@ body {
   z-index: 1;
 }
 
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translate3d(0, 0px, 0) rotate(0deg);
-  }
-
-  50% {
-    transform: translate3d(0, -20px, 0) rotate(3deg);
-  }
-}
-
-.bg-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  z-index: 1;
-}
-
-.bg-blob.blob-green {
-  background-color: rgba(100, 180, 69, 0.15);
-  animation: float 6s ease-in-out infinite;
-}
-
-.bg-blob.blob-yellow {
-  background-color: rgba(255, 190, 0, 0.1);
-  animation: float 8s ease-in-out infinite reverse;
-}
-
-@keyframes grain {
-
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-
-  10% {
-    transform: translate(-5%, -10%);
-  }
-
-  30% {
-    transform: translate(3%, -15%);
-  }
-
-  50% {
-    transform: translate(12%, 9%);
-  }
-
-  70% {
-    transform: translate(9%, 4%);
-  }
-
-  90% {
-    transform: translate(-1%, 7%);
-  }
-}
-
-.noise-overlay {
-  position: relative;
-}
-
-.noise-overlay::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  animation: grain 8s steps(10) infinite;
-  z-index: 50;
-}
-
+/* Container de bloqueio. Oculta magicamente os pedaços das "bolhas animadas" que tentarem ultrapassar os limites da div mãe */
 .continuous-bg {
   position: relative;
   overflow: hidden;
   background-color: var(--bg-white);
 }
+
+/* =========================================
+   Animações Globais: Bolhas Flutuantes (Blobs)
+   ========================================= */
+
+/* Motor gráfico da animação (Keyframes): forja uma subida sutil aliada a uma microscópica rotação (Efeito orgânico levitante) */
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -20px, 0) rotate(3deg);
+  }
+}
+
+/* A estrutura base circular das "manchas" artísticas de background */
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px); /* Ferramenta letal que derrete o círculo, transformando-o num raio amorfo e macio de luz */
+  z-index: 1;
+}
+
+/* Configuração do "raio" de luz Verde flutuando a cada 6s */
+.bg-blob.blob-green {
+  background-color: rgba(100, 180, 69, 0.15);
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Configuração do "raio" de luz Amarela. 
+   Usa 'reverse' e tempo assimétrico (8s) propositalmente, para que ela nunca flutue sincronizada de forma robótica com a mancha verde */
+.bg-blob.blob-yellow {
+  background-color: rgba(255, 190, 0, 0.1);
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+/* =========================================
+   Animações Globais: Filtro de Ruído Estático (Grain)
+   ========================================= */
+
+/* Movimenta freneticamente o eixo X/Y em curtas distâncias variadas ao longo do tempo emulando falha magnética retro (VHS/TV) */
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  30% {
+    transform: translate(3%, -15%);
+  }
+  50% {
+    transform: translate(12%, 9%);
+  }
+  70% {
+    transform: translate(9%, 4%);
+  }
+  90% {
+    transform: translate(-1%, 7%);
+  }
+}
+
+/* Adicionada aos elementos gigantes onde se deseja ter a textura tátil "orgânica" */
+.noise-overlay {
+  position: relative;
+}
+
+/* A pseudoclasse que materializa a camada invisível estática */
+.noise-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* Uma imagem gráfica vetorial (SVG) codificada violentamente em base64 bruto direto no CSS, gerando fractalNoise instantâneo poupando solicitações HTTP */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03; /* A opacidade é minúscula (3%), para dar um aspecto granulado "papel artesanal" luxuoso, não sujeira invasiva */
+  pointer-events: none; /* Propriedade divina: Sem ela, o usuário nunca conseguiria clicar num botão que estivesse por debaixo dessa película invisível de textura */
+  animation: grain 8s steps(10) infinite; /* Anima o noise em "pulos curtos" (steps), potencializando o efeito analógico rústico */
+  z-index: 50; 
+}

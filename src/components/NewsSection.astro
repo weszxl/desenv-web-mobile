@@ -1,6 +1,22 @@
 ---
+/**
+ * Componente: NewsSection.astro (Seção de Blog/Notícias)
+ * 
+ * O que faz:
+ * Renderiza uma seção de blog contendo notícias, dicas e artigos relacionados à reciclagem.
+ * Possui um array interno de notícias e realiza uma ordenação por data real (mais recentes primeiro)
+ * usando Javascript antes de renderizar os cartões em HTML.
+ * O componente também cria o menu de filtros (Categorias) e os botões "Exibir Mais".
+ * 
+ * Onde é usado:
+ * Normalmente é empregado na parte inferior da landing page (index.astro), 
+ * ajudando com SEO e mantendo os usuários engajados com atualizações.
+ */
+
+// Importa o otimizador nativo de imagens do Astro
 import { Image } from "astro:assets";
 
+// Importa manualmente cada capa de notícia a partir da pasta de assets
 import img1 from "../assets/images/notice_gazeta24horasrio.com.br-descarte-de-oleo-de-cozinha-ainda-causa-entupimentos-nas-cidades.png";
 import img2 from "../assets/images/notice_globorural.globo.com-pesquisa-indica-resultados-positivos-do-oleo-de-cozinha-usado-na-producao-de-biodiesel.png";
 import img3 from "../assets/images/notice_tribunadosertao.com.br-oleo-de-cozinha-descartado-de-forma-irregular-ameaca-solo-e-lencois-freaticos.png";
@@ -10,6 +26,11 @@ import img6 from "../assets/images/tip_ciclovivo.com.br-cartilha-ensina-a-usar-e
 import img7 from "../assets/images/notice_agronoticia.com.br-demanda-da-industria-de-biodiesel-por-oleo-de-cozinha-usado-dispara.png";
 import img8 from "../assets/images/notice_globorural.globo.com-demanda-da-industria-de-biodiesel-por-oleo-de-cozinha-usado-dispara.png";
 
+/**
+ * Array de Notícias (Database Mock).
+ * Cada objeto representa um cartão de matéria.
+ * O campo 'info' guarda a data e a categoria em formato de string separada por traço.
+ */
 const newsItems = [
   {
     image: img1,
@@ -77,36 +98,44 @@ const newsItems = [
   },
 ];
 
+/**
+ * Dicionário (Mapa) que converte os nomes dos meses em português (string)
+ * para o número correspondente (0-11), usado no construtor padrão Date() do JS.
+ */
 const monthMap = {
-  jan: 0,
-  fev: 1,
-  mar: 2,
-  abr: 3,
-  mai: 4,
-  jun: 5,
-  jul: 6,
-  ago: 7,
-  set: 8,
-  out: 9,
-  nov: 10,
-  dez: 11,
+  jan: 0, fev: 1, mar: 2, abr: 3, mai: 4, jun: 5,
+  jul: 6, ago: 7, set: 8, out: 9, nov: 10, dez: 11,
 };
 
+/**
+ * Ordenação Automática das Notícias (Sort).
+ * Extrai a data da string (ex: "10 Mar 2026 - Notícia"),
+ * converte para milissegundos e ordena para que a matéria mais recente (maior data) venha primeiro.
+ */
 newsItems.sort((a, b) => {
   const parseDate = (infoStr) => {
+    // Ex: "10 Mar 2026"
     const datePart = infoStr.split("-")[0].trim().toLowerCase();
     const parts = datePart.split(" ");
+    
     const day = parseInt(parts[0], 10);
     const month = monthMap[parts[1]];
     const year = parseInt(parts[2], 10);
+    
+    // Retorna a data em milissegundos para facilitar a comparação matemática
     return new Date(year, month, day).getTime();
   };
+  
+  // Ordem decrescente (mais recente para o mais antigo)
   return parseDate(b.info) - parseDate(a.info);
 });
 ---
 
+<!-- Âncora usada na navegação (Menu "Blog" -> id="noticias") -->
 <section class="news-section" id="noticias">
   <div class="news-container">
+    
+    <!-- Cabeçalho textual da seção do Blog -->
     <div class="blog-header-container">
       <div class="blog-header-title">
         <h2 class="section-title">Blog</h2>
@@ -116,6 +145,11 @@ newsItems.sort((a, b) => {
       </p>
     </div>
 
+    <!-- 
+      Botões de Filtro. 
+      O atributo 'data-filter' será usado pelo script (news_section.js)
+      para ocultar ou exibir os cartões compatíveis no momento do clique. 
+    -->
     <div class="blog-filters">
       <button class="filter-btn active" data-filter="all">Todos</button>
       <button class="filter-btn" data-filter="noticia">Notícias</button>
@@ -123,17 +157,24 @@ newsItems.sort((a, b) => {
       <button class="filter-btn" data-filter="dica">Dicas</button>
     </div>
 
+    <!-- Container Grid que abrigará todos os cartões de notícia -->
     <div class="blog-grid" id="blog-grid">
       {
+        /* Mapeamento dinâmico do Array ordenado de notícias para gerar o HTML */
         newsItems.map((item) => {
+          // Extrai o tipo (categoria) a partir da string bruta. Ex: de "10 Mar - Notícia" tira apenas "Notícia"
+          // O replace com Regex remove todos os acentos (Ex: Notícia -> noticia) para bater perfeitamente com os data-filters dos botões acima
           const category = item.info
             .split("-")[1]
             .trim()
             .toLowerCase()
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "");
+
           return (
+            // A tag semântica <article> envelopa cada notícia isolada
             <article class="blog-card" data-category={category}>
+              <!-- Capa visual da Notícia -->
               <div class="blog-image-wrapper">
                 <Image src={item.image} alt={item.title} class="blog-image" />
               </div>
@@ -143,7 +184,7 @@ newsItems.sort((a, b) => {
                 <span class="blog-date">{item.info}</span>
                 <p class="blog-description">{item.description}</p>
 
-                <a href={item.link} class="blog-link">
+                <a href={item.link} class="blog-link" target="_blank" rel="noopener noreferrer">
                   Saiba mais
                   <svg
                     width="16"
@@ -163,6 +204,11 @@ newsItems.sort((a, b) => {
       }
     </div>
 
+    <!-- 
+      Botão "Exibir Mais" (Paginação / Load More). 
+      Ele é interceptado e gerenciado pelo Javascript, e pode iniciar oculto 
+      dependendo de quantas notícias estão listadas na base.
+    -->
     <div
       class="load-more-container"
       style="margin-top: 3rem; display: flex; justify-content: center;"
@@ -172,8 +218,10 @@ newsItems.sort((a, b) => {
   </div>
 </section>
 
+<!-- Importa isoladamente as regras visuais apenas para os cards e o grid de notícias -->
 <style>
   @import "../styles/components-styles/news_section.css";
 </style>
 
+<!-- Importa a inteligência algorítmica (Filtros e Load More) por trás desta seção -->
 <script src="../scripts/news_section.js"></script>

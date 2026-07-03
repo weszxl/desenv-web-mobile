@@ -1,3 +1,19 @@
+/**
+ * Estilos para a seção "Como Funciona a Nossa Coleta" (HowWork.astro).
+ * 
+ * Responsabilidades deste arquivo CSS:
+ * - O layout dividido entre botões (acordeões) na esquerda e imagem ilustrativa na direita (Desktop).
+ * - A transformação desse mesmo conteúdo para mobile, ocultando a imagem direita
+ *   e exibindo imagens dentro de cada card (Mobile-first).
+ * - Animação de abrir e fechar a sanfona utilizando técnica do CSS Grid.
+ * - Efeitos de interação nos botões rotativos (+) e listas de tópicos.
+ */
+
+/* =========================================
+   Estrutura Principal da Seção
+   ========================================= */
+
+/* Fundo base claro com respiros para separação das seções superior/inferior */
 .process-section {
   padding: 4rem 1.5rem;
   background-color: var(--bg-light);
@@ -10,51 +26,66 @@
   }
 }
 
+/* Limite máximo do conteúdo no centro da tela (mantendo margens no Ultra Wide) */
 .container {
   max-width: 1280px;
   margin: 0 auto;
 }
 
+/* Centraliza os títulos e introduções no topo da seção */
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
+/* =========================================
+   Grid do Layout (Mobile vs Desktop)
+   ========================================= */
+
+/* Estrutura principal dividida. Mobile é tratado como coluna única empilhada */
 .layout-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
 }
 
+/* No desktop, o Grid se divide em duas colunas assimétricas: 45% (acordeões) / 55% (imagem dinâmica) */
 @media (min-width: 992px) {
   .layout-grid {
     grid-template-columns: 4.5fr 5.5fr;
     gap: 3rem;
-    align-items: stretch;
+    align-items: stretch; /* Estica as linhas para ficarem da mesma altura */
   }
 }
 
+/* Coluna flexível onde ficam empilhados verticalmente todos os cartões sanfona */
 .accordion-column {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1rem; /* Afastamento padronizado entre um cartão e outro */
 }
 
+/* =========================================
+   Design dos Cartões (Acordeões)
+   ========================================= */
+
+/* O Card base que funciona como botão agrupador de conteúdo */
 .feature-card {
   background-color: var(--bg-white);
   border-radius: 1.25rem;
   padding: 0.625rem 0.625rem 0 0.625rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); /* Sombreamento super suave/fino */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Borda muito leve para dar volume visual sem pesar */
   transition: all 0.3s ease;
 }
 
 @media (min-width: 992px) {
   .feature-card {
-    padding: 1.25rem 1.25rem 0 1.25rem;
+    padding: 1.25rem 1.25rem 0 1.25rem; /* Mais espaçamento interno (breathing room) no desktop */
   }
 }
 
+/* Área clicável (Header) do cartão que comanda o abrir/fechar */
 .card-header {
   width: 100%;
   display: flex;
@@ -66,10 +97,15 @@
   text-align: left;
 }
 
+/* =========================================
+   Gerenciamento das Imagens (Mobile/Desktop)
+   ========================================= */
+
+/* Container da imagem que é inserida DENTRO do botão, feita para aparecer SÓ no mobile */
 .mobile-image-wrapper {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 9; /* Mantém uma proporção de tela larga padrão (retangular deitada) */
   background-color: var(--bg-light);
   border-radius: 0.75rem;
   margin-bottom: 1.25rem;
@@ -82,10 +118,13 @@
   object-fit: contain;
 }
 
+/* Coluna lateral da imagem gigante (inicialmente invisível no mobile) */
 .visual-column {
   display: none;
 }
 
+/* No desktop, esconde as pequenas imagens contidas dentro dos cartões (mobile) 
+   e revela a coluna visual lateral dedicada (dinâmica) */
 @media (min-width: 992px) {
   .mobile-image-wrapper {
     display: none;
@@ -98,6 +137,11 @@
   }
 }
 
+/* =========================================
+   Títulos e Ícones do Cartão
+   ========================================= */
+
+/* Organiza o título alinhado opostamente ao ícone de cruz/fechar ('+') */
 .header-row {
   display: flex;
   justify-content: space-between;
@@ -120,6 +164,7 @@
   }
 }
 
+/* Fundo redondo para o ícone (+ / x) */
 .toggle-icon {
   width: 28px;
   height: 28px;
@@ -128,37 +173,55 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Impede que seja esmagado caso o texto seja muito longo */
   color: var(--charcoal);
   transition: all 0.3s ease;
 }
 
+/* Transição de rotação no ícone SVG de '+' */
 .icon-plus {
   transition: transform 0.3s ease;
 }
 
+/* Quando a div pai (cartão inteiro) possui a classe .active, o "+" rotaciona 45 graus virando visualmente um "X" */
 .feature-card.active .icon-plus {
   transform: rotate(45deg);
 }
 
+/* Quando ativo, a bolinha do ícone fica amarela com o "X" branco por destaque */
 .feature-card.active .toggle-icon {
   background-color: var(--brand-yellow);
   color: var(--bg-white);
 }
 
+/* =========================================
+   Animação do Acordeão (Sanfona)
+   ========================================= */
+
+/* 
+  Utiliza a técnica moderna e otimizada de animar no CSS Grid (`grid-template-rows: 0fr` para `1fr`).
+  Isso permite animar a abertura da altura (height) para tamanhos incertos (auto) de forma suave
+  sem precisar de cálculos matemáticos no Javascript.
+*/
 .card-body {
   display: grid;
-  grid-template-rows: 0fr;
+  grid-template-rows: 0fr; /* Estado fechado (teto 0) */
   transition: grid-template-rows 0.4s cubic-bezier(0.25, 0.4, 0.25, 1);
 }
 
+/* Quando ativo, destrava o Grid e anima até o seu limite total real exigido pelo conteúdo (1fr) */
 .feature-card.active .card-body {
   grid-template-rows: 1fr;
 }
 
+/* Garante que o conteúdo interno não transborde visualmente por fora dos limites do div durante a transição da altura */
 .card-content {
   overflow: hidden;
 }
+
+/* =========================================
+   Textos Internos e Lista de Bullets
+   ========================================= */
 
 .feature-desc {
   font-size: 0.875rem;
@@ -168,6 +231,7 @@
   margin: 0 0 1rem 0;
 }
 
+/* Lista customizada para exibir tópicos (bullets) sem as "bolinhas" padrão do navegador */
 .feature-bullets {
   list-style: none;
   padding: 0;
@@ -188,6 +252,7 @@
   line-height: 1.4;
 }
 
+/* Criação do ícone redondo (Checkzinho/Seta amarela) customizado na frente de cada tópico */
 .bullet-icon {
   width: 18px;
   height: 18px;
@@ -200,6 +265,7 @@
   margin-top: 0.125rem;
 }
 
+/* Barra inferior de destaque colorida, exibida ao final para dar encerramento visual ao card */
 .accent-line {
   height: 3px;
   width: 100%;
@@ -208,6 +274,11 @@
   margin-bottom: 1.25rem;
 }
 
+/* =========================================
+   Imagem Lateral Dinâmica (Apenas Desktop)
+   ========================================= */
+
+/* Caixa (Wrapper) de background que delimita e "segura" a imagem gigante e expansiva */
 .image-wrapper {
   position: relative;
   width: 100%;
@@ -224,7 +295,8 @@
   height: 100%;
   object-fit: contain;
   z-index: 10;
-
-  transform: scale(1.15);
+  /* Propositalmente aplica escala 115% pra causar o efeito de as bordas do produto excederem o fundo da imagem */
+  transform: scale(1.15); 
+  /* Atrela a transição apenas à opacidade, para fazer um efeito "fade-out e fade-in" cruzado vindo do Javascript */
   transition: opacity 0.3s ease-in-out;
 }

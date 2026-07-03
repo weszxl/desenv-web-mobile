@@ -1,8 +1,26 @@
 ---
+/**
+ * Componente: HowWork.astro (Como Funciona)
+ *
+ * O que faz:
+ * Este componente apresenta um guia com as etapas do processo ("Retirada", "Preparação", "Reciclagem").
+ * Usa uma estrutura de acordeões (sanfonas expansíveis) na esquerda (ou no formato móvel empilhado),
+ * e, nas resoluções maiores, apresenta uma imagem de destaque na direita que interage e muda dinamicamente via JS.
+ *
+ * Onde é usado:
+ * Normalmente é empregado na landing page do site (index.astro) servindo como
+ * a "vitrine" visual explicando detalhadamente o modelo de negócio da coleta.
+ */
+
+// Importação das imagens utilizadas no painel (neste exemplo a mesma imagem simula as etapas)
 import imgHowWork01 from "../assets/images/3_how-work_01.png";
 import imgHowWork02 from "../assets/images/3_how-work_01.png";
 import imgHowWork03 from "../assets/images/3_how-work_01.png";
 
+/**
+ * Array de dados estruturados para renderização repetível (DRY).
+ * Cada 'feature' (objeto) representa um "cartão/acordeão" com sua respectiva lista de descrições e arte.
+ */
 const features = [
   {
     id: "coleta",
@@ -43,8 +61,10 @@ const features = [
 ];
 ---
 
+<!-- Âncora usada na navegação (menu) -->
 <section id="o-que-fazemos" class="process-section">
   <div class="container">
+    <!-- Título e introdução do bloco centralizados -->
     <div class="section-header">
       <h2 class="section-title">Como Funciona a Nossa Coleta</h2>
       <p class="section-subtitle">
@@ -52,9 +72,18 @@ const features = [
       </p>
     </div>
 
+    <!-- 
+      Grid principal. Responsável por empilhar os cards no layout Mobile ou 
+      dividi-los (Acordeões 45% | Imagem 55%) no layout Desktop. 
+    -->
     <div class="layout-grid">
+      <!-- Coluna da Esquerda: Contém a lista de botões/cartões interativos (Acordeões) -->
       <div class="accordion-column">
         {
+          /* 
+            Iteração no array 'features' de dados declarado no topo do arquivo.
+            'index === 0' verifica se é o primeiro item da iteração (0) para já fazê-lo nascer aberto (classe 'active').
+          */
           features.map((feature, index) => (
             <div
               class={`feature-card ${index === 0 ? "active" : ""}`}
@@ -133,6 +162,12 @@ const features = [
         }
       </div>
 
+      <!-- 
+        Coluna da Direita: Painel com Imagem Principal Unificada.
+        Só é visível a partir de monitores Desktop (fica totalmente invisível no layout Mobile).
+        O JavaScript (how_work.js) intercepta o clique num botão-cartão da coluna esquerda
+        e injeta, via ID ("dynamic-feature-image"), o atributo 'src' equivalente aqui dentro.
+      -->
       <div class="visual-column">
         <div class="image-wrapper">
           <img
@@ -147,8 +182,10 @@ const features = [
   </div>
 </section>
 
+<!-- Importa de forma isolada os estilos (classes e efeitos Grid/Flex) correspondentes a este bloco HTML -->
 <style>
   @import "../styles/components-styles/how_work.css";
 </style>
 
+<!-- Importa e amarra o Script (DOM) responsável pelo abre/fecha dinâmico dos cartões e pela troca da imagem lateral -->
 <script src="../scripts/how_work.js"></script>

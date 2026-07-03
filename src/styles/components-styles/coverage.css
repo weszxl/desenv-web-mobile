@@ -1,3 +1,22 @@
+/**
+ * ==========================================
+ * coverage.css
+ * ==========================================
+ * ONDE ESTÁ SENDO USADO:
+ * Importado dentro do componente `src/components/Coverage.astro`.
+ * 
+ * O QUE ELE FAZ:
+ * - Define a estilização da seção de "Área de operação" (mapa de cobertura).
+ * - Utiliza CSS Grid para organizar o mapa na esquerda e as informações na direita (em telas grandes).
+ * - Estiliza as abas (tabs) com uma animação na borda inferior verde ao passar o mouse ou ativar.
+ * - Adiciona animações suaves (fadeIn/Slide) quando o usuário troca o conteúdo exibido.
+ * - Estiliza o cartão em si (sombras sutis, bordas arredondadas e selo de aviso).
+ * ==========================================
+ */
+
+/* =========================================
+   Estrutura Principal e Layout
+   ========================================= */
 .coverage-section {
   padding: 4rem 1.5rem;
   background-color: var(--bg-white);
@@ -24,6 +43,9 @@
   z-index: 2;
 }
 
+/* =========================================
+   Grid do Mapa vs Conteúdo
+   ========================================= */
 .coverage-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -45,6 +67,9 @@
   }
 }
 
+/* =========================================
+   Lado Esquerdo: Área do Mapa
+   ========================================= */
 .map-wrapper {
   position: relative;
   margin-right: auto;
@@ -60,6 +85,9 @@
   filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.05));
 }
 
+/* =========================================
+   Lado Direito: Abas e Textos
+   ========================================= */
 .content-wrapper {
   display: flex;
   flex-direction: column;
@@ -76,6 +104,9 @@
   margin-bottom: 0.5rem;
 }
 
+/* =========================================
+   Navegação das Abas (Tabs)
+   ========================================= */
 .tab-buttons {
   display: flex;
   gap: 1rem;
@@ -121,6 +152,9 @@
   transform: scaleX(1);
 }
 
+/* =========================================
+   Conteúdo das Abas (Cartões e Animações)
+   ========================================= */
 .tab-contents-container {
   min-height: 180px;
 }
@@ -145,6 +179,9 @@
   }
 }
 
+/* =========================================
+   Estilização Visual do Cartão de Informações
+   ========================================= */
 .tab-card {
   display: flex;
   flex-direction: column;

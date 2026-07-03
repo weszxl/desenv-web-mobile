@@ -1,4 +1,22 @@
 ---
+/**
+ * ==========================================
+ * FAQSection.astro
+ * ==========================================
+ * ONDE ESTÁ SENDO USADO:
+ * Renderizado na página inicial (`src/pages/index.astro`), geralmente antes do rodapé.
+ * 
+ * O QUE ELE FAZ:
+ * Exibe a seção de Perguntas Frequentes (FAQ).
+ * - Utiliza um Array de objetos JS contendo as perguntas e respostas.
+ * - Renderiza dinamicamente as perguntas em formato de "Acordeão" (lista expansível).
+ * - Possui um layout dividido em grid (em telas grandes):
+ *   Esquerda: Cartão de suporte com links para WhatsApp e e-mail.
+ *   Direita: A lista interativa das perguntas e respostas.
+ * ==========================================
+ */
+
+// Dados das Perguntas Frequentes
 const faqs = [
     {
         question: "Como sei que o óleo está pronto para recolha?",
@@ -29,7 +47,9 @@ const faqs = [
 const allFaqs = [...faqs];
 ---
 
+<!-- Seção Principal de FAQ -->
 <section class="faq-section">
+    <!-- Background animado: Elementos de fundo, gradientes e blobs idênticos às outras seções -->
     <div class="faq-background">
         <div class="bg-gradient-overlay"></div>
         <div class="bg-blob blob-green faq-blob-1"></div>
@@ -38,8 +58,12 @@ const allFaqs = [...faqs];
 
     <div class="faq-noise-wrapper noise-overlay"></div>
 
+    <!-- Contêiner centralizador -->
     <div class="faq-container">
+        <!-- Grid principal: Divide a seção em duas colunas (Esquerda: Contatos, Direita: Perguntas) -->
         <div class="faq-grid">
+            
+            <!-- Coluna da Esquerda: Área de Suporte e Contato -->
             <div class="faq-sidebar">
                 <div class="sidebar-header">
                     <span class="subtitle">AINDA COM DÚVIDAS?</span>
@@ -70,15 +94,19 @@ const allFaqs = [...faqs];
                 </div>
             </div>
 
+            <!-- Coluna da Direita: Lista de Perguntas Frequentes (Acordeão) -->
             <div class="faq-content">
                 <div class="accordion-group">
                     {
+                        // Percorre o array "allFaqs" e renderiza um botão expansível para cada item
                         allFaqs.map((faq, index) => (
                             <div class="faq-item">
+                                <!-- Botão clicável que expande a resposta -->
                                 <button
                                     class="faq-button"
                                     aria-expanded="false"
                                 >
+                                    <!-- Ícone de '+' que gira para 'x' via CSS quando ativo -->
                                     <div class="toggle-icon">
                                         <svg
                                             class="icon-plus"
@@ -101,6 +129,7 @@ const allFaqs = [...faqs];
                                     <h3 class="faq-question">{faq.question}</h3>
                                 </button>
 
+                                <!-- Conteúdo que é revelado quando o botão é clicado (Resposta) -->
                                 <div class="faq-collapse">
                                     <div class="faq-answer">
                                         <p>{faq.answer}</p>
@@ -115,8 +144,10 @@ const allFaqs = [...faqs];
     </div>
 </section>
 
+<!-- Importação dos estilos exclusivos da seção de FAQ -->
 <style>
     @import "../styles/components-styles/faq_section.css";
 </style>
 
+<!-- Importação do script responsável pela interatividade de abrir/fechar o acordeão -->
 <script src="../scripts/faq.js"></script>

@@ -1,3 +1,22 @@
+/**
+ * ==========================================
+ * form.css
+ * ==========================================
+ * ONDE ESTÁ SENDO USADO:
+ * Importado diretamente no final do componente `src/components/Form.astro`.
+ * 
+ * O QUE ELE FAZ:
+ * Concentra toda a estilização visual da página de "Fale Conosco", incluindo:
+ * - O background de tela inteira com as bolhas ("blobs") flutuantes.
+ * - O layout em grid dividido em duas colunas (Sidebar informativa e o Formulário).
+ * - O visual moderno dos campos de input (fundo branco, bordas, foco verde).
+ * - As animações de erro (bordas vermelhas) e exibição suave de campos condicionais.
+ * ==========================================
+ */
+
+/* =========================================
+   Layout Principal e Fundo da Seção
+   ========================================= */
 .form-page-section {
   position: relative;
   padding: 8rem 0 6rem 0;
@@ -50,6 +69,9 @@
   padding: 0 1.5rem;
 }
 
+/* =========================================
+   Sistema de Grid (Divisão de Tela)
+   ========================================= */
 .form-page-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -64,6 +86,9 @@
   }
 }
 
+/* =========================================
+   Coluna da Esquerda (Textos Informativos)
+   ========================================= */
 .form-page-sidebar {
   display: flex;
   flex-direction: column;
@@ -175,12 +200,16 @@
   color: var(--brand-green);
 }
 
+/* =========================================
+   Coluna da Direita (Cartão do Formulário)
+   ========================================= */
 .form-page-content {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
+/* O cartão branco principal onde os inputs ficam */
 .form-card {
   background-color: var(--bg-white);
   border-radius: 1.25rem;
@@ -245,6 +274,9 @@
   margin-left: 0.25rem;
 }
 
+/* =========================================
+   Estilização dos Inputs e Elementos de Formulário
+   ========================================= */
 .form-control {
   width: 100%;
   padding: 0.875rem 1rem;
@@ -297,6 +329,10 @@ select.form-control {
   padding-right: 2.5rem;
 }
 
+/* =========================================
+   Campos Condicionais e Animações
+   ========================================= */
+/* Campos que começam ocultos (como os de Agendar Coleta) */
 .conditional-field {
   display: none;
 }
@@ -317,6 +353,9 @@ select.form-control {
   }
 }
 
+/* =========================================
+   Botão de Envio (Submit)
+   ========================================= */
 .form-submit-btn {
   width: 100%;
   padding: 1rem;

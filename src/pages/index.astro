@@ -1,5 +1,21 @@
 ---
+/**
+ * Página Mestra: Home (Início)
+ * 
+ * O que faz:
+ * Esta é a página vital e mais importante do projeto. A "capa da revista".
+ * Ela empilha de forma estritamente sequencial, quase como blocos de Lego, diversos 
+ * componentes isolados (Hero, HowWork, Service, etc) para formar a "Landing Page" 
+ * espetacular, rica e ininterrupta da Papa Óleo.
+ * 
+ * Onde é usado:
+ * É renderizada imediatamente quando o cliente acessa a rota base (raiz) da URL `/`.
+ */
+
+// Importa o Layout Mestre (Tag HTML, head metadata, importação de fontes do Google)
 import Layout from "../layouts/Layout.astro";
+
+// Importa a constelação de Componentes Modulares independentes desenvolvidos em paralelo
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import HowWork from "../components/HowWork.astro";
@@ -11,25 +27,47 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
+  <!-- Barra de navegação contendo âncoras (IDs) que rolam suavemente a tela para os blocos abaixo -->
   <Header />
+  
   <main>
+    <!-- O outdoor digital gigante (Hero Banner) que tenta prender a atenção no 1º segundo de acesso -->
     <Hero />
+    
+    <!-- Seção limpa e lúdica de cards estáticos explicando passo-a-passo como a reciclagem funciona -->
     <HowWork />
+    
+    <!-- O glorioso componente de Acordeão interativo, separando os serviços por "tipo de público" -->
     <Service />
+    
+    <!-- O componente imersivo escuro contendo mapa SVG de abrangência de cidades e raios elétricos pulsantes -->
     <Coverage />
     
+    <!-- 
+      Embrulho Especial Contínuo (Continuous Background)
+      Estas duas últimas seções foram propositalmente engaioladas numa div exlusiva e isolada para que
+      possam compartilhar juntas o mesmo fundo branco animado (As famosas Bolhas Flutuantes e Efeito TV/Ruído), 
+      extinguindo qualquer linha dura de separação e unificando o design da reta final do site.
+    -->
     <section class="continuous-bg noise-overlay">
+      
+      <!-- O sutil degradê que evita que o fundo fique agressivamente e puramente branco "chapado" -->
       <div class="bg-gradient-overlay"></div>
       
-      <!-- Blobs distribuídos pela seção dupla -->
+      <!-- As "bolhas alienígenas" absolutas distribuídas cirurgicamente pelas extremidades e alimentadas pelas animações de global.css -->
       <div class="bg-blob blob-green" style="top: 5%; left: 5%; width: 10rem; height: 10rem;"></div>
       <div class="bg-blob blob-yellow" style="top: 20%; right: 5%; width: 12rem; height: 12rem;"></div>
       <div class="bg-blob blob-green" style="bottom: 30%; left: -5%; width: 15rem; height: 15rem;"></div>
       <div class="bg-blob blob-yellow" style="bottom: 5%; right: -5%; width: 20rem; height: 20rem;"></div>
       
+      <!-- Seção com cards estáticos e informativos sobre como filtrar, engarrafar e embalar corretamente o óleo sujo -->
       <HowRecycle />
+      
+      <!-- Seção vital com grade interativa de notícias externas lidas do banco e ordenadas cronologicamente (A última isca do site) -->
       <NewsSection />
     </section>
   </main>
+  
+  <!-- O clássico bloco escuro institucional de encerramento -->
   <Footer />
 </Layout>

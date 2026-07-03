@@ -1,24 +1,49 @@
 ---
+/**
+ * ==========================================
+ * Coverage.astro
+ * ==========================================
+ * ONDE ESTÁ SENDO USADO:
+ * Renderizado na página inicial (`src/pages/index.astro`), logo antes da seção de Fale Conosco.
+ * 
+ * O QUE ELE FAZ:
+ * Exibe a área de cobertura de atuação da empresa. Consiste em:
+ * - Uma imagem principal de mapa dinâmico (trocado via JavaScript).
+ * - Um sistema de abas (Tabs) para alternar entre "Região Metropolitana" e "Litoral Gaúcho".
+ * - Cada aba altera a imagem do mapa na esquerda e exibe o cartão de informações 
+ *   correspondente na direita.
+ * - Armazena as imagens de cada estado (selecionado) em `data-attributes` na seção 
+ *   para facilitar a troca via script.
+ * ==========================================
+ */
+
 import mapMetroOn from "../assets/images/coverage_map_poa-selected.svg";
 import mapBeachOn from "../assets/images/coverage_map_coastal-selected.svg";
 import poaIcon from "../assets/images/coverage_poa_icon.svg";
 import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
 ---
 
+<!-- Seção Principal de Cobertura -->
+<!-- Os data-attributes armazenam o caminho das imagens ativas para o script acessá-las -->
 <section
   class="coverage-section"
   id="cobertura"
   data-map-metro={mapMetroOn.src}
   data-map-beach={mapBeachOn.src}
 >
+  <!-- Cabeçalho da Seção -->
   <div class="section-header text-center">
     <h2 class="section-title">Área de operação</h2>
     <p class="global-support-text">
       Confira nossa área de cobertura para a coleta de óleo.
     </p>
   </div>
+
   <div class="coverage-container">
+    <!-- Grid que divide o mapa à esquerda e o conteúdo à direita -->
     <div class="coverage-grid">
+      
+      <!-- Lado Esquerdo: Área de visualização do Mapa -->
       <div class="map-wrapper">
         <img
           src={mapMetroOn.src}
@@ -28,15 +53,23 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
         />
       </div>
 
+      <!-- Lado Direito: Sistema de Abas e Informações -->
       <div class="content-wrapper">
+        
+        <!-- Botões para alternar as abas -->
         <div class="tab-buttons" role="tablist">
+          <!-- Botão ativo por padrão: Região Metropolitana -->
           <button class="active" data-target="metro" role="tab" aria-selected="true" id="btn-metro" aria-controls="metro"
             >Região Metropolitana</button
           >
+          <!-- Botão para: Litoral Gaúcho -->
           <button data-target="litoral" role="tab" aria-selected="false" id="btn-litoral" aria-controls="litoral">Litoral Gaúcho</button>
         </div>
 
+        <!-- Contêiner com o conteúdo dos cartões das abas -->
         <div class="tab-contents-container">
+          
+          <!-- Aba 1: Região Metropolitana (Inicia visível com classe 'active') -->
           <div class="tab-content active" id="metro" role="tabpanel" aria-labelledby="btn-metro">
             <div class="tab-card">
               <div class="card-header">
@@ -61,6 +94,7 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
             </div>
           </div>
 
+          <!-- Aba 2: Litoral Gaúcho (Inicia oculta) -->
           <div class="tab-content" id="litoral" role="tabpanel" aria-labelledby="btn-litoral">
             <div class="tab-card">
               <div class="card-header">
@@ -83,14 +117,17 @@ import coastalIcon from "../assets/images/coverage_coastal_icon.svg";
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Importação dos estilos exclusivos da seção de cobertura -->
 <style>
   @import "../styles/components-styles/coverage.css";
 </style>
 
+<!-- Importação do script responsável pela interação (troca de abas e imagens) -->
 <script src="../scripts/coverage.js"></script>

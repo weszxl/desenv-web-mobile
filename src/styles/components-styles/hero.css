@@ -1,13 +1,33 @@
+/**
+ * Estilos para o componente Hero.astro (Seção Principal).
+ * 
+ * Este arquivo CSS é responsável pela formatação visual do primeiro bloco do site:
+ * - Layout em tela cheia (100svh).
+ * - Posicionamento dos ornamentos visuais (blobs coloridos e ruído de fundo).
+ * - Tipografia fluída do título principal (usando clamp() para responsividade).
+ * - Disposição da imagem e seu efeito animado de brilho (glow).
+ * - Organização dos botões de Call To Action.
+ */
+
+/* =========================================
+   Container Base e Background
+   ========================================= */
+
+/* Bloco principal que envolve toda a seção Hero */
 .hero-section {
-  position: relative;
-  min-height: 100svh;
+  position: relative; /* Permite posicionar elementos absolutos dentro dele */
+  min-height: 100svh; /* Ocupa 100% da altura da tela visível do dispositivo */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: var(--bg-white);
+  align-items: center; /* Centraliza verticalmente o conteúdo */
+  justify-content: center; /* Centraliza horizontalmente o conteúdo */
+  overflow: hidden; /* Corta os enfeites de fundo que vazarem do container */
+  background-color: var(--bg-white); /* Fundo claro por padrão */
 }
 
+/* 
+  Estilo individual para as formas orgânicas (blobs) que ficam soltas pelo fundo.
+  Essas classes ajustam o tamanho e a posição inicial de cada blob.
+*/
 .hero-blob-1 {
   top: 5rem;
   left: 2.5rem;
@@ -22,33 +42,42 @@
   height: 8rem;
 }
 
+/* =========================================
+   Estrutura Interna e Alinhamento
+   ========================================= */
+
+/* Container que limita a largura do conteúdo (mantém alinhado com navbar e outras seções) */
 .hero-container {
   position: relative;
-  z-index: 10;
+  z-index: 10; /* Garante que o texto e imagens fiquem na frente dos efeitos de fundo */
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   min-height: 100svh;
-
+  
+  /* Paddings: Dá um espaço maior no topo para compensar a navbar que é fixa */
   padding: 5rem 1.5rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
 }
 
+/* Em telas maiores (tablets+), aumenta ainda mais o respiro no topo */
 @media (min-width: 768px) {
   .hero-container {
     padding-top: 7rem;
   }
 }
 
+/* Container englobando texto + imagem (exclui o footer com os botões) */
 .hero-main-content {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr; /* Coluna única no mobile (um bloco embaixo do outro) */
   gap: 1rem;
-  flex-grow: 1;
+  flex-grow: 1; /* Faz esse bloco crescer para empurrar o bloco de footer para baixo */
   align-items: center;
 }
 
+/* A partir de telas largas, divide em 2 colunas iguais: esquerda para texto, direita para imagem */
 @media (min-width: 1024px) {
   .hero-main-content {
     grid-template-columns: repeat(2, 1fr);
@@ -56,6 +85,11 @@
   }
 }
 
+/* =========================================
+   Textos (Título e Subtítulo)
+   ========================================= */
+
+/* Coluna esquerda agrupando os textos */
 .hero-text {
   display: flex;
   flex-direction: column;
@@ -63,28 +97,38 @@
   text-align: left;
 }
 
+/* Título principal H1 */
 .hero-title {
+  /* clamp(MIN, VALOR_IDEAL, MAX): 
+     Garante que o título encolha no mobile e cresça no desktop de forma fluída sem quebrar layout */
   font-size: clamp(2.25rem, 8vw, 4.5rem);
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 1.1;
+  font-weight: 900; /* Fonte bastante encorpada (Black/Heavy) para gerar impacto visual */
+  letter-spacing: -0.05em; /* Aproxima as letras levemente para um design mais moderno e coeso */
+  line-height: 1.1; /* Linhas mais justas/próximas para títulos grandes */
   margin: 0;
 }
 
+/* Utilitário para forçar a quebra de linha de uma parte específica do texto H1 */
 .block {
   display: block;
 }
 
+/* Texto de apoio abaixo do título (parágrafo explicativo) */
 .hero-subtitle {
   font-size: clamp(1.125rem, 2vw, 1.25rem);
   font-family: var(--font-sans);
   color: rgba(18, 18, 18, 0.8);
   letter-spacing: -0.025em;
-  max-width: 28rem;
+  max-width: 28rem; /* Evita que a linha fique extensa demais, melhorando a escaneabilidade (leitura) */
   line-height: 1.5;
   margin: 0;
 }
 
+/* =========================================
+   Imagem Principal e Efeitos Visuais
+   ========================================= */
+
+/* Coluna direita contendo a imagem e seu efeito de luz (brilho) traseiro */
 .hero-image-wrapper {
   position: relative;
   display: flex;
@@ -92,55 +136,65 @@
   align-items: center;
 }
 
+/* Círculo luminoso verde desfocado que fica posicionado por trás da imagem */
 .image-glow {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.75);
+  transform: translate(-50%, -50%) scale(0.75); /* Centraliza perfeitamente em relação à div pai e reduz o tamanho base */
   width: 100%;
   max-width: 400px;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; /* Força que seja sempre um quadrado (que vira círculo puro com o border-radius) */
   background-color: rgba(100, 180, 69, 0.2);
-  filter: blur(80px);
+  filter: blur(80px); /* Cria um blur extremo, gerando o efeito esfumaçado/neon */
   border-radius: 50%;
-  animation: pulse-glow 2s ease-in-out infinite;
+  animation: pulse-glow 2s ease-in-out infinite; /* Animação contínua de pulsação (aumenta/diminui a sombra) */
 }
 
+/* Animação do brilho luminoso (pulsa modificando a intensidade do box-shadow) */
 @keyframes pulse-glow {
   0%,
   100% {
     box-shadow: 0 0 20px rgba(100, 180, 69, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(100, 180, 69, 0.6);
+    box-shadow: 0 0 40px rgba(100, 180, 69, 0.6); /* Brilho mais intenso na metade do tempo (1s) */
   }
 }
 
+/* Imagem da lata de óleo/ilustração de reciclagem */
 .hero-image {
   position: relative;
-  z-index: 10;
+  z-index: 10; /* Garante que a imagem fique renderizada por cima (na frente) do image-glow */
   width: 100%;
   max-width: 550px;
-  max-height: 35vh;
+  max-height: 35vh; /* Limita a altura no celular para que a imagem não empurre o texto inicial para fora da tela (above the fold) */
   height: auto;
   object-fit: contain;
 }
 
+/* No desktop, como a imagem fica na coluna direita paralela ao texto, libera a trava de altura máxima */
 @media (min-width: 1024px) {
   .hero-image {
     max-height: none;
   }
 }
 
+/* =========================================
+   Botões e Calls to Action (CTAs)
+   ========================================= */
+
+/* Rodapé interno da seção (área que aloca os botões de ação final) */
 .hero-footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Coloca os links um abaixo do outro no mobile */
   align-items: flex-start;
   gap: 1.25rem;
   margin-top: 1.5rem;
   width: 100%;
 }
 
+/* No desktop, o botão e a frase de contato ficam alinhados na mesma linha horizontal */
 @media (min-width: 1024px) {
   .hero-footer {
     flex-direction: row;
@@ -149,34 +203,39 @@
   }
 }
 
+/* Estilo padronizado (base) de botões da seção Hero */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
-  border-radius: 9999px;
+  border-radius: 9999px; /* Formato de pílula perfeitamente arredondada */
   font-weight: 700;
   font-size: 1.125rem;
   text-decoration: none;
   transition: transform 0.2s ease-in-out;
-  width: 100%;
+  width: 100%; /* O botão principal estica ocupando toda a largura no mobile */
 }
 
+/* No desktop, o botão volta ao seu tamanho natural contraindo de acordo com a frase/texto inserido */
 @media (min-width: 1024px) {
   .btn {
     width: auto;
   }
 }
 
+/* Efeito sutil de levantar/aumentar o tamanho do botão ao interagir com o mouse (hover) */
 .btn:hover {
   transform: scale(1.05);
 }
 
+/* Modificador de cor primária para botões (fundo verde institucional, letra branca) */
 .btn-primary {
   background-color: var(--brand-green);
   color: var(--bg-white);
 }
 
+/* Texto simples "Mais informações?" ao lado do botão principal */
 .contact-info {
   font-size: 1.125rem;
   color: rgba(18, 18, 18, 0.7);
@@ -184,15 +243,17 @@
   margin: 0;
 }
 
+/* Palavra clicável de ação estilizada dentro da frase explicativa ("Fale conosco") */
 .contact-info a {
   color: var(--charcoal);
-  text-decoration: underline;
-  text-decoration-color: var(--brand-green);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-decoration: underline; /* Deixa uma linha sublinhada permanente indicando que é clicável */
+  text-decoration-color: var(--brand-green); /* O sublinhado ganha cor de destaque (verde) contrastante */
+  text-decoration-thickness: 2px; /* Deixa o sublinhado mais grosso e perceptível */
+  text-underline-offset: 4px; /* Afasta a linha decorativa do texto base para ficar mais legível/elegante */
   transition: color 0.2s;
 }
 
+/* Ao focar/passar o mouse na palavra do link secundário, o texto inteiro (e não só a linha) também fica verde */
 .contact-info a:hover {
   color: var(--brand-green);
 }

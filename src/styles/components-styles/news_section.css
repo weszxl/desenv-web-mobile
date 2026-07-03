@@ -1,15 +1,33 @@
+/**
+ * Estilos para a seção de Notícias/Blog (NewsSection.astro).
+ * 
+ * Responsabilidades deste arquivo CSS:
+ * - O layout e espaçamento geral do container principal de notícias.
+ * - A estilização do cabeçalho da seção (com o ícone quadrado decorativo e o título).
+ * - A formatação visual dos botões de filtro (categorias como "Todas", "Sustentabilidade", etc).
+ * - O Grid responsivo que gerencia a listagem de múltiplos cartões de notícia lado a lado ou empilhados.
+ * - A estilização individual de cada cartão de notícia (capa + texto), que se adapta drasticamente entre mobile e desktop.
+ */
+
+/* =========================================
+   Container Principal da Seção
+   ========================================= */
+
+/* Bloco principal estrutural da seção de Notícias */
 .news-section {
   position: relative;
-  padding: 6rem 0;
-  background-color: transparent;
+  padding: 6rem 0; /* Espaçamento interno vertical considerável para o mobile */
+  background-color: transparent; /* Fundo transparente para herdar graciosamente a cor/textura geral da página */
 }
 
+/* Aumenta bastante o respiro da seção em telas maiores (tablets horizontais e desktops) */
 @media (min-width: 768px) {
   .news-section {
     padding: 8rem 0;
   }
 }
 
+/* Container interno que centraliza de verdade e limita a largura do conteúdo (mantendo a grade padrão do site) */
 .news-container {
   position: relative;
   z-index: 10;
@@ -19,12 +37,18 @@
   padding: 0 1.5rem;
 }
 
+/* =========================================
+   Cabeçalho da Seção (Header)
+   ========================================= */
+
+/* Container que engloba o título inteiro da seção, possuindo uma borda verde na parte inferior que divide o espaço */
 .blog-header-container {
   margin-bottom: 2rem;
   border-bottom: 2px solid var(--brand-green);
   padding-bottom: 1.5rem;
 }
 
+/* Agrupa utilizando Flexbox o ícone (quadradinho amarelo) com o texto do título principal na mesma linha horizontal */
 .blog-header-title {
   display: flex;
   align-items: center;
@@ -32,13 +56,15 @@
   margin-bottom: 0.5rem;
 }
 
+/* Elemento puramente visual e decorativo (Quadradinho amarelo) usado à esquerda do título principal */
 .square-icon {
   width: 24px;
   height: 24px;
   background-color: var(--brand-yellow);
-  border-radius: 4px;
+  border-radius: 4px; /* Cantos levemente arredondados para não parecer rústico */
 }
 
+/* Título de seção em si ("Últimas Notícias"), usando clamp() que cria uma escala matemática fluida do tamanho da fonte */
 .section-title {
   font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 900;
@@ -46,55 +72,75 @@
   margin: 0;
 }
 
+/* Subtítulo ou texto descritivo complementar logo abaixo do título verde principal */
 .section-subtitle {
   color: var(--charcoal);
-  opacity: 0.8;
+  opacity: 0.8; /* Leve transparência serve para tirar o peso visual e priorizar a hierarquia do título principal */
   font-size: 1.125rem;
   margin: 0;
 }
 
+/* =========================================
+   Botões de Filtro de Categorias (Pílulas)
+   ========================================= */
+
+/* Agrupador/Wrapper dos botões de filtro. Utiliza flex-wrap para permitir que quebrem de linha responsivamente no mobile */
 .blog-filters {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Se a quantidade de botões não couber na mesma linha do celular, os últimos caem para a linha de baixo naturalmente */
   margin-bottom: 3rem;
 }
 
+/* Estilo padrão básico de cada botão/pílula representativo de uma categoria */
 .filter-btn {
   background-color: transparent;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 0.5rem 1.25rem;
-  border-radius: 9999px;
+  border-radius: 9999px; /* Formato completo de pílula (100% arredondado) */
   color: var(--charcoal);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease; /* Transições suaves para as interações de Hover/Active */
 }
 
+/* Efeito visual ao passar o mouse: a borda cinza e o texto escuro assumem a cor principal de destaque (verde) */
 .filter-btn:hover {
   border-color: var(--brand-green);
   color: var(--brand-green);
 }
 
+/* Classe dinâmica aplicável programaticamente via Javascript para a categoria que o usuário selecionou ativamente */
 .filter-btn.active {
   background-color: var(--brand-green);
   border-color: var(--brand-green);
-  color: var(--bg-white);
+  color: var(--bg-white); /* Texto inverte para a cor branca e o fundo fica verde para constraste total */
 }
 
-/* Grid */
+/* =========================================
+   Grid de Notícias (Listagem e Organização)
+   ========================================= */
+
+/* Grade mãe que organiza os múltiplos cartões de notícia. 
+   Comportamento Mobile: exibe os itens em 1 única coluna vertical padrão. */
 .blog-grid {
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr;
 }
 
+/* Comportamento Desktop: divide a exibição espacial em exatamente 2 colunas lado a lado */
 @media (min-width: 1024px) {
   .blog-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
+/* =========================================
+   Estilização do Cartão Individual da Notícia
+   ========================================= */
+
+/* Elemento flexível (Card). No celular, os componentes visuais respeitam uma hierarquia empilhada: imagem em cima, texto embaixo */
 .blog-card {
   display: flex;
   flex-direction: column;
@@ -102,20 +148,23 @@
   align-items: flex-start;
 }
 
+/* Em telas médias/grandes (Tablets/PCs), o flex-direction altera, fazendo a imagem e o bloco de texto ficarem lado a lado na horizontal */
 @media (min-width: 640px) {
   .blog-card {
     flex-direction: row;
   }
 }
 
+/* Invólucro controlador da imagem de capa da notícia. Proporção retangular panorâmica padrão cinematográfica (16:9) no mobile */
 .blog-image-wrapper {
   width: 100%;
   aspect-ratio: 16/9;
   border-radius: 1rem;
-  overflow: hidden;
+  overflow: hidden; /* Obriga a imagem retangular bruta a não vazar e assumir o border-radius suave estipulado na div mãe */
   flex-shrink: 0;
 }
 
+/* No desktop, como ela passa a dividir espaço na mesma linha com os textos, o formato visual vira quadrado (1:1) pegando só 35% de largura */
 @media (min-width: 640px) {
   .blog-image-wrapper {
     width: 35%;
@@ -123,18 +172,21 @@
   }
 }
 
+/* Comportamento essencial da foto propriamente dita: sempre vai cobrir o espaço inteiro da div pai sem perder a proporção/distorcer (object-fit) */
 .blog-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* Caixa responsável por encapsular e empilhar verticalmente todos os textos (título, data, descrição e link "ler mais") */
 .blog-content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1; /* Ocupa vigorosamente todo o espaço flexível restante que não foi utilizado pela foto (em tese, pega 65% no desktop) */
 }
 
+/* Título primário de impacto da notícia atual */
 .blog-title {
   font-size: 1.25rem;
   font-weight: 800;
@@ -143,6 +195,7 @@
   line-height: 1.3;
 }
 
+/* Linha visual sutil para dados secundários: tag de categoria, data de publicação, tempo de leitura ou autor */
 .blog-date {
   font-size: 0.8125rem;
   color: var(--charcoal);
@@ -151,6 +204,7 @@
   margin-bottom: 1rem;
 }
 
+/* Resumo da lide ou primeiro trecho curto do artigo */
 .blog-description {
   font-size: 0.9375rem;
   color: var(--charcoal);
@@ -159,6 +213,12 @@
   line-height: 1.5;
 }
 
+/* 
+  Estilo do link clicável final (Ex: "Ler matéria >").
+  O `margin-top: auto;` é um macete de layout: ele joga este botão lá pro fundo (para baixo)
+  garantindo que este link fique sempre perfeitamente alinhado visualmente na mesma altura nos 2 cartões,
+  mesmo quando uma das notícias vizinhas possui um texto maior/menor que a outra.
+*/
 .blog-link {
   display: inline-flex;
   align-items: center;
@@ -171,6 +231,7 @@
   margin-top: auto;
 }
 
+/* Animação charmosa no hover: o texto fica amarelo institucional e empurra levemente a setinha para a direita, ao expandir o gap do flexbox */
 .blog-link:hover {
   color: var(--brand-yellow);
   gap: 0.75rem;

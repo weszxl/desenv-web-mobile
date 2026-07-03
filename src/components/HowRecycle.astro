@@ -1,10 +1,32 @@
 ---
+/**
+ * Componente: HowRecycle.astro
+ * 
+ * O que faz:
+ * Este componente renderiza a seção "Como descartar o seu óleo usado".
+ * Ele apresenta um passo a passo (step-by-step) de como o usuário deve preparar 
+ * e armazenar o óleo antes da coleta, renderizando de forma dinâmica 
+ * os cartões em um layout estilo "zig-zag" (alternando texto e imagem).
+ * 
+ * Onde é usado:
+ * Normalmente na landing page principal (ex: src/pages/index.astro) 
+ * para educar os clientes sobre o processo correto de reciclagem.
+ */
+
+// Importa o componente nativo e otimizado de imagens do Astro
 import { Image } from "astro:assets";
+
+// Importa as ilustrações/ícones SVG para cada passo do processo
 import step1 from "../assets/images/5_how-recycle_step1.svg";
 import step2 from "../assets/images/5_how-recycle_step2.svg";
 import step3 from "../assets/images/5_how-recycle_step3.svg";
 import step4 from "../assets/images/5_how-recycle_step4.svg";
 
+/**
+ * Array contendo os dados de cada etapa do processo.
+ * Usar uma estrutura de dados (array de objetos) facilita a renderização 
+ * e futuras manutenções, já que separamos o "conteúdo" da "marcação HTML".
+ */
 const steps = [
   {
     number: "1º",
@@ -37,8 +59,15 @@ const steps = [
 ];
 ---
 
+<!-- 
+  Seção principal de Preparação.
+  O id="preparacao" serve para navegação interna via âncoras (ex: clicar no header desliza para cá).
+-->
 <section id="preparacao" class="prep-section">
+  <!-- Container central limitador de largura (mantém margens consistentes com o resto do site) -->
   <div class="container">
+    
+    <!-- Cabeçalho textual explicativo da seção inteira -->
     <div class="section-header">
       <h2 class="section-title">Como descartar o seu óleo usado</h2>
       <p class="section-subtitle">
@@ -46,15 +75,29 @@ const steps = [
       </p>
     </div>
 
+    <!-- 
+      Wrapper (Embalagem) do layout Zig-Zag.
+      Ele organiza os cartões dos passos renderizados em tela de forma alternada.
+    -->
     <div class="zigzag-wrapper">
       {
+        /* 
+          Itera (map) sobre a lista de passos (steps) declarada no bloco Javascript inicial.
+          O parâmetro 'index' é usado para saber a posição atual (0, 1, 2, 3...) da iteração.
+        */
         steps.map((step, index) => {
+          // Lógica simples para alternar as posições no layout visual:
+          // Se o índice for par (0, 2), consideremos como 'layout-card-left'
+          // Se for ímpar (1, 3), consideremos como 'layout-card-right'
           const isCardLeft = index % 2 === 0;
 
           return (
+            // A template literal condicional interpola a classe certa, permitindo ao CSS
+            // mudar a ordem dos elementos Flex (imagem na direita, imagem na esquerda).
             <div
               class={`step-row ${isCardLeft ? "layout-card-left" : "layout-card-right"}`}
             >
+              <!-- Conteúdo de Texto do Passo -->
               <div class="step-content">
                 <div class="step-badge">
                   <span class="dot">&bull;</span> PASSO {step.number}
@@ -63,7 +106,12 @@ const steps = [
                 <p class="step-desc">{step.description}</p>
               </div>
 
+              <!-- Conteúdo da Imagem Ilustrativa do Passo -->
               <div class="step-image-wrapper">
+                <!-- 
+                  loading="lazy" atrasa o download da imagem até o usuário rolar 
+                  perto da tela onde ela está, economizando dados e tempo de carga.
+                -->
                 <Image src={step.icon} alt={step.title} loading="lazy" />
               </div>
             </div>
@@ -74,6 +122,7 @@ const steps = [
   </div>
 </section>
 
+<!-- Importação isolada (scoped) da folha de estilos exclusiva para este componente -->
 <style>
   @import "../styles/components-styles/how_recycle.css";
 </style>
