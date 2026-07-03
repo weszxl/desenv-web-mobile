@@ -1,34 +1,59 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const swiper = new Swiper(".swiper", {
-    slidesPerView: 1,
-    spaceBetween: 24,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      },
-    },
+  const filterBtns = document.querySelectorAll(".blog-filters .filter-btn");
+  const cards = document.querySelectorAll(".blog-card");
+  const loadMoreBtn = document.getElementById("load-more-btn");
+  
+  let currentLimit = 4;
+
+  function applyFilters() {
+    const activeBtn = document.querySelector(".blog-filters .filter-btn.active");
+    const filterValue = activeBtn ? activeBtn.getAttribute("data-filter") : "all";
+    let visibleCount = 0;
+    
+    cards.forEach((card) => {
+      const category = card.getAttribute("data-category");
+      const match = (filterValue === "all" || category === filterValue);
+      
+      if (match) {
+        if (visibleCount < currentLimit) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+    
+    if (loadMoreBtn) {
+      if (visibleCount > currentLimit) {
+        loadMoreBtn.style.display = "inline-block";
+      } else {
+        loadMoreBtn.style.display = "none";
+      }
+    }
+  }
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Remove active class from all buttons
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      // Add active class to clicked button
+      btn.classList.add("active");
+      
+      currentLimit = 4; // Reset limit when changing filters
+      applyFilters();
+    });
   });
 
-  // Keep hover active logic if the user still wants it
-  const cards = document.querySelectorAll(".swiper-slide");
-  cards.forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      cards.forEach(c => c.classList.remove("active"));
-      card.classList.add("active");
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", () => {
+      currentLimit += 4; // Load 4 more cards
+      applyFilters();
     });
-    card.addEventListener("mouseleave", () => {
-      card.classList.remove("active");
-    });
-  });
+  }
+
+  // Initial load
+  applyFilters();
 });

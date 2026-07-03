@@ -16,9 +16,20 @@ import Footer from "../components/Footer.astro";
     <Hero />
     <HowWork />
     <Service />
-    <NewsSection />
     <Coverage />
-    <HowRecycle />
+    
+    <section class="continuous-bg noise-overlay">
+      <div class="bg-gradient-overlay"></div>
+      
+      <!-- Blobs distribuídos pela seção dupla -->
+      <div class="bg-blob blob-green" style="top: 5%; left: 5%; width: 10rem; height: 10rem;"></div>
+      <div class="bg-blob blob-yellow" style="top: 20%; right: 5%; width: 12rem; height: 12rem;"></div>
+      <div class="bg-blob blob-green" style="bottom: 30%; left: -5%; width: 15rem; height: 15rem;"></div>
+      <div class="bg-blob blob-yellow" style="bottom: 5%; right: -5%; width: 20rem; height: 20rem;"></div>
+      
+      <HowRecycle />
+      <NewsSection />
+    </section>
   </main>
   <Footer />
 </Layout>

@@ -1,9 +1,8 @@
 .prep-section {
   position: relative;
   padding: 4rem 0;
-  background-color: var(--bg-white);
+  background-color: transparent;
   color: var(--charcoal);
-  overflow: hidden;
 }
 
 @media (min-width: 768px) {

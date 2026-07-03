@@ -146,3 +146,9 @@ body {
   animation: grain 8s steps(10) infinite;
   z-index: 50;
 }
+
+.continuous-bg {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-white);
+}
