@@ -1,7 +1,7 @@
 ---
 /**
  * Componente: Header.astro
- * 
+ *
  * O que faz:
  * Este componente renderiza o cabeçalho superior (navbar) do site.
  * Ele engloba:
@@ -9,9 +9,9 @@
  * - O menu de navegação com links internos (Início, Como funciona, etc).
  * - Um botão de CTA (Call to Action) para formulário de contato.
  * - Um menu hambúrguer interativo para navegação em dispositivos móveis.
- * 
+ *
  * Onde é usado:
- * É inserido no layout principal/global do projeto (como BaseLayout.astro) 
+ * É inserido no layout principal/global do projeto (como BaseLayout.astro)
  * para estar sempre presente no topo de todas as páginas do site.
  */
 
@@ -29,22 +29,14 @@ const navLinks = [
 ];
 ---
 
-<!-- 
-  Barra de navegação principal.
-  Possui o id="main-nav" para ser capturada e manipulada pelo script (header.js).
--->
 <nav id="main-nav" class="navbar">
   <div class="nav-container">
-    
-    <!-- Link da Logomarca redirecionando para a home -->
     <a href="/" class="nav-logo">
-      <!-- Logo exibida no estado inicial (topo da página) -->
       <Image
         src={logoV1}
         alt="Logo Papa Óleo - Coleta de Óleo Usado"
         class="logo-default"
       />
-      <!-- Logo exibida quando a página é rolada para baixo (scrolled) -->
       <Image
         src={logoV2}
         alt="Logo Papa Óleo - Coleta de Óleo Usado"
@@ -52,10 +44,8 @@ const navLinks = [
       />
     </a>
 
-    <!-- Menu de navegação projetado para resoluções Desktop -->
     <ol class="nav-links-desktop">
       {
-        // Itera sobre o array de links declarado no topo para criar os itens da lista dinamicamente
         navLinks.map((item) => (
           <li>
             <a href={item.href} class="nav-link">
@@ -66,7 +56,6 @@ const navLinks = [
       }
     </ol>
 
-    <!-- Botão de "Entrar em Contato" visível apenas no Desktop -->
     <a href="/formulario" class="btn-cta-desktop"> Entrar em Contato </a>
 
     <!-- 
@@ -74,7 +63,6 @@ const navLinks = [
       Exibido apenas em telas menores. O script JS escuta o clique neste elemento.
     -->
     <button id="mobile-menu-btn" class="mobile-toggle" aria-label="Menu">
-      <!-- Ícone SVG de Hamburguer (3 linhas), padrão quando o menu está fechado -->
       <svg
         class="menu-icon"
         viewBox="0 0 24 24"
@@ -84,7 +72,6 @@ const navLinks = [
       >
         <path d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
-      <!-- Ícone SVG de Fechar (X), inicialmente oculto pela classe .hidden -->
       <svg
         class="close-icon hidden"
         viewBox="0 0 24 24"
@@ -97,14 +84,8 @@ const navLinks = [
     </button>
   </div>
 
-  <!-- 
-    Container do Menu Mobile expansível.
-    Este bloco é ativado e desativado (desliza ou aparece) via JS 
-    quando o usuário clica no botão hambúrguer.
-  -->
   <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-content">
-      <!-- Lista de links formatada para Mobile (tamanho maior e disposta em coluna) -->
       <ol class="mobile-nav-list">
         {
           navLinks.map((item) => (
@@ -116,35 +97,19 @@ const navLinks = [
           ))
         }
       </ol>
-      <!-- Botão de ação (CTA) que também é inserido dentro do menu no Mobile -->
       <a href="/formulario" class="btn-cta-mobile"> Entrar em Contato </a>
     </div>
   </div>
 </nav>
 
-<!-- 
-  Estilo Global (is:global):
-  Este bloco afeta o HTML da página inteira.
-  Aqui, ativa o "smooth scroll" global, permitindo que a navegação
-  por âncoras (ex: /#o-que-fazemos) seja animada de forma suave.
--->
 <style is:global>
   html {
     scroll-behavior: smooth;
   }
 </style>
 
-<!-- 
-  Estilo Local (Scoped):
-  Importa as classes CSS exclusivas que moldam o visual e o responsivo do cabeçalho.
--->
 <style>
   @import "../styles/components-styles/header.css";
 </style>
 
-<!-- 
-  Script para interatividade do Header:
-  - Adiciona e remove a classe "scrolled" ao rolar a página.
-  - Lógica de abrir/fechar o menu mobile, trocando o ícone e a visibilidade do contêiner.
--->
 <script src="../scripts/header.js"></script>

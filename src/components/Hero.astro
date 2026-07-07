@@ -1,15 +1,15 @@
 ---
 /**
  * Componente: Hero.astro
- * 
+ *
  * O que faz:
  * Este componente representa a seção principal (Hero Section) da página de entrada.
- * Ele engloba a mensagem principal do site (título de impacto), o subtítulo 
+ * Ele engloba a mensagem principal do site (título de impacto), o subtítulo
  * com apelo comercial/ambiental, um botão de chamada para ação (agendar coleta),
  * links rápidos para o WhatsApp e a ilustração de destaque (hero image).
- * 
+ *
  * Onde é usado:
- * Normalmente é o primeiro bloco visual visível (above the fold) 
+ * Normalmente é o primeiro bloco visual visível (above the fold)
  * na página principal (ex: src/pages/index.astro), logo abaixo do Header.
  */
 
@@ -18,27 +18,14 @@ import { Image } from "astro:assets"; // O componente Image otimiza imagens auto
 import heroImg from "../assets/images/2_hero.png"; // Ilustração principal da seção Hero
 ---
 
-<!-- 
-  A tag <section> com id="inicio" atua como âncora para navegação.
-  Classes extras: hero-section define a estrutura base, noise-overlay adiciona uma textura sutil.
--->
 <section id="inicio" class="hero-section noise-overlay">
   <!-- Efeitos visuais de background (degradê e manchas coloridas animadas) -->
   <div class="bg-gradient-overlay"></div>
   <div class="bg-blob blob-green hero-blob-1"></div>
   <div class="bg-blob blob-yellow hero-blob-2"></div>
 
-  <!-- Container central que limita a largura máxima do conteúdo da seção Hero -->
   <div class="hero-container">
-    
-    <!-- 
-      Conteúdo principal dividido em duas partes/colunas.
-      - hero-text: Título e parágrafo principal à esquerda (desktop).
-      - hero-image-wrapper: Imagem ilustrativa à direita (desktop).
-    -->
     <div class="hero-main-content">
-      
-      <!-- Bloco de texto com título H1 (importante para SEO) e subtítulo explicativo -->
       <div class="hero-text">
         <h1 class="hero-title">
           <span class="block text-brand-green">NÓS COLETAMOS</span>
@@ -53,10 +40,10 @@ import heroImg from "../assets/images/2_hero.png"; // Ilustração principal da 
         </p>
       </div>
 
-      <!-- Bloco que encapsula a imagem e seu efeito de brilho (glow) de fundo -->
       <div class="hero-image-wrapper">
-        <div class="image-glow"></div> <!-- Elemento visual de desfoque/iluminação atrás da imagem -->
-        
+        <div class="image-glow"></div>
+        <!-- Elemento visual de desfoque/iluminação atrás da imagem -->
+
         <!-- 
           Utilização do componente nativo <Image> do Astro para conversão e otimização de imagem.
           A propriedade fetchpriority="high" prioriza o download dessa imagem para 
@@ -71,16 +58,7 @@ import heroImg from "../assets/images/2_hero.png"; // Ilustração principal da 
       </div>
     </div>
 
-    <!-- 
-      Área inferior (Footer) da seção Hero, 
-      responsável por agrupar as interações de clique principais (Call To Action).
-    -->
     <div class="hero-footer">
-      <!-- 
-        Botão de agendamento que direciona para o WhatsApp.
-        Utiliza a variável de ambiente pública PUBLIC_WHATSAPP_NUMBER 
-        e envia um texto pré-formatado (URL Encoded).
-      -->
       <a
         href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Gostaria de agendar uma coleta de óleo.")}`}
         target="_blank"
@@ -90,7 +68,6 @@ import heroImg from "../assets/images/2_hero.png"; // Ilustração principal da 
         Agendar Coleta
       </a>
 
-      <!-- Link alternativo, voltado apenas para dúvidas pontuais, também apontando pro WhatsApp -->
       <p class="contact-info">
         Mais informações? <a
           href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Poderia me dar mais informações.")}`}
@@ -102,7 +79,6 @@ import heroImg from "../assets/images/2_hero.png"; // Ilustração principal da 
   </div>
 </section>
 
-<!-- Importação isolada (scoped globalmente pelas diretivas no arquivo) da folha de estilos deste componente -->
 <style>
   @import "../styles/components-styles/hero.css";
 </style>

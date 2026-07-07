@@ -16,7 +16,6 @@
 // Importa o otimizador nativo de imagens do Astro
 import { Image } from "astro:assets";
 
-// Importa manualmente cada capa de notícia a partir da pasta de assets
 import img1 from "../assets/images/notice_gazeta24horasrio.com.br-descarte-de-oleo-de-cozinha-ainda-causa-entupimentos-nas-cidades.png";
 import img2 from "../assets/images/notice_globorural.globo.com-pesquisa-indica-resultados-positivos-do-oleo-de-cozinha-usado-na-producao-de-biodiesel.png";
 import img3 from "../assets/images/notice_tribunadosertao.com.br-oleo-de-cozinha-descartado-de-forma-irregular-ameaca-solo-e-lencois-freaticos.png";
@@ -98,23 +97,13 @@ const newsItems = [
   },
 ];
 
-/**
- * Dicionário (Mapa) que converte os nomes dos meses em português (string)
- * para o número correspondente (0-11), usado no construtor padrão Date() do JS.
- */
 const monthMap = {
   jan: 0, fev: 1, mar: 2, abr: 3, mai: 4, jun: 5,
   jul: 6, ago: 7, set: 8, out: 9, nov: 10, dez: 11,
 };
 
-/**
- * Ordenação Automática das Notícias (Sort).
- * Extrai a data da string (ex: "10 Mar 2026 - Notícia"),
- * converte para milissegundos e ordena para que a matéria mais recente (maior data) venha primeiro.
- */
 newsItems.sort((a, b) => {
   const parseDate = (infoStr) => {
-    // Ex: "10 Mar 2026"
     const datePart = infoStr.split("-")[0].trim().toLowerCase();
     const parts = datePart.split(" ");
     
@@ -122,20 +111,16 @@ newsItems.sort((a, b) => {
     const month = monthMap[parts[1]];
     const year = parseInt(parts[2], 10);
     
-    // Retorna a data em milissegundos para facilitar a comparação matemática
     return new Date(year, month, day).getTime();
   };
   
-  // Ordem decrescente (mais recente para o mais antigo)
   return parseDate(b.info) - parseDate(a.info);
 });
 ---
 
-<!-- Âncora usada na navegação (Menu "Blog" -> id="noticias") -->
 <section class="news-section" id="noticias">
   <div class="news-container">
     
-    <!-- Cabeçalho textual da seção do Blog -->
     <div class="blog-header-container">
       <div class="blog-header-title">
         <h2 class="section-title">Blog</h2>
@@ -146,9 +131,7 @@ newsItems.sort((a, b) => {
     </div>
 
     <!-- 
-      Botões de Filtro. 
-      O atributo 'data-filter' será usado pelo script (news_section.js)
-      para ocultar ou exibir os cartões compatíveis no momento do clique. 
+      Botões de Filtro.  
     -->
     <div class="blog-filters">
       <button class="filter-btn active" data-filter="all">Todos</button>
@@ -157,10 +140,9 @@ newsItems.sort((a, b) => {
       <button class="filter-btn" data-filter="dica">Dicas</button>
     </div>
 
-    <!-- Container Grid que abrigará todos os cartões de notícia -->
+    <!-- Container de notícias -->
     <div class="blog-grid" id="blog-grid">
       {
-        /* Mapeamento dinâmico do Array ordenado de notícias para gerar o HTML */
         newsItems.map((item) => {
           // Extrai o tipo (categoria) a partir da string bruta. Ex: de "10 Mar - Notícia" tira apenas "Notícia"
           // O replace com Regex remove todos os acentos (Ex: Notícia -> noticia) para bater perfeitamente com os data-filters dos botões acima
@@ -172,7 +154,7 @@ newsItems.sort((a, b) => {
             .replace(/[\u0300-\u036f]/g, "");
 
           return (
-            // A tag semântica <article> envelopa cada notícia isolada
+            // <article> envelopa cada notícia isolada
             <article class="blog-card" data-category={category}>
               <!-- Capa visual da Notícia -->
               <div class="blog-image-wrapper">
@@ -205,9 +187,7 @@ newsItems.sort((a, b) => {
     </div>
 
     <!-- 
-      Botão "Exibir Mais" (Paginação / Load More). 
-      Ele é interceptado e gerenciado pelo Javascript, e pode iniciar oculto 
-      dependendo de quantas notícias estão listadas na base.
+       (Paginação). 
     -->
     <div
       class="load-more-container"
@@ -218,10 +198,8 @@ newsItems.sort((a, b) => {
   </div>
 </section>
 
-<!-- Importa isoladamente as regras visuais apenas para os cards e o grid de notícias -->
 <style>
   @import "../styles/components-styles/news_section.css";
 </style>
 
-<!-- Importa a inteligência algorítmica (Filtros e Load More) por trás desta seção -->
 <script src="../scripts/news_section.js"></script>

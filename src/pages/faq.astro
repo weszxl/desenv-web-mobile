@@ -1,12 +1,12 @@
 ---
 /**
  * Página: FAQ (Dúvidas Frequentes)
- * 
+ *
  * O que faz:
  * Monta a página de Perguntas Frequentes utilizando o layout padrão do site.
- * Importa e empilha hierarquicamente os componentes Header (Cabeçalho), 
+ * Importa e empilha hierarquicamente os componentes Header (Cabeçalho),
  * FAQSection (O corpo interativo sanfonado de fato) e o Footer (Rodapé).
- * 
+ *
  * Onde é usado:
  * Acessível via rota no navegador pela URL `/faq`.
  */
@@ -20,17 +20,12 @@ import FAQSection from "../components/FAQSection.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!-- Embrulha todo o conteúdo e componentes dentro do Layout mestre -->
 <Layout>
-  <!-- Injeta a barra de navegação principal no topo do site -->
   <Header />
-  
-  <!-- A tag semântica <main> sinaliza para os robôs do Google (SEO) onde fica o "miolo", o conteúdo vital da página -->
+
   <main>
-    <!-- Injeta a complexa seção de Perguntas e Respostas -->
     <FAQSection />
   </main>
-  
-  <!-- Injeta as informações institucionais, mapas e redes sociais de rodapé no final -->
+
   <Footer />
 </Layout>

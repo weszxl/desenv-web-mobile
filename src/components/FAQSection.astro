@@ -47,9 +47,7 @@ const faqs = [
 const allFaqs = [...faqs];
 ---
 
-<!-- Seção Principal de FAQ -->
 <section class="faq-section">
-    <!-- Background animado: Elementos de fundo, gradientes e blobs idênticos às outras seções -->
     <div class="faq-background">
         <div class="bg-gradient-overlay"></div>
         <div class="bg-blob blob-green faq-blob-1"></div>
@@ -58,12 +56,9 @@ const allFaqs = [...faqs];
 
     <div class="faq-noise-wrapper noise-overlay"></div>
 
-    <!-- Contêiner centralizador -->
     <div class="faq-container">
-        <!-- Grid principal: Divide a seção em duas colunas (Esquerda: Contatos, Direita: Perguntas) -->
         <div class="faq-grid">
             
-            <!-- Coluna da Esquerda: Área de Suporte e Contato -->
             <div class="faq-sidebar">
                 <div class="sidebar-header">
                     <span class="subtitle">AINDA COM DÚVIDAS?</span>
@@ -94,11 +89,9 @@ const allFaqs = [...faqs];
                 </div>
             </div>
 
-            <!-- Coluna da Direita: Lista de Perguntas Frequentes (Acordeão) -->
             <div class="faq-content">
                 <div class="accordion-group">
                     {
-                        // Percorre o array "allFaqs" e renderiza um botão expansível para cada item
                         allFaqs.map((faq, index) => (
                             <div class="faq-item">
                                 <!-- Botão clicável que expande a resposta -->
@@ -126,10 +119,9 @@ const allFaqs = [...faqs];
                                         </svg>
                                     </span>
 
-                                    <h3 class="faq-question">{faq.question}</h3>
+                                    <span class="faq-question">{faq.question}</span>
                                 </button>
 
-                                <!-- Conteúdo que é revelado quando o botão é clicado (Resposta) -->
                                 <div class="faq-collapse">
                                     <div class="faq-answer">
                                         <p>{faq.answer}</p>
@@ -144,10 +136,8 @@ const allFaqs = [...faqs];
     </div>
 </section>
 
-<!-- Importação dos estilos exclusivos da seção de FAQ -->
 <style>
     @import "../styles/components-styles/faq_section.css";
 </style>
 
-<!-- Importação do script responsável pela interatividade de abrir/fechar o acordeão -->
 <script src="../scripts/faq.js"></script>

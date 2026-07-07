@@ -1,14 +1,14 @@
 ---
 /**
  * Componente Mestre: Layout.astro (Esqueleto Base da Aplicação)
- * 
+ *
  * O que faz:
- * É o alicerce fundamental de todas as páginas do site. 
- * Ele contém as tags HTML estruturais obrigatórias (<html>, <head>, <body>), 
+ * É o alicerce fundamental de todas as páginas do site.
+ * Ele contém as tags HTML estruturais obrigatórias (<html>, <head>, <body>),
  * configurações de metadados, importação global de fontes (Google Fonts) e injeção do CSS Global.
- * 
+ *
  * Onde é usado:
- * Importado e utilizado como "casca" protetora por TODAS as páginas (index, faq, formulário, etc) 
+ * Importado e utilizado como "casca" protetora por TODAS as páginas (index, faq, formulário, etc)
  * dentro de `src/pages/`. O conteúdo específico de cada página é ejetado no local da tag `<slot />`.
  */
 
@@ -18,7 +18,7 @@ import "../styles/global.css";
 // Importa o componente dos botões fixos (WhatsApp e Acessibilidade) que "perseguem" a tela
 import FloatingButtons from "../components/FloatingButtons.astro";
 
-/** 
+/**
  * Extrai propriedades enviadas por quem invocou o Layout.
  * Exemplo: <Layout title="Contato">. Se a página não enviar o title, ele usa "Papaóleo Coleta" como valor padrão.
  */
@@ -29,44 +29,29 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
 ---
 
 <!doctype html>
-<!-- Define o idioma principal da página, instruindo leitores de tela e ferramentas de tradução -->
 <html lang="pt">
   <head>
-    <!-- Configurações vitais de codificação de caracteres e cálculo de zoom em dispositivos móveis -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- O título dinâmico que aparece brilhando lá na aba do navegador do usuário -->
     <title>{title}</title>
 
     <!-- Tag avançada de SEO: Previne o Google de punir o site por "conteúdo duplicado", apontando sempre a URL original -->
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- O pequeno ícone que aparece na aba do navegador (Em formato SVG para nitidez infinita em retina displays) -->
     <link rel="icon" type="image/svg+xml" href="/favicon_v2.svg" />
-    
-    <!-- Otimizações extremas de carregamento: O navegador pré-conecta (handshake) aos servidores do Google Fonts antes mesmo de descobrir quais fontes vai baixar -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Importação oficial das famílias tipográficas elegantes: Inter (Para Textos base) e JetBrains Mono (Para Códigos/Detalhes) -->
+
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <!-- 
-      O portal interdimensional <slot />: 
-      É exatamente aqui que o Astro injeta o conteúdo único de cada página que chame este <Layout>. 
-      Tudo que estiver dentro de <Layout>...seu código...</Layout> nos arquivos será renderizado misteriosamente nesta exata linha.
-    -->
     <slot />
 
-    <!-- 
-      O Golpe de Mestre: Como este componente de Layout abraça todo o site inteiro, 
-      injetar os botões flutuantes aqui no final garante que eles existam nativamente em 100% das páginas automaticamente!
-    -->
     <FloatingButtons />
   </body>
 </html>

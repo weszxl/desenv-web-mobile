@@ -1,15 +1,15 @@
 ---
 /**
  * Componente: FloatingButtons.astro
- * 
+ *
  * O que faz:
  * Este componente renderiza os botões flutuantes que ficam fixos na tela (geralmente no canto inferior direito).
  * Ele inclui:
  * - Um botão de contato rápido que redireciona para o WhatsApp.
  * - Um botão de "Voltar ao topo" que rola a página de volta para cima suavemente.
- * 
+ *
  * Onde é usado:
- * Geralmente é inserido no layout base/principal do site (ex: BaseLayout.astro) 
+ * Geralmente é inserido no layout base/principal do site (ex: BaseLayout.astro)
  * para estar presente em todas as páginas, facilitando a interação e a navegação do usuário.
  */
 
@@ -19,19 +19,7 @@ import { Image } from "astro:assets";
 import whatsappIcon from "../assets/images/whatsapp.svg";
 ---
 
-<!-- 
-  Container geral dos botões flutuantes.
-  A classe 'hidden' é usada inicialmente para escondê-los. 
-  O script JS remove essa classe quando o usuário rola a página para baixo.
--->
 <div id="floating-actions" class="floating-wrapper hidden">
-  
-  <!-- 
-    Botão do WhatsApp
-    O href é montado dinamicamente usando uma variável de ambiente (PUBLIC_WHATSAPP_NUMBER)
-    e já inclui uma mensagem padrão formatada para a API do WhatsApp.
-    O target="_blank" garante que o link abra em uma nova aba do navegador.
-  -->
   <a
     href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Gostaria de agendar uma coleta de óleo.")}`}
     target="_blank"
@@ -39,14 +27,9 @@ import whatsappIcon from "../assets/images/whatsapp.svg";
     class="fab btn-whatsapp"
     aria-label="Falar no WhatsApp"
   >
-    <!-- Renderiza o ícone do WhatsApp importado -->
     <Image src={whatsappIcon} alt="WhatsApp" />
   </a>
 
-  <!-- 
-    Botão "Voltar ao Topo"
-    A funcionalidade de rolagem (scroll) ao clicar é gerenciada pelo script vinculado no fim do arquivo.
-  -->
   <button id="btn-back-to-top" class="fab btn-top" aria-label="Voltar ao topo">
     <!-- Ícone SVG inline representando uma seta direcional (chevron up) -->
     <svg
@@ -64,17 +47,8 @@ import whatsappIcon from "../assets/images/whatsapp.svg";
   </button>
 </div>
 
-<!-- 
-  Estilização scoped:
-  Importa o arquivo CSS externo que define a aparência e posicionamento absoluto/fixo destes botões.
--->
 <style>
   @import "../styles/components-styles/floating_buttons.css";
 </style>
 
-<!-- 
-  Script do componente:
-  Arquivo JavaScript que gerencia quando os botões aparecem (listener no scroll) 
-  e a ação de clique do botão "Voltar ao topo".
--->
 <script src="../scripts/floating_buttons.js"></script>

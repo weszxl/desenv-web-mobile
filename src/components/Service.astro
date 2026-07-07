@@ -17,23 +17,16 @@
 // Importação do componente de Imagem otimizada nativo do framework Astro
 import { Image } from "astro:assets";
 
-// Importação manual das imagens de fundo (Background) que ilustram cada serviço visualmente
 import img01 from "../assets/images/4_services_01.png";
 import img02 from "../assets/images/4_services_02.png";
 import img03 from "../assets/images/4_services_03.png";
 import img04 from "../assets/images/4_services_04.png";
 
-// Importação manual dos Ícones vetoriais (SVG amarelos) que representam as modalidades
 import icon01 from "../assets/images/4_services-icon_01.svg";
 import icon02 from "../assets/images/4_services-icon_02.svg";
 import icon03 from "../assets/images/4_services-icon_03.svg";
 import icon04 from "../assets/images/4_services-icon_04.svg";
 
-/**
- * Matriz (Array) de dados dos Serviços.
- * Cada objeto contém todas as informações (textos e imagens) que preencherão um cartão na interface,
- * facilitando a manutenção e a renderização dinâmica por loop (.map).
- */
 const services = [
   {
     id: 1,
@@ -70,11 +63,8 @@ const services = [
 ];
 ---
 
-<!-- Âncora referenciada pelo menu superior (Header) para rolar a página exatamente até esta parte -->
 <section id="quem-atendemos" class="services-section">
-  <!-- Container centralizador limitador da largura máxima do conteúdo em telas Ultra Wide -->
   <div class="services-container">
-    <!-- Cabeçalho textual introdutório da seção -->
     <div class="services-header">
       <h2 class="section-title">Serviços de Coleta de Óleo</h2>
       <p class="section-subtitle">
@@ -82,12 +72,9 @@ const services = [
       </p>
     </div>
 
-    <!-- Div principal (Pai) que engloba a lógica mecânica do Acordeão (Via CSS Flex-Grow e JS) -->
     <div class="accordion-wrapper" id="coleta-accordion">
       {
-        /* Loop inteligente (.map) que percorre nossa matriz 'services' gerando as tags HTML dinamicamente */
         services.map((service, index) => (
-          // O primeiro elemento (index === 0) sempre ganha a classe de brinde "active" para nascer aberto por padrão
           <div class={`accordion-card ${index === 0 ? "active" : ""}`}>
             <Image
               src={service.image}
@@ -130,10 +117,8 @@ const services = [
   </div>
 </section>
 
-<!-- Importação modular do CSS contendo as pesadas regras de transição (flex-grow) deste acordeão -->
 <style>
   @import "../styles/components-styles/service.css";
 </style>
 
-<!-- Script isolado (JS) que "escuta" o clique do usuário em um cartão, fechando os demais e ativando-o -->
 <script src="../scripts/service.js"></script>
