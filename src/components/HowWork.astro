@@ -93,17 +93,17 @@ const features = [
                 class="card-header"
                 aria-expanded={index === 0 ? "true" : "false"}
               >
-                <div class="mobile-image-wrapper">
+                <span class="mobile-image-wrapper">
                   <img
                     src={feature.image.src}
                     alt={`Ilustração: ${feature.title}`}
                     loading="lazy"
                   />
-                </div>
+                </span>
 
-                <div class="header-row">
+                <span class="header-row">
                   <h3 class="feature-title">{feature.title}</h3>
-                  <div class="toggle-icon">
+                  <span class="toggle-icon">
                     <svg
                       class="icon-plus"
                       width="12"
@@ -120,8 +120,8 @@ const features = [
                         stroke-linecap="round"
                       />
                     </svg>
-                  </div>
-                </div>
+                  </span>
+                </span>
               </button>
 
               <div class="card-body">
