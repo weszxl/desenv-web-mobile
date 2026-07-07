@@ -1,7 +1,7 @@
 ---
 /**
  * Componente: Footer.astro
- * 
+ *
  * O que faz:
  * Este componente renderiza o rodapé (footer) do site.
  * Ele engloba:
@@ -9,9 +9,9 @@
  * - Links diretos de contato (Telefone, E-mail) e redes sociais (Instagram, WhatsApp).
  * - Menus de navegação rápida (Início, Como Funciona, FAQ, Privacidade, etc.).
  * - O logotipo da empresa.
- * 
+ *
  * Onde é usado:
- * Geralmente é importado no layout principal (ex: BaseLayout.astro) para ser exibido 
+ * Geralmente é importado no layout principal (ex: BaseLayout.astro) para ser exibido
  * na parte inferior de absolutamente todas as páginas do site.
  */
 
@@ -28,7 +28,6 @@ import logoV3 from "../assets/images/logo_v3.svg";
 -->
 <footer id="contato" class="footer-section">
   <div class="footer-container">
-    
     <!-- Cabeçalho de CTA (Call to Action) convidando o usuário a agir -->
     <div class="footer-cta-header">
       <p class="section-title">
@@ -39,7 +38,6 @@ import logoV3 from "../assets/images/logo_v3.svg";
 
     <!-- Wrapper que engloba o formulário de contato e os estados de envio (loading, success, error) -->
     <div class="contact-wrapper">
-      
       <!-- Container inicial contendo os campos do formulário visíveis -->
       <div id="form-container">
         <!-- 
@@ -47,8 +45,12 @@ import logoV3 from "../assets/images/logo_v3.svg";
           precisa de verificação antes de tentar o envio.
           data-submit-type="mock" indica que fará uma simulação temporária, não um post real no momento.
         -->
-        <form id="contact-form" class="contact-form" data-validate="true" data-submit-type="mock">
-          
+        <form
+          id="contact-form"
+          class="contact-form"
+          data-validate="true"
+          data-submit-type="mock"
+        >
           <!-- 
             Campo 'Honeypot' (isca).
             Fica escondido visualmente pelo CSS. Se preenchido, indica que é um bot de spam, 
@@ -61,7 +63,7 @@ import logoV3 from "../assets/images/logo_v3.svg";
             tabindex="-1"
             autocomplete="off"
           />
-          
+
           <div class="inputs-grid">
             <!-- Grupo Input: Nome do usuário -->
             <div class="input-group">
@@ -76,7 +78,7 @@ import logoV3 from "../assets/images/logo_v3.svg";
               />
               <span class="error-text">Preencha este campo</span>
             </div>
-            
+
             <!-- Grupo Input: Endereço de e-mail -->
             <div class="input-group">
               <input
@@ -90,7 +92,7 @@ import logoV3 from "../assets/images/logo_v3.svg";
               />
               <span class="error-text">Formato de e-mail inválido</span>
             </div>
-            
+
             <!-- Grupo Input: Telefone/WhatsApp com máscara -->
             <div class="input-group">
               <input
@@ -111,7 +113,7 @@ import logoV3 from "../assets/images/logo_v3.svg";
             <span class="btn-text">Enviar dados</span>
           </button>
         </form>
-        
+
         <!-- Texto explicativo complementar ao formulário -->
         <p class="contact-note">
           Insira suas informações para que possamos entrar em contato com você.
@@ -141,7 +143,6 @@ import logoV3 from "../assets/images/logo_v3.svg";
 
     <!-- Grid que distribui as 3 colunas de links adicionais no rodapé -->
     <div class="footer-links-grid">
-      
       <!-- Coluna 1: Informações de Contato Direto -->
       <div class="footer-link-col">
         <h4 class="link-title">Contatos</h4>
@@ -170,7 +171,7 @@ import logoV3 from "../assets/images/logo_v3.svg";
           >
             <Image src={instagramIcon} alt="Instagram" loading="lazy" />
           </a>
-          
+
           <!-- Botão WhatsApp com URL gerada por variável de ambiente -->
           <a
             href={`https://wa.me/${import.meta.env.PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent("Olá! Gostaria de agendar uma coleta de óleo.")}`}
@@ -239,4 +240,4 @@ import logoV3 from "../assets/images/logo_v3.svg";
   Contém as regras de máscara, validação de campos vazios/e-mail/telefone e 
   também o envio/mock do formulário. 'defer' faz o script rodar após o HTML carregar.
 -->
-<script src="/js/validacao.js" defer></script>
+<script src="../scripts/form_validate.js"></script>

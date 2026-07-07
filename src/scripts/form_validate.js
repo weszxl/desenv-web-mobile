@@ -135,18 +135,28 @@ document.addEventListener("DOMContentLoaded", () => {
         if (btnText) btnText.textContent = "Enviando..."; // Dá feedback visual
       }
 
-      const formContainer = document.getElementById("form-container");
-      const successState = document.getElementById("success-state");
+      // Busca os elementos no escopo do formulário atual para evitar conflitos
+      const wrapper = form.closest(".contact-wrapper") || form.parentElement;
+      const formContainer = wrapper.querySelector("#form-container");
+      const successState = wrapper.querySelector("#success-state");
 
       // Simula um tempo de carregamento de 800ms
       setTimeout(() => {
         if (formContainer && successState) {
           form.style.display = "none";
           
-          const contactNote = document.querySelector(".contact-note");
+          const contactNote = wrapper.querySelector(".contact-note");
           if(contactNote) contactNote.style.display = "none";
           
           successState.classList.remove("hidden"); // Mostra o tick de sucesso
+        } else {
+          // Fallback visual para outros formulários que não têm o #success-state
+          if (submitBtn) {
+            btnText.textContent = "Enviado com sucesso!";
+            setTimeout(() => {
+              if (btnText) btnText.textContent = originalBtnText;
+            }, 3000);
+          }
         }
         form.reset();
         
